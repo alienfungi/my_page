@@ -1,0 +1,72 @@
+
+/* part of fix to keep footer at bottom of the screen */
+html, body, #wrap, #notFooter { height:100%; }
+#notFooter { position:relative; }
+
+#wrap {
+	width:90%;
+	margin: 0 auto 0 auto;
+}
+
+/* content */
+#contentOuter {
+	float: right;
+	width: 70%;
+}
+#contentInner {
+	background-color: white;
+	border-radius: 10px 10px 10px 10px;
+	margin: 10px 0 10px 10px;
+	padding: 10px;
+}
+
+/* sidebar */
+#sidebarOuter {
+	float: left;
+	width: 30%;
+}
+#sidebarInner {
+	background-color: white;
+	border-radius: 10px 10px 10px 10px;
+	margin: 10px 10px 10px 0;
+	padding: 10px 10px 10px 10px;
+}
+
+/* header */
+#headerOuter {
+	height: auto;
+	width: 100%;
+
+	header {
+		background-color: white;
+		border-radius: 0 0 10px 10px;
+		margin: 0 0 10px 0;
+		padding: 10px;
+		text-align: center;
+	}
+}
+
+/* footer */
+#footerOuter {
+	clear: both;
+	height: 40px;
+	margin-top: -40px;
+	position: relative;
+
+	footer {
+		background-color: white;
+		border-radius: 5px 10px 0 0;
+		height: 100%;
+		margin: 10px 0 0 0;
+		padding: 10px;
+	}
+}
+
+.error {
+    color: red;
+    font-style: italic;
+}
+
+.elevated {
+    box-shadow: 5px 5px 5px #000;
+}
