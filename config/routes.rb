@@ -1,4 +1,6 @@
 MyPage::Application.routes.draw do
+  resources :comments, only: [:new, :create]
+
   root to: 'static_pages#home'
 
   match '/packman', to: 'static_pages#packman'

@@ -1,10 +1,39 @@
 
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 applet {
 	height: 660px;
 	max-height: 100%;
 	max-width: 100%;
 	width: 660px;
 	background-color: black;
+}
+
+form {
+	background-color: lightgray;
+	border: gray 2px solid;
+	border-radius: 10px;
+
+	max-width: 100%;
+	padding: 10px;
+	width: 300px;
+
+	h2 {
+		margin: 0;
+		text-align: center;
+	}
+
+	input[type="text"], textarea {
+		@include box_sizing;
+		border: gray 1px solid;
+		border-radius: 5px;
+		padding: 5px;
+		width: 100%;
+	}
 }
 
 #notFooter {
@@ -84,10 +113,34 @@ applet {
 }
 
 .error {
-    color: red;
-    font-style: italic;
+  color: red;
+  font-style: italic;
 }
 
 .elevated {
-    box-shadow: 5px 5px 5px #000;
+  box-shadow: 5px 5px 5px #000;
+}
+
+@media screen and (max-width:600px) {
+	#wrap {
+		width:100%;
+	}
+	#contentInner {
+		margin: 0;
+	}
+	#contentOuter {
+	  width: 100%;
+	}
+	header {
+		border-bottom: gray 2px solid;
+	}
+	footer {
+		border-top: gray 2px solid;
+	}
+	#sidebarOuter {
+		display: none;
+	}
+	.elevated {
+		box-shadow: 0 0 0 #000;
+	}
 }
