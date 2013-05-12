@@ -1,39 +1,43 @@
 <% provide(:title, 'Packman') %>
 
+<div id="packmanContainer" class="left-container">
 <applet
+  id="packman"
 	archive="applets/packApplet.jar"
 	code="packMan/PackApplet.class"
 	alt="You must have Java 7 to view this applet.">
 </applet>
-<table cellspacing="1" cellpadding="1" border ="0">
+</div>
+<div id="controls">
+<table>
+  <h2>Controls</h2>
   <tr>
-    <td colspan="2" align="center"><u>Controls</u></td>
-  <tr>
-    <td align="right">Up:</td>
+    <td>Up:</td>
     <td>W</td>
   </tr>
   <tr>
-    <td align="right">Left:</td>
+    <td>Left:</td>
     <td>A</td>
   </tr>
   <tr>
-    <td align="right">Down:</td>
+    <td>Down:</td>
     <td>S</td>
   </tr>
   <tr>
-    <td align="right">Right:</td>
+    <td>Right:</td>
     <td>D</td>
   </tr>
   <tr>
-    <td align="right">Pause:</td>
+    <td>Pause:</td>
     <td>SPACE</td>
   </tr>
   <tr>
-    <td align="right">Menu:</td>
+    <td>Menu:</td>
     <td>M</td>
   </tr>
   <tr>
-    <td align="right">Stats:</td>
+    <td>Stats:</td>
     <td>N</td>
   </tr>
 </table>
+</div>

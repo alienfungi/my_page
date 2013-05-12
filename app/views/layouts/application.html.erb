@@ -18,18 +18,23 @@
 				</header>
 			</div>
 
-			<!-- content -->
-			<div id="contentOuter">
-				<div id="contentInner" class="elevated">
-					<%= yield %>
-					<%= debug(params) if Rails.env.development? %>
-				</div>
-			</div>
-
 			<!-- sidebar -->
 			<div id="sidebarOuter">
 				<div id="sidebarInner" class="elevated">
 					<%= render 'layouts/nav' %>
+				</div>
+			</div>
+
+			<!-- content -->
+			<div id="contentOuter">
+				<div id="contentInner" class="elevated">
+					<%= yield %>
+
+					<!-- debug info (development only) -->
+					<div style="clear:both"><%= debug(params) if Rails.env.development? %></div>
+
+					<!-- doorstop -->
+					<div style="clear:both"></div>
 				</div>
 			</div>
 
