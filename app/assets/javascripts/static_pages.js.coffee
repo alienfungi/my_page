@@ -45,3 +45,8 @@ $(document).ready ->
 			email_error.innerHTML = ""
 
 		valid
+
+	window.post_score = (arg) ->
+		display = document.getElementById("score")
+		if display != null
+			display.innerHTML = arg
