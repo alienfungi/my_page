@@ -4,7 +4,12 @@ class StaticPagesController < ApplicationController
   	@comment = Comment.new
   end
 
+  def java
+  end
+
   def packman
   end
-  
+
+  def cars
+  end
 end

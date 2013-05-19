@@ -1,44 +1,51 @@
 <% provide(:title, 'Packman') %>
 
 <div id="packmanContainer" class="left-container">
-<applet
-  id="packman"
-	archive="applets/packApplet.jar"
-	code="packMan/PackApplet.class"
-	alt="You must have Java 7 to view this applet.">
-</applet>
+  <table>
+    <tr>
+      <td id="score">score: 0</td>
+      <td id="lives">lives: 3</td>
+    </tr>
+  </table>
+  <object type="application/x-java-applet" id="packman">
+    <param name="code" value="packMan/PackApplet.class">
+    <param name="archive" value="applets/packApplet.jar">
+    You must have Java properly installed to view this applet.
+  </object>
 </div>
+
 <div id="controls">
-<table>
-  <h2>Controls</h2>
-  <tr>
-    <td>Up:</td>
-    <td>W</td>
-  </tr>
-  <tr>
-    <td>Left:</td>
-    <td>A</td>
-  </tr>
-  <tr>
-    <td>Down:</td>
-    <td>S</td>
-  </tr>
-  <tr>
-    <td>Right:</td>
-    <td>D</td>
-  </tr>
-  <tr>
-    <td>Pause:</td>
-    <td>SPACE</td>
-  </tr>
-  <tr>
-    <td>Menu:</td>
-    <td>M</td>
-  </tr>
-  <tr>
-    <td>Stats:</td>
-    <td>N</td>
-  </tr>
-</table>
+  <table>
+    <h2>Controls</h2>
+    <tr>
+      <td>Up:</td>
+      <td>W</td>
+    </tr>
+    <tr>
+      <td>Left:</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <td>Down:</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <td>Right:</td>
+      <td>D</td>
+    </tr>
+    <tr>
+      <td>Pause:</td>
+      <td>SPACE</td>
+    </tr>
+    <tr>
+      <td>Menu:</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <td>Stats:</td>
+      <td>N</td>
+    </tr>
+  </table>
 </div>
-<%# <div id="score" style="clear:both">test</div> %>
+
+<%#<div id="score" style="clear:both">test</div>%>

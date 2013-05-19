@@ -43,11 +43,37 @@ body {
 	padding: 10px;
 	@include box_sizing;
 
-	applet {
-		background-color: $bg5;
+	table {
+		color: $light-font;
+		font-size: 1.5em;
+		margin: 0;
+		width: 100%;
+
+		td {
+			width: 50%;
+		}
+	}
+
+	object {
 		height: 660px;
 		max-width: 100%;
 		width: 570px;
+	}
+}
+
+#carsContainer {
+	background-color:$bg2;
+	border: $bg3 2px solid;
+	border-radius: 10px;
+	float: left;
+	max-width: 100%;
+	padding: 10px;
+	@include box_sizing;
+
+	object {
+		height: 400px;
+		max-width: 100%;
+		width: 700px;
 	}
 }
 
@@ -143,6 +169,35 @@ background-color: white;
 border-radius: 10px;
 margin: 20px 0 20px 10px;
 padding: 10px;
+
+	#javaThumbs {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+
+		.container {
+			@include box-sizing;
+			background-color: $bg5;
+			border-radius: 10px;
+			color: $light-font;
+			float: left;
+			margin: 10px;
+			padding: 10px;
+			text-align: center;
+
+			img {
+				max-height: 250px;
+				max-width: 250px;
+
+			}
+			h1 {
+				margin: 10px;
+			}
+			&:hover {
+				background-color: $bg4;
+			}
+		}
+	}
 }
 
 /* sidebar */
@@ -159,16 +214,16 @@ padding: 10px;
 
 	ul {
 		list-style: none;
-		padding: 5px;
+		padding: 0;
 		margin: 0;
 
 		li {
-			margin: 5px 0 5px 0;
+			margin: 5px 0 0 0;
 			text-align: left;
 
-			a {
+			.button {
 				background-color: $bg2;
-				border-radius: 10px;
+				//border-radius: 10px;
 				color: $dark-font;
 				display: block;
 				padding: 10px;
@@ -176,12 +231,17 @@ padding: 10px;
 
 				&:hover {
 					background-color: $bg3;
+					cursor: pointer;
 				}
 
 				&:active {
 					background-color: $bg4;
 					color: $light-font;
 				}
+			}
+
+			.expansion {
+				margin: 0 10px 0 10px;
 			}
 		}
 	}
@@ -235,6 +295,20 @@ padding: 10px;
 
 .elevated {
   box-shadow: 5px 5px 5px #000;
+}
+
+.expansion {
+	display: none;
+}
+
+.first {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.last {
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
 }
 
 @media screen and (max-width:480px) {

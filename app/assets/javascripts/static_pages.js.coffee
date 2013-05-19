@@ -4,6 +4,17 @@
 
 #if document.getElementById("packman")
 $(document).ready ->
+
+	$('#sidebarInner .expandable').on 'mouseenter', '.expander', () ->
+		$(this).addClass('last')
+		$(this).closest('.expandable').find('.expansion').slideDown 250
+		false
+
+	$('#sidebarInner .expandable').on 'mouseleave', () ->
+		$(this).find('.expansion').slideUp 250
+		$(this).find('.expander').removeClass('last')
+		$('#sidebarInner > nav > ul').children().last().children('a').addClass('last')
+
 	packmanResize = () ->
 		packman = document.getElementById "packman"
 		correct_ratio = 22 / 19
@@ -49,4 +60,9 @@ $(document).ready ->
 	window.post_score = (arg) ->
 		display = document.getElementById("score")
 		if display != null
-			display.innerHTML = arg
+			display.innerHTML = "score: " + arg
+
+	window.post_lives = (arg) ->
+		display = document.getElementById("lives")
+		if display != null
+			display.innerHTML = "lives: " + arg

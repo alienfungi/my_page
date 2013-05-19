@@ -1,6 +1,18 @@
 <nav>
 	<ul>
-		<li><%= link_to "Home", root_path %></li>
-		<li><%= link_to "Packman", packman_path %></li>
+		<li><%= link_to "Home", root_path, class: "button first" %></li>
+		<li class="expandable"><%= link_to "Java", java_path, class: "expander button" %>
+			<ul class="expansion">
+				<li><%= link_to "Cars", cars_path, class: "button" %></li>
+				<li><%= link_to "Packman", packman_path, class: "button last" %></li>
+			</ul>
+		</li>
+		<li class="expandable"><a class="expander button last">####</a>
+			<ul class="expansion">
+				<li><a class="button">###</a></li>
+				<li><a class="button">###</a></li>
+				<li><a class="button last">###</a></li>
+			</ul>
+		</li>
 	</ul>
 </nav>

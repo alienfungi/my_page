@@ -4,6 +4,8 @@ MyPage::Application.routes.draw do
   root to: 'static_pages#home'
 
   match '/packman', to: 'static_pages#packman'
+  match '/cars', to: 'static_pages#cars'
+  match '/java', to: 'static_pages#java'
 
   # match '/about',   to: 'static_pages#about'
   # match '/contact', to: 'static_pages#contact'
