@@ -66,3 +66,9 @@ $(document).ready ->
 		display = document.getElementById("lives")
 		if display != null
 			display.innerHTML = "lives: " + arg
+
+	$('#javaThumbs').on 'mouseenter', '.container', ()->
+		$(this).animate {'opacity': '1'}
+
+	$('#javaThumbs').on 'mouseleave', '.container', ()->
+		$(this).animate {'opacity': '0.75'}

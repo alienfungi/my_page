@@ -182,20 +182,20 @@ padding: 10px;
 			color: $light-font;
 			float: left;
 			margin: 10px;
+			opacity: 0.75;
 			padding: 10px;
 			text-align: center;
 
 			img {
 				max-height: 250px;
 				max-width: 250px;
-
 			}
 			h1 {
 				margin: 10px;
 			}
-			&:hover {
+			/*&:hover {
 				background-color: $bg4;
-			}
+			}*/
 		}
 	}
 }
