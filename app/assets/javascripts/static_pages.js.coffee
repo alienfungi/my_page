@@ -6,12 +6,12 @@
 $(document).ready ->
 
 	$('#sidebarInner .expandable').on 'mouseenter', '.expander', () ->
-		$(this).addClass('last')
+		$(this).addClass 'last'
 		$(this).closest('.expandable').find('.expansion').slideDown 250
 		false
 
 	$('#sidebarInner .expandable').on 'mouseleave', () ->
-		$(this).find('.expansion').slideUp 250
+		$(this).find('.expansion').slideUp 'fast'
 		$(this).find('.expander').removeClass('last')
 		$('#sidebarInner > nav > ul').children().last().children('a').addClass('last')
 
