@@ -44,4 +44,8 @@ MyPage::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Add applets and sounds to asset pipeline
+  config.assets.paths << Rails.root.join('app', 'assets', 'applets')
+  config.assets.paths << Rails.root.join('app', 'assets', 'sounds')
 end

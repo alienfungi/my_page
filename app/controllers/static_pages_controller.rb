@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
 
   def home
-  	@comment = Comment.new
+    @comment = Comment.new
   end
 
   def java

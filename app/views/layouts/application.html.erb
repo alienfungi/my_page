@@ -8,45 +8,45 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<div id="wrap">
-		<div id="notFooter">
+  <div id="wrap">
+    <div id="notFooter">
 
-			<!-- header -->
-			<div id="headerOuter">
-				<header class="elevated">
-					<%= render 'layouts/header' %>
-				</header>
-			</div>
+      <!-- header -->
+      <div id="headerOuter">
+        <header class="elevated">
+          <%= render 'layouts/header' %>
+        </header>
+      </div>
 
-			<!-- sidebar -->
-			<div id="sidebarOuter">
-				<div id="sidebarInner" class="elevated">
-					<%= render 'layouts/nav' %>
-				</div>
-			</div>
+      <!-- sidebar -->
+      <div id="sidebarOuter">
+        <div id="sidebarInner" class="elevated">
+          <%= render 'layouts/nav' %>
+        </div>
+      </div>
 
-			<!-- content -->
-			<div id="contentOuter">
-				<div id="contentInner" class="elevated">
-					<%= yield %>
+      <!-- content -->
+      <div id="contentOuter">
+        <div id="contentInner" class="elevated">
+          <%= yield %>
 
-					<!-- debug info (development only) -->
-					<div style="clear:both"><%= debug(params) if Rails.env.development? %></div>
+          <!-- debug info (development only) -->
+          <div style="clear:both"><%= debug(params) if Rails.env.development? %></div>
 
-					<!-- doorstop -->
-					<div style="clear:both"></div>
-				</div>
-			</div>
+          <!-- doorstop -->
+          <div style="clear:both"></div>
+        </div>
+      </div>
 
-		</div><!-- end #notFooter-->
+    </div><!-- end #notFooter-->
 
-		<!-- footer -->
-		<div id="footerOuter">
-			<footer class="elevated">
-				<%= render 'layouts/footer' %>
-			</footer>
-		</div>
+    <!-- footer -->
+    <div id="footerOuter">
+      <footer class="elevated">
+        <%= render 'layouts/footer' %>
+      </footer>
+    </div>
 
-	</div> <!-- end #wrap -->
+  </div> <!-- end #wrap -->
 </body>
 </html>
