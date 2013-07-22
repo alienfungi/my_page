@@ -8,12 +8,11 @@ $(document).ready ->
   $('#sidebarInner .expandable').on 'mouseenter', '.expander', () ->
     $(this).addClass 'last'
     $(this).closest('.expandable').find('.expansion').stop(true, true).delay(500).slideDown 250
-    false
 
   $('#sidebarInner .expandable').on 'mouseleave', () ->
+    expander = $(this).find '.expander'
     $(this).find('.expansion').stop(true, true).slideUp 'fast'
-    $(this).find('.expander').removeClass('last')
-    $('#sidebarInner > nav > ul').children().last().children('a').addClass('last')
+    expander.removeClass('last') if expander.hasClass 'not-last'
 
   packmanResize = () ->
     packman = document.getElementById "packman"

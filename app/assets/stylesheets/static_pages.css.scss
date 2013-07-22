@@ -9,6 +9,13 @@
   box-sizing: border-box;
 }
 
+@mixin transition {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
 /* background colors */
 $bg1: #FFF;
 $bg2: #CCC;
@@ -302,11 +309,19 @@ padding: 10px;
 }
 
 .first {
+  @include transition;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 
+.not-last {
+  @include transition;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
 .last {
+  @include transition;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
