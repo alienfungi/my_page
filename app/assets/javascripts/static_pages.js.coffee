@@ -4,16 +4,6 @@
 
 #if document.getElementById("packman")
 $(document).ready ->
-
-  $('#sidebarInner .expandable').on 'mouseenter', '.expander', () ->
-    $(this).addClass 'last'
-    $(this).closest('.expandable').find('.expansion').stop(true, true).delay(500).slideDown 250
-
-  $('#sidebarInner .expandable').on 'mouseleave', () ->
-    expander = $(this).find '.expander'
-    $(this).find('.expansion').stop(true, true).slideUp 'fast'
-    expander.removeClass('last') if expander.hasClass 'not-last'
-
   packmanResize = () ->
     packman = document.getElementById "packman"
     correct_ratio = 22 / 19
@@ -28,31 +18,29 @@ $(document).ready ->
 
   window.validate_comment = () ->
     VALID_EMAIL = new RegExp /^((?!\.)[a-z0-9._%+-]+(?!\.)\w)@[a-z0-9-]+\.[a-z.]{2,5}(?!\.)\w$/i
-    name = document.getElementById "comment_name"
-    email = document.getElementById "comment_email"
+    name = $("#comment_name")
+    email = $("#comment_email")
     valid = true
 
     # validate name field
-    if name.value == ""
+    if name.val() == ""
       valid = false
-      name.classList.add "error"
-      document.getElementById("name_error").innerHTML = "Name is required."
+      name.parent().addClass "has-error"
     else
-      name.classList.remove "error"
-      name_error.innerHTML = ""
+      name.parent().removeClass "has-error"
 
     # validate email field
-    if email.value == ""
+    if email.val() == ""
       valid = false
-      email.classList.add "error"
-      document.getElementById("email_error").innerHTML = "Email is required."
+      email.parent().removeClass "has-warning"
+      email.parent().addClass "has-error"
     else if !VALID_EMAIL.test email.value
       valid = false
-      email.classList.add "error"
-      document.getElementById("email_error").innerHTML = "Email is invalid."
+      email.parent().removeClass "has-error"
+      email.parent().addClass "has-warning"
     else
-      email.classList.remove "error"
-      email_error.innerHTML = ""
+      email.parent().removeClass "has-error"
+      email.parent().removeClass "has-warning"
 
     valid
 

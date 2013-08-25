@@ -34,12 +34,7 @@ html {
 }
 
 body {
-  background-color: $bg3;
-  color: $dark-font;
   font-family: Ubuntu, sans-serif;
-  height: 100%;
-  margin: 0;
-  width: 100%;
 }
 
 #packmanContainer {
@@ -99,204 +94,33 @@ body {
   }
 }
 
-form {
-  background-color: $bg2;
-  border: $bg3 2px solid;
-  border-radius: 10px;
-  max-width: 400px;
-  padding: 10px;
-
-  h2 {
-    margin: 0;
-    text-align: center;
-  }
-
-  table {
-    width: 100%;
-  }
-
-  input[type="text"], textarea {
-    @include box_sizing;
-    border: $bg3 1px solid;
-    border-radius: 5px;
-    padding: 5px;
-    width: 100%;
-  }
-
-  input[type="submit"] {
-    background-color: $bg2;
-    border: $bg3 2px solid;
-    border-radius: 5px;
-    color: $dark-font;
-    float: right;
-    padding: 5px;
-
-    &:hover {
-      background-color: $bg3;
-      cursor: pointer;
-    }
-
-    &:active {
-      background-color: $bg4;
-      border: $bg4 2px solid;
-      color: $light-font;
-    }
-  }
-
-  .error {
-    border: $font-error 1px solid !important;
-    background-color: $bg-error !important;
-  }
-
-  .errorMessage {
-    color: red;
-    font-style: italic;
-  }
-}
-
-#notFooter {
-  height: 100%;
-  position: relative;
-}
-
-#wrap {
-  height: 100%;
-  margin: 0 auto 0 auto;
-  width: 90%;
-}
-
 /* content */
-#contentOuter {
-float: right;
-height: auto;
-width: 70%;
-}
-#contentInner {
-background-color: white;
-border-radius: 10px;
-margin: 20px 0 20px 10px;
-padding: 10px;
+#javaThumbs {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 
-  #javaThumbs {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-
-    .container {
-      @include box-sizing;
-      background-color: $bg5;
-      border-radius: 10px;
-      color: $light-font;
-      float: left;
-      margin: 10px;
-      opacity: 0.75;
-      padding: 10px;
-      text-align: center;
-
-      img {
-        max-height: 250px;
-        max-width: 250px;
-      }
-      h1 {
-        margin: 10px;
-      }
-      /*&:hover {
-        background-color: $bg4;
-      }*/
-    }
-  }
-}
-
-/* sidebar */
-#sidebarOuter {
-  float: left;
-  height: auto;
-  width: 30%;
-}
-#sidebarInner {
-  background-color: $bg4;
-  border-radius: 10px;
-  margin: 20px 10px 20px 0;
-  padding: 10px;
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    li {
-      margin: 5px 0 0 0;
-      text-align: left;
-
-      .button {
-        background-color: $bg2;
-        //border-radius: 10px;
-        color: $dark-font;
-        display: block;
-        padding: 10px;
-        text-decoration: none;
-
-        &:hover {
-          background-color: $bg3;
-          cursor: pointer;
-        }
-
-        &:active {
-          background-color: $bg4;
-          color: $light-font;
-        }
-      }
-
-      .expansion {
-        margin: 0 10px 0 10px;
-      }
-    }
-  }
-
-}
-
-/* header */
-#headerOuter {
-  height: auto;
-  width: 100%;
-
-  header {
-    background-color: $bg4;
-    border-radius: 0 0 10px 10px;
-    color: $bg1;
+  .container {
+    @include box-sizing;
+    background-color: $bg5;
+    border-radius: 10px;
+    color: $light-font;
+    float: left;
+    margin: 10px;
+    opacity: 0.75;
     padding: 10px;
     text-align: center;
-  }
-}
 
-/* footer */
-#footerOuter {
-  clear: both;
-  height: 50px;
-  margin-top: -50px;
-  position: relative;
-
-  footer {
-    background-color: $bg4;
-    border-radius: 10px 10px 0 0;
-    color: $bg1;
-    height: 30px;
-    padding: 10px;
-
-    ul {
-      float: right;
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-
-      li {
-        display: inline;
-      }
+    img {
+      max-height: 250px;
+      max-width: 250px;
     }
-
-    a {
-      color: $bg1;
+    h1 {
+      margin: 10px;
     }
+    /*&:hover {
+      background-color: $bg4;
+    }*/
   }
 }
 
@@ -326,26 +150,3 @@ padding: 10px;
   border-bottom-right-radius: 10px;
 }
 
-@media screen and (max-width:480px) {
-  #wrap {
-    width:100%;
-  }
-  #contentInner {
-    margin: 0;
-  }
-  #contentOuter {
-    width: 100%;
-  }
-  header, #contentInner, #sidebarInner {
-    border-bottom: $bg3 2px solid;
-  }
-  #sidebarOuter {
-    width: 100%;
-  }
-  #sidebarInner {
-    margin: 0;
-  }
-  .elevated {
-    box-shadow: 0 0 0 #000;
-  }
-}

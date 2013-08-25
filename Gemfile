@@ -7,9 +7,9 @@ gem 'mail'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :development, :test do
-	gem 'sqlite3'
-	gem 'rspec-rails'
-	gem 'webrick'#, '~> 1.3.1'
+  gem 'sqlite3'
+  gem 'rspec-rails'
+  gem 'webrick'#, '~> 1.3.1'
 end
 
 group :assets do
@@ -21,7 +21,8 @@ end
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'bootstrap-sass'
 
 group :production do
-	gem 'pg'
+  gem 'pg'
 end
