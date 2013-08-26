@@ -45,6 +45,15 @@ jQuery ->
     if display != null
       display.innerHTML = "lives: " + arg
 
+  window.save_score = (total, name) ->
+    $.ajax '/scores',
+      type: 'POST'
+      data:
+        total: total
+        name: name
+      success: () ->
+        $('.datatable').dataTable().fnReloadAjax()
+
   $('#javaThumbs').on 'mouseenter', '.container', ()->
     $(this).stop(true, true).animate {'opacity': '1'}
 

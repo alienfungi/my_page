@@ -1,13 +1,13 @@
 <% provide(:title, 'Packman') %>
 
 <ul class="nav nav-tabs" id="packmanTabs">
-  <li><%= link_to "Game", "#game", data: { toggle: "tab" } %></li>
+  <li class="active"><%= link_to "Game", "#game", data: { toggle: "tab" } %></li>
   <li><%= link_to "Controls", "#controls", data: { toggle: "tab" } %></li>
-  <li class="active"><%= link_to "High Scores", "#scores", data: { toggle: "tab" } %></li>
+  <li><%= link_to "High Scores", "#scores", data: { toggle: "tab" } %></li>
 </ul>
 
 <div class="tab-content">
-  <div class="tab-pane" id="game">
+  <div class="tab-pane active" id="game">
     <div id="packmanContainer">
       <table>
         <tr>
@@ -67,7 +67,7 @@
     </table>
   </div><!-- #controls -->
 
-  <div class="tab-pane active" id="scores">
+  <div class="tab-pane" id="scores">
     <h1>High Scores</h1>
     <table class="table datatable" data-source="<%= scores_url(format: "json") %>">
       <thead>

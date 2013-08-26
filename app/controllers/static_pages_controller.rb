@@ -8,6 +8,7 @@ class StaticPagesController < ApplicationController
   end
 
   def packman
+    session[:return_to] = packman_path
   end
 
   def cars

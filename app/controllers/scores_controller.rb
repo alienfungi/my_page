@@ -10,4 +10,13 @@ class ScoresController < ApplicationController
     end
   end
 
+  def create
+    total = params[:total]
+    name = params[:name]
+    return_to = session.delete(:return_to)
+    @score = Score.new(total: total.to_i, name: name)
+    @score.save
+    redirect_to return_to unless return_to.empty?
+  end
+
 end

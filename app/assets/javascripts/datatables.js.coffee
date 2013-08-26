@@ -1,5 +1,6 @@
 jQuery ->
   $('.datatable').dataTable
+    aaSorting: [[0, "desc"]]
     bJQueryUI: true
     bServerSide: true
     sAjaxSource: $('.datatable').data('source')
