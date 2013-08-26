@@ -1,5 +1,6 @@
 MyPage::Application.routes.draw do
   resources :comments, only: [:new, :create]
+  resources :scores
 
   root to: 'static_pages#home'
 

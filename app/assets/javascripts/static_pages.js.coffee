@@ -2,8 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-#if document.getElementById("packman")
-$(document).ready ->
+jQuery ->
   packmanResize = () ->
     packman = document.getElementById "packman"
     correct_ratio = 22 / 19
@@ -16,32 +15,24 @@ $(document).ready ->
   # on init
   packmanResize()
 
+  validate_field = (field, expression = //) ->
+    parent = field.parent()
+    parent.removeClass "has-error"
+    parent.removeClass "has-warning"
+    if field.val() == ""
+      parent.addClass "has-error"
+      false
+    else if !expression.test(field.val())
+      parent.addClass "has-warning"
+      false
+    else
+      true
+
   window.validate_comment = () ->
-    VALID_EMAIL = new RegExp /^((?!\.)[a-z0-9._%+-]+(?!\.)\w)@[a-z0-9-]+\.[a-z.]{2,5}(?!\.)\w$/i
-    name = $("#comment_name")
-    email = $("#comment_email")
+    email_regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
     valid = true
-
-    # validate name field
-    if name.val() == ""
-      valid = false
-      name.parent().addClass "has-error"
-    else
-      name.parent().removeClass "has-error"
-
-    # validate email field
-    if email.val() == ""
-      valid = false
-      email.parent().removeClass "has-warning"
-      email.parent().addClass "has-error"
-    else if !VALID_EMAIL.test email.value
-      valid = false
-      email.parent().removeClass "has-error"
-      email.parent().addClass "has-warning"
-    else
-      email.parent().removeClass "has-error"
-      email.parent().removeClass "has-warning"
-
+    unless validate_field($("#comment_name")) then valid = false
+    unless validate_field($("#comment_email"), email_regex) then valid = false
     valid
 
   window.post_score = (arg) ->

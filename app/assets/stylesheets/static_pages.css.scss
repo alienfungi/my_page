@@ -79,21 +79,6 @@ body {
   }
 }
 
-#controls {
-  background-color: $bg2;
-  border: $bg3 2px solid;
-  border-radius: 10px;
-  float: left;
-  padding: 10px;
-
-  h2 {
-    margin: 0;
-  }
-  table {
-    padding: 5px;
-  }
-}
-
 /* content */
 #javaThumbs {
   list-style-type: none;

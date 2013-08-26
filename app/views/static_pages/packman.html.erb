@@ -1,51 +1,84 @@
 <% provide(:title, 'Packman') %>
 
-<div id="packmanContainer" class="left-container">
-  <table>
-    <tr>
-      <td id="score">score: 0</td>
-      <td id="lives">lives: 3</td>
-    </tr>
-  </table>
-  <object type="application/x-java-applet" id="packman">
-    <param name="archive" value="assets/packApplet.jar"/>
-    <param name="code" value="packMan.PackApplet"/>
-    You must have Java properly installed to view this applet.
-  </object>
-</div>
+<ul class="nav nav-tabs" id="packmanTabs">
+  <li><%= link_to "Game", "#game", data: { toggle: "tab" } %></li>
+  <li><%= link_to "Controls", "#controls", data: { toggle: "tab" } %></li>
+  <li class="active"><%= link_to "High Scores", "#scores", data: { toggle: "tab" } %></li>
+</ul>
 
-<div id="controls">
-  <table>
-    <h2>Controls</h2>
-    <tr>
-      <td>Up:</td>
-      <td>W</td>
-    </tr>
-    <tr>
-      <td>Left:</td>
-      <td>A</td>
-    </tr>
-    <tr>
-      <td>Down:</td>
-      <td>S</td>
-    </tr>
-    <tr>
-      <td>Right:</td>
-      <td>D</td>
-    </tr>
-    <tr>
-      <td>Pause:</td>
-      <td>SPACE</td>
-    </tr>
-    <tr>
-      <td>Menu:</td>
-      <td>M</td>
-    </tr>
-    <tr>
-      <td>Stats:</td>
-      <td>N</td>
-    </tr>
-  </table>
-</div>
+<div class="tab-content">
+  <div class="tab-pane" id="game">
+    <div id="packmanContainer">
+      <table>
+        <tr>
+          <td id="score">score: 0</td>
+          <td id="lives">lives: 3</td>
+        </tr>
+      </table>
+      <object type="application/x-java-applet" id="packman">
+        <param name="archive" value="assets/packApplet.jar"/>
+        <param name="code" value="packMan.PackApplet"/>
+        You must have Java properly installed to view this applet.
+      </object>
+    </div>
+  </div><!-- #game -->
 
-<%#<div id="score" style="clear:both">test</div>%>
+  <div class="tab-pane" id="controls">
+    <h1>Controls</h1>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Function</th>
+          <th>Key</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Up</td>
+          <td>W</td>
+        </tr>
+        <tr>
+          <td>Left</td>
+          <td>A</td>
+        </tr>
+        <tr>
+          <td>Down</td>
+          <td>S</td>
+        </tr>
+        <tr>
+          <td>Right</td>
+          <td>D</td>
+        </tr>
+        <tr>
+          <td>Pause</td>
+          <td>SPACE</td>
+        </tr>
+        <tr>
+          <td>Menu</td>
+          <td>M</td>
+        </tr>
+        <tr>
+          <td>Stats</td>
+          <td>N</td>
+        </tr>
+      </tbody>
+    </table>
+  </div><!-- #controls -->
+
+  <div class="tab-pane active" id="scores">
+    <h1>High Scores</h1>
+    <table class="table datatable" data-source="<%= scores_url(format: "json") %>">
+      <thead>
+        <tr>
+          <th>Score</th>
+          <th>Player</th>
+        </tr>
+      </thead>
+
+      <tbody>
+      </tbody>
+    </table>
+  </div><!-- #scores -->
+</div><!-- .tab-content -->
