@@ -58,5 +58,23 @@ module MyPage
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # ActionMailer
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address: "smtp.gmail.com",
+      port: 587,
+      domain: "zanewoodfin.com",
+      user_name: ENV['SMTP_USERNAME'],
+      password: ENV['SMTP_PASSWORD'],
+      authentication: "plain",
+      enable_starttls_auto: true
+    }
+
+    # Add applets, sounds, and fonts to asset pipeline
+    config.assets.paths << Rails.root.join('app', 'assets', 'applets')
+    config.assets.paths << Rails.root.join('app', 'assets', 'sounds')
+    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
   end
 end

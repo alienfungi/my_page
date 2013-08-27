@@ -1,5 +1,5 @@
 class Comment
-  # include ActiveModel::Validations
+  include ActiveModel::Validations
   extend ActiveModel::Naming
   include ActiveModel::Conversion
 
@@ -15,5 +15,5 @@ class Comment
     end
   end
 
-  # validates_presence_of :email, :name
+  validates_presence_of :email, :name
 end

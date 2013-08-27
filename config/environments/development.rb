@@ -13,19 +13,6 @@ MyPage::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-      address: "smtp.gmail.com",
-      port: 587,
-      domain: "zanewoodfin.com",
-      user_name: "<username>",
-      password: "<password>",
-      authentication: "plain",
-      enable_starttls_auto: true
-    }
-
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
@@ -35,6 +22,9 @@ MyPage::Application.configure do
   # Raise exception on mass assignment protection for Active Record models
   config.active_record.mass_assignment_sanitizer = :strict
 
+  # Disable delivery errors, bad email addresses will be ignored
+  # config.action_mailer.raise_delivery_errors = false
+ 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   config.active_record.auto_explain_threshold_in_seconds = 0.5
@@ -44,8 +34,4 @@ MyPage::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
-
-  # Add applets and sounds to asset pipeline
-  config.assets.paths << Rails.root.join('app', 'assets', 'applets')
-  config.assets.paths << Rails.root.join('app', 'assets', 'sounds')
 end

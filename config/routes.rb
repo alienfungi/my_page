@@ -7,6 +7,8 @@ MyPage::Application.routes.draw do
   match '/packman', to: 'static_pages#packman'
   match '/cars', to: 'static_pages#cars'
   match '/java', to: 'static_pages#java'
+  match '/contact', to: 'static_pages#contact'
+  match '/resume', to: 'static_pages#resume'
 
   # match '/about',   to: 'static_pages#about'
   # match '/contact', to: 'static_pages#contact'

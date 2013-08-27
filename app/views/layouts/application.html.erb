@@ -9,15 +9,26 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div id="wrap">
 
-  <!-- header -->
-  <%= content_tag :div, render('layouts/header'), class: "container" %>
+    <!-- header -->
+    <%= render 'layouts/header' %>
 
-  <!-- content -->
-  <%= content_tag :div, yield, class: "container" %>
+    <!-- flash messages -->
+    <% flash.each do |name, message| %>
+      <%= content_tag :div, message, class: "container #{flash_class(name)}" %>
+    <% end %>
 
-  <!-- debug info (development only) -->
-  <%= content_tag(:div, debug(params), class: "container") if Rails.env.development? %>
+    <!-- content -->
+    <%= content_tag :div, yield, class: "container" %>
+
+    <!-- debug info (development only) -->
+    <%= content_tag(:div, debug(params), class: "container") if Rails.env.development? %>
+
+  </div><!-- #wrap -->
+
+  <!-- footer -->
+  <%= render 'layouts/footer' %>
 
 </body>
 </html>

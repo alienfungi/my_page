@@ -81,17 +81,16 @@ body {
 
 /* content */
 #javaThumbs {
-  list-style-type: none;
   margin: 0;
   padding: 0;
 
-  .container {
+  .thumb-container {
     @include box-sizing;
     background-color: $bg5;
     border-radius: 10px;
     color: $light-font;
     float: left;
-    margin: 10px;
+    margin: 0 10px 10px 0;
     opacity: 0.75;
     padding: 10px;
     text-align: center;
@@ -103,35 +102,15 @@ body {
     h1 {
       margin: 10px;
     }
-    /*&:hover {
-      background-color: $bg4;
-    }*/
   }
 }
 
-.elevated {
-  box-shadow: 5px 5px 5px #000;
-}
+#resume {
+  h1 {
+    text-align: center;
+  }
 
-.expansion {
-  display: none;
+  table {
+    width: 100%;
+  }
 }
-
-.first {
-  @include transition;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-
-.not-last {
-  @include transition;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.last {
-  @include transition;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-

@@ -1,7 +1,13 @@
 class StaticPagesController < ApplicationController
 
   def home
+  end
+
+  def contact
     @comment = Comment.new
+  end
+
+  def resume
   end
 
   def java

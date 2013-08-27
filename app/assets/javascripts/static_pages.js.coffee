@@ -54,8 +54,8 @@ jQuery ->
       success: () ->
         $('.datatable').dataTable().fnReloadAjax()
 
-  $('#javaThumbs').on 'mouseenter', '.container', ()->
+  $('#javaThumbs').on 'mouseenter', '.thumb-container', ()->
     $(this).stop(true, true).animate {'opacity': '1'}
 
-  $('#javaThumbs').on 'mouseleave', '.container', ()->
+  $('#javaThumbs').on 'mouseleave', '.thumb-container', ()->
     $(this).stop(true, true).animate {'opacity': '0.75'}
