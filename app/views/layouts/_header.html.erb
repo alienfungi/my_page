@@ -1,14 +1,23 @@
-<div class="navbar-header">
-  <%= link_to "Zane's Page", root_path, class: "navbar-brand" %>
-</div>
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <div class="navbar-header">
+      <%= link_to "Zane's Page", root_path, class: "navbar-brand" %>
+    </div>
 
-<div class="collapse navbar-collapse">
-  <ul class="nav navbar-nav">
-    <li>
-      <%= link_to "Home", root_path %>
-    </li>
-    <li>
-      <%= link_to "Java", java_path %>
-    </li>
-  </ul>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li>
+          <%= link_to "Home", root_path %>
+        </li>
+        <li>
+          <%= link_to "Java", java_path %>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

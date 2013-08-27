@@ -11,15 +11,13 @@
 <body>
 
   <!-- header -->
-  <header class="navbar navbar-inverse navbar-fixed-top">
-    <%= content_tag :div, render('layouts/header'), class: "container" %>
-  </header>
+  <%= content_tag :div, render('layouts/header'), class: "container" %>
 
   <!-- content -->
   <%= content_tag :div, yield, class: "container" %>
 
   <!-- debug info (development only) -->
-  <%= content_tag :div, debug(params), class: "container" if Rails.env.development? %>
+  <%= content_tag(:div, debug(params), class: "container") if Rails.env.development? %>
 
 </body>
 </html>
