@@ -6,17 +6,19 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(params[:comment])
-    if @comment.valid?
+
+    notification = if @comment.valid?
       begin
         CommentMailer.comment_email(@comment).deliver
+        { success: "Message submitted." }
       rescue
-        redirect_to(contact_url, error: "Comment failed to transmit.")
-      else
-        redirect_to(contact_url, notice: "Comment submitted.")
+        { error: "Message failed to submit." }
       end
     else
-      redirect_to(contact_url, alert: "Invalid comment information.")
+      { alert: "Invalid information." }
     end
+
+    redirect_to(contact_url, flash: notification)
   end
 
 end
