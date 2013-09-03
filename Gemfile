@@ -6,11 +6,17 @@ gem 'mail'
 gem 'haml'
 gem 'haml-rails'
 gem 'whenever', require: false
-gem 'activerecord-deprecated_finders'
 
 group :development, :test do
   gem 'sqlite3'
+end
+
+group :test do
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
+  gem 'webrat'
 end
 
 gem 'sass-rails'

@@ -5,7 +5,6 @@ class CommentMailer < ActionMailer::Base
     # add throw error statement if comment object invalid
     @comment = comment
     mail to: 'Zane Woodfin <zanewoodfin@gmail.com>',
-         subject: "A comment from zanewoodfin.com has arrived",
-         from: @comment.email
+         subject: "A comment from zanewoodfin.com has arrived"
   end
 end

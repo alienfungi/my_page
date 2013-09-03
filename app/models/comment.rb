@@ -10,9 +10,11 @@ class Comment
   end
 
   def initialize(attributes = {})
-    attributes.each do |key, value|
-      self.send("#{key}=", value)
-    end
+    default_message = 'none provided'
+    id = attributes.fetch(:id, 1)
+    name = attributes.fetch(:name, default_message)
+    email = attributes.fetch(:email, default_message)
+    message = attributes.fetch(:message, default_message)
   end
 
   validates_presence_of :email, :name
