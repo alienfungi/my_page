@@ -14,9 +14,11 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'cucumber'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'webrat'
+  gem 'multi_test'
 end
 
 gem 'sass-rails'

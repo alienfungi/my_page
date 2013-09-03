@@ -177,6 +177,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass
   coffee-rails
+  cucumber
   cucumber-rails
   database_cleaner
   factory_girl_rails
@@ -186,6 +187,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   mail
+  multi_test
   pg
   rails
   rspec-rails
