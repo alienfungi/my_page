@@ -49,8 +49,9 @@ jQuery ->
     $.ajax '/scores',
       type: 'POST'
       data:
-        total: total
-        name: name
+        score:
+          total: total
+          name: name
       success: () ->
         $('.datatable').dataTable().fnReloadAjax()
 

@@ -4,11 +4,11 @@ MyPage::Application.routes.draw do
 
   root to: 'static_pages#home'
 
-  match '/packman', to: 'static_pages#packman'
-  match '/cars', to: 'static_pages#cars'
-  match '/java', to: 'static_pages#java'
-  match '/contact', to: 'static_pages#contact'
-  match '/resume', to: 'static_pages#resume'
+  match '/packman', to: 'static_pages#packman', via: [:get, :post]
+  match '/cars', to: 'static_pages#cars', via: [:get, :post]
+  match '/java', to: 'static_pages#java', via: [:get, :post]
+  match '/contact', to: 'static_pages#contact', via: [:get, :post]
+  match '/resume', to: 'static_pages#resume', via: [:get, :post]
 
   # match '/about',   to: 'static_pages#about'
   # match '/contact', to: 'static_pages#contact'

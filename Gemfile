@@ -1,24 +1,21 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails'
+gem 'thin'
 gem 'mail'
 gem 'haml'
 gem 'haml-rails'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+gem 'whenever', require: false
+gem 'activerecord-deprecated_finders'
 
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
-  gem 'webrick'#, '~> 1.3.1'
 end
 
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
-end
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier', '>= 1.0.3'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

@@ -1,5 +1,5 @@
 class ScoresDatatable
-  delegate :params, :h, to: :@view
+  delegate :params, to: :@view
 
   def initialize(view)
     @view = view
@@ -20,7 +20,7 @@ private
     scores.map do |score|
       [
         score.total,
-        h(score.name)
+        CGI::escapeHTML(score.name)
       ]
     end
   end

@@ -1,8 +1,6 @@
 class Score < ActiveRecord::Base
   MAX_RECORDS = 100
 
-  attr_accessible :name, :total
-
   validates :name, presence: true
   validates :total, presence: true
 
