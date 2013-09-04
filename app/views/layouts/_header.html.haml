@@ -10,4 +10,7 @@
       %ul.nav.navbar-nav
         - @header_links.each do |text, path|
           = content_tag :li, link_to(text, path), class: (current_page?(path) ? 'active' : '')
+      %ul.nav.navbar-nav.navbar-right
+        %li
+          = link_to('Login', login_path)
 

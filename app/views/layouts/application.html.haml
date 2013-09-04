@@ -14,10 +14,11 @@
     = render 'layouts/header'
 
     / flash messages
-    - flash.each do |name, message|
-      = content_tag :div, class: "container #{flash_class(name)}" do
-        %a{class: "close", data: {dismiss: "alert"}, href: "#", aria: {hidden: "true"}} &times;
-        = message
+    #flash.container
+      - flash.each do |name, message|
+        = content_tag :div, class: flash_class(name) do
+          %a{class: "close", data: {dismiss: "alert"}, href: "#", aria: {hidden: "true"}} &times;
+          = message
 
     / content
     = content_tag :div, yield, class: "container"

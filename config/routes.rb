@@ -2,6 +2,10 @@ MyPage::Application.routes.draw do
   resources :comments, only: [:new, :create]
   resources :scores
 
+  resource :sessions
+  post 'login' => 'sessions#create'
+  get 'login'  => 'sessions#new'
+
   root to: 'static_pages#home'
 
   match '/packman', to: 'static_pages#packman', via: [:get, :post]

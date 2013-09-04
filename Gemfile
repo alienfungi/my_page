@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby "2.0.0"
 
 gem 'rails'
 gem 'thin'
@@ -6,6 +7,7 @@ gem 'mail'
 gem 'haml'
 gem 'haml-rails'
 gem 'whenever', require: false
+gem 'bcrypt-ruby', require: 'bcrypt'
 
 group :development, :test do
   gem 'sqlite3'
@@ -17,7 +19,6 @@ group :test do
   gem 'cucumber'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
-  gem 'webrat'
   gem 'multi_test'
 end
 
