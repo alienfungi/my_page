@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 ruby "2.0.0"
 
 gem 'rails'
-gem 'thin'
 gem 'mail'
 gem 'haml'
 gem 'haml-rails'
@@ -34,4 +33,6 @@ gem 'bootstrap-sass'
 
 group :production do
   gem 'pg'
+  gem 'rails_12factor'
 end
+
