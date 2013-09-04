@@ -65,10 +65,6 @@ module MyPage
       enable_starttls_auto: true
     }
 
-    # Add applets, sounds, and fonts to asset pipeline
-    config.assets.paths << Rails.root.join('app', 'assets', 'applets')
-    config.assets.paths << Rails.root.join('app', 'assets', 'sounds')
-    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-    config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
+    config.serve_static_assets = true
   end
 end
