@@ -5,6 +5,7 @@ MyPage::Application.routes.draw do
   resource :sessions
   post 'login' => 'sessions#create'
   get 'login'  => 'sessions#new'
+  match '/logout', to: 'sessions#destroy', via: [:get, :post]
 
   root to: 'static_pages#home'
 

@@ -27,6 +27,7 @@ module ApplicationHelper
       when :notice then "info"
       when :alert then "warning"
       when :error then "danger"
+      else "invalid-type"
     end
   end
 

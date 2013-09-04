@@ -15,3 +15,8 @@ Feature: Login
     And I fill in password with password
     And I click Login
     Then I should be logged in
+
+  Scenario: Logging out
+    Given I am logged in
+    When I follow the link to Logout
+    Then I should be logged out
