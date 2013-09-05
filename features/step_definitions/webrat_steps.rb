@@ -102,7 +102,7 @@ When /^I attach the file at "([^\"]*)" to "([^\"]*)"$/ do |path, field|
 end
 
 Then /^I should see "(.*)"$/ do |text|
-  assert !!(response_body =~ /#{Regexp.escape text}/m), response_body
+  page.should have_content(text)
 end
 
 Then /^I should not see "(.*)"$/ do |text|
@@ -128,8 +128,13 @@ end
 Then /^the "([^\"]*)" field should not contain "([^\"]*)"$/ do |field, value|
   assert !(field_labeled(field).value =~ /#{value}/)
 end
-    
-Then /^I should be on (.+)$/ do |page_name|
-  assert_equal path_to(page_name), URI.parse(current_url).path
+
+Then /^I should be on((?: an individual)?) (.+)$/ do |individual, page_name|
+  current = URI.parse(current_url).path
+  if individual.blank?
+    assert_equal path_to(page_name), current
+  else
+    assert_match /^#{Regexp.escape(path_to(page_name))}\/\d+$/, current unless individual.blank?
+  end
 end
 

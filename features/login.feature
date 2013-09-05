@@ -11,12 +11,14 @@ Feature: Login
   Scenario: Logging in with valid credentials
     Given I am on the login page
     And I have valid credentials
-    When I fill in "session_email" with "zanewoodfin@gmail.com"
+    When I fill in "session_email" with "email@email.com"
     And I fill in "session_password" with "password"
     And I press "Login"
     Then I should be logged in
+    And I should be on home page
 
   Scenario: Logging out
-    Given I am logged in
-    When I click "Logout"
+    Given I am logged in as SolidSnake
+    When I click "SolidSnake"
+    And I click "Logout"
     Then I should be logged out

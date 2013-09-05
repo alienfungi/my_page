@@ -5,14 +5,21 @@ Given /^the following (.+) records?$/ do |factory, table|
 end
 
 Given /^I have valid credentials$/ do
-  User.create(email: 'zanewoodfin@gmail.com', password: 'password')
+  User.create(username: 'name', email: 'email@email.com', password: 'password')
 end
 
-Given /^I am logged in$/ do
-  User.create(email: 'zanewoodfin@gmail.com', password: 'password')
+Given /^I am logged in(?: as )?(\S*)$/ do |username|
+  username = username.blank? ? 'name' : username
+  email = 'unused@email.com'
+  password = 'password'
+  User.create(
+    username: username,
+    email: email,
+    password: password
+  )
   visit login_path
-  fill_in 'session_email', with: 'zanewoodfin@gmail.com'
-  fill_in 'session_password', with: 'password'
+  fill_in 'session_email', with: email
+  fill_in 'session_password', with: password
   click_button 'Login'
 end
 
@@ -28,3 +35,4 @@ end
 Then /^the (.*) should be (.*)$/ do |model, action|
   find('#flash').find('div').should have_content "#{model} #{action}."
 end
+

@@ -11,6 +11,16 @@
         - @header_links.each do |text, path|
           = content_tag :li, link_to(text, path), class: (current_page?(path) ? 'active' : '')
       %ul.nav.navbar-nav.navbar-right
-        %li
-          = signed_in? ? link_to('Logout', logout_path) : link_to('Login', login_path)
+        %li.dropdown
+          - if signed_in?
+            %a{href: "#", class: "dropdown-toggle", data: {toggle: "dropdown"}}
+              = h current_user.username
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                = link_to('Users', users_path)
+              %li
+                = link_to('Logout', logout_path)
+          - else
+            = link_to('Login', login_path)
 

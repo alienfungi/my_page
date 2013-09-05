@@ -1,12 +1,12 @@
 require 'bcrypt'
 
 class User < ActiveRecord::Base
-  attr_accessor :new_password, :new_password_confirmation, :password, :admin
+  attr_accessor :new_password, :new_password_confirmation, :password
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validate :email, presence: true,
-    format: { with: VALID_EMAIL_REGEX },
-    uniqueness: { case_sensitive: false }
+  WORD_CHARS = /\A\w+\z/
+  validates(:username, presence: true, format: { with: WORD_CHARS })
+  validates(:email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: true)
   validates_confirmation_of :new_password, :if => :password_changed?
 
   before_save :hash_new_password

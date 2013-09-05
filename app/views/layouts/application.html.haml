@@ -1,31 +1,31 @@
 !!! 5
 %html{lang: "en"}
-%head
-  %title= full_title yield(:title)
-  %link{href: 'http://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic,700italic', rel: 'stylesheet', type: 'text/css'}
-  %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
-  = stylesheet_link_tag    "application", media: "all"
-  = javascript_include_tag "application"
-  = csrf_meta_tags
-%body
-  #wrap
+  %head
+    %title= full_title yield(:title)
+    %link{href: 'http://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic,700italic', rel: 'stylesheet', type: 'text/css'}
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
+    = stylesheet_link_tag    "application", media: "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    #wrap
 
-    / header
-    = render 'layouts/header'
+      / header
+      = render 'layouts/header'
 
-    / flash messages
-    #flash.container
-      - flash.each do |name, message|
-        = content_tag :div, class: flash_class(name) do
-          %a{class: "close", data: {dismiss: "alert"}, href: "#", aria: {hidden: "true"}} &times;
-          = message
+      / flash messages
+      #flash.container
+        - flash.each do |name, message|
+          = content_tag :div, class: flash_class(name) do
+            %a{class: "close", data: {dismiss: "alert"}, href: "#", aria: {hidden: "true"}} &times;
+            = message
 
-    / content
-    = content_tag :div, yield, class: "container"
+      / content
+      = content_tag :div, yield, class: "container"
 
-    / debug info (development only)
-    = content_tag(:div, debug(params), class: "container") if Rails.env.development?
+      / debug info (development only)
+      = content_tag(:div, debug(params), class: "container") if Rails.env.development?
 
-  / footer
-  = render 'layouts/footer'
+    / footer
+    = render 'layouts/footer'
 
