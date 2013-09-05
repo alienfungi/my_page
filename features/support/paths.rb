@@ -1,11 +1,11 @@
 module NavigationHelpers
   def path_to(page_name)
     case page_name
-    when /the home\s?page/
+    when /home\s?page/
       '/'
     else
       begin
-        page_name =~ /the (.*) page/
+        page_name =~ /(.*) page/
         path_components = $1.split(/\s+/)
         self.send(path_components.push('path').join('_').to_sym)
       rescue Object => e

@@ -1,6 +1,7 @@
 MyPage::Application.routes.draw do
   resources :comments, only: [:new, :create]
   resources :scores
+  resources :users
 
   resource :sessions
   post 'login' => 'sessions#create'

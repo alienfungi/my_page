@@ -14,12 +14,14 @@ group :development, :test do
 end
 
 group :test do
+  gem 'rspec'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'cucumber'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'multi_test'
+  gem 'capybara'
 end
 
 gem 'sass-rails'

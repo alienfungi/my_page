@@ -9,4 +9,10 @@ FactoryGirl.define do
     name "Paul"
     total 123
   end
+
+  factory :user do
+    email "email@email.com"
+    password "password"
+    admin false
+  end
 end
