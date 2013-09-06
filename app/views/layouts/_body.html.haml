@@ -1,0 +1,16 @@
+/ flash messages
+#flash.container
+  - flash.each do |name, message|
+    = content_tag :div, class: flash_class(name) do
+      %a{class: "close", data: {dismiss: "alert"}, href: "#", aria: {hidden: "true"}} &times;
+      = message
+
+/ content
+= content_tag :div, yield, class: "container"
+
+%br
+%br
+
+/ debug info (development only)
+= content_tag(:div, debug(params), class: "container") if Rails.env.development?
+

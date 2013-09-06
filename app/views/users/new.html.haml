@@ -1,4 +1,5 @@
-%h1 New User
+- provide :title, 'New User'
+
 = form_for @user, html: { role: "form" } do |f|
   .form-group
     = f.label :email, "Email", class: "control-label"
@@ -18,4 +19,3 @@
 
   = f.submit "Submit", class: "btn btn-default"
 
-%br

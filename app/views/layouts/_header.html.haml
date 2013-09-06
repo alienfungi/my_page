@@ -1,15 +1,16 @@
-.navbar.navbar-inverse.navbar-fixed-top
+%header.navbar.navbar-inverse.navbar-fixed-top
   .container
-    %button{class: "navbar-toggle", type: "button", data: {target: ".navbar-collapse", toggle: "collapse"}}
+    %button{class: "navbar-toggle", type: "button", data: {target: "#header_collapse", toggle: "collapse"}}
       %span.icon-bar
       %span.icon-bar
       %span.icon-bar
     .navbar-header
       = link_to "Zane's Site", root_path, class: "navbar-brand"
-    .collapse.navbar-collapse
+    #header_collapse.collapse.navbar-collapse
       %ul.nav.navbar-nav
         - @header_links.each do |text, path|
-          = content_tag :li, link_to(text, path), class: (current_page?(path) ? 'active' : '')
+          = content_tag :li, class: (current_page?(path) ? 'active' : '') do
+            = link_to text, path
       %ul.nav.navbar-nav.navbar-right
         %li.dropdown
           - if signed_in?
@@ -23,4 +24,13 @@
                 = link_to('Logout', logout_path)
           - else
             = link_to('Login', login_path)
+
+- if content_for? :header
+  .page-header
+    .container
+      = yield(:header)
+- elsif content_for? :title
+  .page-header
+    .container
+      = content_tag :h1, yield(:title)
 

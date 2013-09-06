@@ -1,16 +1,22 @@
-%h1 Users
+- provide :title, 'Users'
 
-.pull-right
-  = form_tag({}, method: "get", class: "form-inline", role: "form") do
-    .form-group
-      = text_field_tag :search_for, "", class: "form-control", autofocus: true
-    = submit_tag "Search", class: "btn btn-default"
-  %br
+- content_for :header do
+  .row
+    %h1.col-sm-8.col-md-9 Users
+    = form_tag({}, method: "get", class: "form-inline col-sm-4 col-md-3", role: "form") do
+      %table{style: 'width: 100%;'}
+        %tr
+          %td
+            = text_field_tag :search_for, "", class: "form-control", autofocus: true
+          %td
+            %label{for: 'search_submit', class: 'btn btn-primary', style: 'width: 100%;'}
+              %span.glyphicon.glyphicon-search
+            %input{class: 'hidden', type: 'submit', name: 'commit', id: 'search_submit'}
 
-.clearfix
+- content_for :sidebar do
+  = render 'sidebar'
 
 = render @users
-
 .pull-right
   = will_paginate @users
 

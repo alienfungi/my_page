@@ -1,6 +1,16 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
 
+  before_action :set_sidebar_links
+
+  def set_sidebar_links
+    @sidebar_links = {
+      "My Profile" => @current_user,
+      "Users" => users_path,
+      "Logout" => logout_path
+    }
+  end
+
   def show
     @user = User.find(params[:id])
   end

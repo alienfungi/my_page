@@ -1,5 +1,7 @@
-= content_tag :h1, @user.username
+- provide :title, @user.username
+
+- content_for :sidebar do
+  = render 'sidebar'
 
 = gravatar_for @user, size: 250
-%br
-%br
+

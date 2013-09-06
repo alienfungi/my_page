@@ -11,6 +11,13 @@ body {
 
 /* Wrapper for page content to push down footer */
 #wrap {
+
+  // Move header margin into padding to fix footer
+  .page-header {
+    padding-top: 40px;
+    margin-top: 0;
+  }
+
   min-height: 100%;
   height: auto !important;
   height: 100%;

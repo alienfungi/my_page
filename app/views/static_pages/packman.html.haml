@@ -6,8 +6,8 @@
   %li= link_to "High Scores", "#scores", data: { toggle: "tab" }
 
 .tab-content
+  %br
   .tab-pane.active#game
-    %h1 Packman
     #packmanContainer
       %table
         %tr
@@ -19,7 +19,6 @@
         You must have Java properly installed to view this applet.
 
   .tab-pane#controls
-    %h1 Controls
     %table.table
       %thead
         %tr
@@ -49,10 +48,10 @@
           %td N
 
   .tab-pane#scores
-    %h1 High Scores
     %table{class: "table datatable", data: {source: scores_url(format: "json")}}
       %thead
         %tr
           %th Score
           %th Player
       %tbody
+
