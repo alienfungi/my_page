@@ -1,3 +1,16 @@
 %h1 Users
-%ul
-  = render @users
+
+.pull-right
+  = form_tag({}, method: "get", class: "form-inline", role: "form") do
+    .form-group
+      = text_field_tag :search_for, "", class: "form-control", autofocus: true
+    = submit_tag "Search", class: "btn btn-default"
+  %br
+
+.clearfix
+
+= render @users
+
+.pull-right
+  = will_paginate @users
+

@@ -5,6 +5,13 @@ GIT
     jquery-datatables-rails (1.11.2)
       jquery-rails
 
+GIT
+  remote: git://github.com/yrgoldteeth/bootstrap-will_paginate.git
+  revision: 994fbb96ab52d2bdbb6035e534060f9df18b34c6
+  specs:
+    bootstrap-will_paginate (0.0.9)
+      will_paginate
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -184,6 +191,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt-ruby
   bootstrap-sass
+  bootstrap-will_paginate!
   capybara
   coffee-rails
   cucumber

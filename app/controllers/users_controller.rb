@@ -6,7 +6,12 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    users = if params.has_key? :search_for
+      User.where("username LIKE ?", "#{Regexp.escape(params[:search_for])}%")
+    else
+      User
+    end
+    @users = users.paginate(page: params[:page], per_page: 10)
   end
 
   def new
