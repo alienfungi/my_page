@@ -15,10 +15,11 @@ Feature: Login
     And I fill in "session_password" with "password"
     And I press "Login"
     Then I should be logged in
-    And I should be on home page
+    And I should be on an individual users page
 
   Scenario: Logging out
     Given I am logged in as SolidSnake
     When I click "SolidSnake"
     And I click "Logout"
     Then I should be logged out
+    And I should be on login page

@@ -1,7 +1,17 @@
 - provide :title, @user.username
+- content_for :header do
+  %h1
+    = @user.username
+    = content_tag :small, (h @user.headline)
 
 - content_for :sidebar do
   = render 'sidebar'
 
-= gravatar_for @user, size: 250
+.col-sm-4
+  = gravatar_for @user, size: 250
+.col-sm-8
+  - if @user == current_user
+    = link_to "Edit", edit_user_path(@user)
+  %h2 About
+  = h @user.about
 

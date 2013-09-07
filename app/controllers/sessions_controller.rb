@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if User.authenticate(email, params[:session][:password])
       user = User.find_by_email(email)
       sign_in user
-      redirect_to users_path, flash: { success: 'You are now logged in.' }
+      redirect_to user, flash: { success: 'You are now logged in.' }
     else
       flash.now[:error] = 'Invalid login credentials'
       render 'new'

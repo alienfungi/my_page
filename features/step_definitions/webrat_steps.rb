@@ -21,7 +21,11 @@ end
 
 # ?: makes parenthesis group without saving the result (don't create a backreference)
 When /^I follow|click(?: the)* "([^\"]*)"(?: link)*$/ do |link|
-  click_link(link)
+  if first(:link, link)
+    first(:link, link).click
+  else
+    click_link(link)
+  end
 end
 
 When /^I fill in "([^\"]*)" with "([^\"]*)"$/ do |field, value|

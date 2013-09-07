@@ -20,8 +20,8 @@ Feature: User Management
     And I fill in "Username" with "name"
     And I fill in "Password" with "password"
     And I fill in "Confirm Password" with "password"
-    And I press "Submit"
-    Then I should be on home page
+    And I press "Create User"
+    Then I should be on an individual users page
     And the User should be created
 
   Scenario: Visiting the user index page
@@ -38,3 +38,30 @@ Feature: User Management
     When I click "Dick"
     Then I should be on an individual users page
     And I should see "Dick"
+
+  Scenario: When a new user is created with full data
+    Given I am on the new user page
+    When I fill in "Email" with "my@email.com"
+    And I fill in "Username" with "my_name"
+    And I fill in "Password" with "password"
+    And I fill in "Confirm Password" with "password"
+    And I fill in "About" with "Some stuff about me."
+    And I fill in "Headline" with "The headline I set."
+    And I press "Create User"
+    Then I should be on an individual users page
+    And I should see "my_name"
+    And I should see "Some stuff about me."
+    And I should see "The headline I set."
+  Scenario: A user should be able to edit his info
+    Given I am logged in
+    When I click "Edit"
+    And I fill in "Username" with "aNew_username"
+    And I fill in "Password" with "newPassword"
+    And I fill in "Confirm Password" with "newPassword"
+    And I fill in "About" with "New stuff about me!"
+    And I fill in "Headline" with "Awesome stuff."
+    And I press "Update"
+    Then I should be on an individual users page
+    And I should see "aNew_username"
+    And I should see "New stuff about me!"
+    And I should see "Awesome stuff."

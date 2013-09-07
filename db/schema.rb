@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130905172550) do
+ActiveRecord::Schema.define(version: 20130907025844) do
 
   create_table "scores", force: true do |t|
     t.string   "name"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 20130905172550) do
     t.datetime "updated_at"
     t.boolean  "admin",           default: false
     t.string   "username"
+    t.string   "headline"
+    t.text     "about"
   end
 
 end

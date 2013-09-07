@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
 
+  before_action :correct_user, only: [:edit, :update]
   before_action :set_sidebar_links
 
   def set_sidebar_links
@@ -32,16 +33,35 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       sign_in @user
-      redirect_to root_path, flash: { success: 'User created.' }
+      redirect_to @user, flash: { success: 'User created.' }
     else
       flash.now[:error] = 'Invalid user info.'
       render 'new'
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @user.update_attributes(user_params)
+      flash[:success] = "User updated."
+      sign_in @user
+      redirect_to @user
+    else
+      flash[:error] = "Invalid information."
+      render 'edit'
+    end
+  end
+
 private
 
   def user_params
-    params.require(:user).permit(:email, :username, :new_password, :new_password_confirmation)
+    params.require(:user).permit(:email, :username, :new_password, :new_password_confirmation, :headline, :about)
+  end
+
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_path) unless current_user?(@user)
   end
 end

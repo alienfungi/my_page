@@ -5,8 +5,15 @@ class User < ActiveRecord::Base
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   WORD_CHARS = /\A\w+\z/
-  validates(:username, presence: true, format: { with: WORD_CHARS })
-  validates(:email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: true)
+
+  validates(:username,
+            presence: true,
+            format: { with: WORD_CHARS },
+            length: 3..20)
+  validates(:email,
+            presence: true,
+            format: { with: VALID_EMAIL_REGEX },
+            uniqueness: true)
   validates_confirmation_of :new_password, :if => :password_changed?
 
   before_save :hash_new_password

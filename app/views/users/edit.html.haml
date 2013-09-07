@@ -1,0 +1,7 @@
+- provide :title, 'Edit User'
+
+= form_for @user, html: { role: "form" } do |f|
+  = render 'users/fields', f: f
+  .row
+    = f.submit "Update User", class: "btn btn-primary btn-block"
+
