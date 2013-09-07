@@ -1,4 +1,9 @@
 - provide :title, 'Resume'
+- content_for :header do
+  %h1.pull-left
+    Resume
+  = image_tag 'rails.png', class: 'pull-right'
+  .clearfix
 
 #resume
   %h1 Paul “Zane” Woodfin

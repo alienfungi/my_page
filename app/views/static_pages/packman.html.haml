@@ -1,4 +1,8 @@
 - provide :title, 'Packman'
+- content_for :header do
+  %h1
+    Packman
+    %small now with A* search!
 
 %ul{class: "nav nav-tabs", id: "packmanTabs"}
   %li{class: "active"}= link_to "Game", "#game", data: { toggle: "tab" }
