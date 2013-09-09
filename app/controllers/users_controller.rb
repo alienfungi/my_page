@@ -54,6 +54,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    begin
+      User.destroy(params[:id])
+      flash[:success] = "User deleted."
+    rescue
+      flash[:error] = "Record not found."
+    end
+    redirect_to users_path
+  end
+
 private
 
   def user_params
@@ -62,6 +72,6 @@ private
 
   def correct_user
     @user = User.find(params[:id])
-    redirect_to(root_path) unless current_user?(@user)
+    redirect_to(root_path) unless current_user?(@user) || current_user.admin
   end
 end

@@ -5,7 +5,7 @@ class StaticPagesController < ApplicationController
   end
 
   def contact
-    @comment = Comment.new
+    @contact_message = ContactMessage.new
   end
 
   def resume

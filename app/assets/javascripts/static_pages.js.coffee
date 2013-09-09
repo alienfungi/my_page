@@ -28,11 +28,11 @@ jQuery ->
     else
       true
 
-  window.validate_comment = () ->
+  window.validate_contact_message = () ->
     email_regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
     valid = true
-    unless validate_field($("#comment_name")) then valid = false
-    unless validate_field($("#comment_email"), email_regex) then valid = false
+    unless validate_field($("#contact_message_name")) then valid = false
+    unless validate_field($("#contact_message_email"), email_regex) then valid = false
     valid
 
   window.post_score = (arg) ->

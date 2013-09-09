@@ -1,14 +1,14 @@
 require "spec_helper"
 
-describe CommentMailer do
-  let(:default_from) { 'commentMailer@zanewoodfin.com' }
+describe ContactMessageMailer do
+  let(:default_from) { 'contactMessageMailer@zanewoodfin.com' }
   let(:default_to) { 'zanewoodfin@gmail.com' }
-  let(:default_subject) { 'A comment from zanewoodfin.com has arrived' }
-  subject { CommentMailer.comment_email(@comment) }
+  let(:default_subject) { 'A message from zanewoodfin.com has arrived' }
+  subject { ContactMessageMailer.contact_message_email(@contact_message) }
 
-  describe '#comment_email' do
+  describe '#contact_message_email' do
     before do
-      @comment = FactoryGirl.build(:comment)
+      @contact_message = FactoryGirl.build(:contact_message)
     end
 
     it 'should be sendable' do
@@ -19,6 +19,13 @@ describe CommentMailer do
     its(:from) { should == [default_from] }
     its(:to) { should == [default_to] }
     its(:subject) { should == default_subject }
-    its(:body) { should include(@comment.message) }
+
+    it 'should contain the message in the html part' do
+      subject.html_part.body.should include @contact_message.message
+    end
+
+    it 'should contain the message in the text part' do
+      subject.html_part.body.should include @contact_message.message
+    end
   end
 end

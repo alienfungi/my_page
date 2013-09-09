@@ -1,0 +1,19 @@
+!!! 5
+%html{lang: "en"}
+  %head
+    %style{type: "text/css"}
+      :plain
+        td {
+          padding: 10px;
+        }
+  %body
+    %table{border: 1}
+      %tr
+        %td name
+        = content_tag :td, @contact_message.name
+      %tr
+        %td email
+        = content_tag :td, @contact_message.email
+      %tr
+        %td comment
+        = content_tag :td, @contact_message.message

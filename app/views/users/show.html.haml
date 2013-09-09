@@ -1,17 +1,28 @@
 - provide :title, @user.username
 - content_for :header do
-  %h1
-    = @user.username
-    = content_tag :small, (h @user.headline)
+  .row
+    %h1.col-sm-10
+      = @user.username
+      = content_tag :small, (h @user.headline)
+    - if @user == current_user || current_user.admin
+      .btn-group.pull-right.col-sm-2
+        %button{type: 'button', class: 'btn btn-primary dropdown-toggle', data: {toggle: 'dropdown'}}
+          Admin
+          %span.caret
+        %ul{class: 'dropdown-menu', role: 'menu'}
+          - if current_user == @user || current_user.admin
+            %li
+              = link_to "Edit", edit_user_path(@user)
+          - if current_user.admin
+            %li
+              = link_to "Delete", user_path(@user), method: :delete
 
 - content_for :sidebar do
   = render 'sidebar'
 
-.col-sm-4
-  = gravatar_for @user, size: 250
-.col-sm-8
-  - if @user == current_user
-    = link_to "Edit", edit_user_path(@user)
+.col-md-4
+  = gravatar_for @user, size: 250, class: "img-responsive"
+.col-md-8
   %h2 About
   = h @user.about
 

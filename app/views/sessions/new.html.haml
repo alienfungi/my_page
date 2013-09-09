@@ -1,6 +1,6 @@
 - provide :title, 'Login'
 
-.col-sm-4.col-sm-offset-4
+.col-sm-6.col-sm-offset-3
   = form_for(:session, url: sessions_path, html: { class: 'form-signin' }) do |f|
     = f.text_field :email, class: 'form-control', placeholder: 'Email', autofocus: true
     = f.password_field :password, class: 'form-control', placeholder: 'Password'

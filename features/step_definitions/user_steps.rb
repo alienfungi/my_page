@@ -12,10 +12,12 @@ Given /^I am logged in(?: as )?(\S*)$/ do |username|
   username = username.blank? ? 'name' : username
   email = 'unused@email.com'
   password = 'password'
+  admin = username == 'admin' ? true : false
   User.create(
     username: username,
     email: email,
-    password: password
+    password: password,
+    admin: admin
   )
   visit login_path
   fill_in 'session_email', with: email

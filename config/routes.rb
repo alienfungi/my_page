@@ -1,5 +1,5 @@
 MyPage::Application.routes.draw do
-  resources :comments, only: [:new, :create]
+  resources :contact_messages, only: [:new, :create]
   resources :scores
   resources :users
 

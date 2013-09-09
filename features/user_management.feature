@@ -52,9 +52,11 @@ Feature: User Management
     And I should see "my_name"
     And I should see "Some stuff about me."
     And I should see "The headline I set."
+
   Scenario: A user should be able to edit his info
     Given I am logged in
-    When I click "Edit"
+    When I press "Admin"
+    And I click "Edit"
     And I fill in "Username" with "aNew_username"
     And I fill in "Password" with "newPassword"
     And I fill in "Confirm Password" with "newPassword"
@@ -65,3 +67,12 @@ Feature: User Management
     And I should see "aNew_username"
     And I should see "New stuff about me!"
     And I should see "Awesome stuff."
+
+  Scenario: An admin should be able to delete users
+    Given I am logged in as admin
+    And I am on the users page
+    When I click "Jane"
+    And I press "Admin"
+    And I click "Delete"
+    Then the User should be deleted
+    And I should be on users page
