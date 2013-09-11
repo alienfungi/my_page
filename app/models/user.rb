@@ -3,6 +3,9 @@ require 'bcrypt'
 class User < ActiveRecord::Base
   attr_accessor :new_password, :new_password_confirmation, :password
 
+  has_many :sent_messages, class_name: "Message", foreign_key: :sender_id
+  has_many :received_messages, class_name: "Message", foreign_key: :recipient_id
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   WORD_CHARS = /\A\w+\z/
 

@@ -1,7 +1,11 @@
 - provide :title, 'New User'
 
+- if signed_in?
+  - content_for :sidebar do
+    = render 'sidebar'
+
 = form_for :user, as: :post, url: users_path, html: { role: "form" } do |f|
-  = render 'users/fields', f: f
+  = render 'fields', f: f
   .row
     = f.submit "Create User", class: "btn btn-primary btn-block"
 

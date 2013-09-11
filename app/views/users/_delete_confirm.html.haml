@@ -1,0 +1,13 @@
+/ provide :user to delete
+
+.modal.fade{id: "delete_modal_#{user.id}", role: 'dialog', aria: {hidden: true}}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{data: {dismiss: "modal"}, aria: {hidden: true}} &times;
+        %h4.modal-title Confirm Delete
+      .modal-body
+        %p Are you sure you would like to delete the user?
+      .modal-footer
+        = link_to "Delete User", user_path(user.id), method: :delete, class: "btn btn-primary"
+        %button.btn.btn-default{data: {dismiss: "modal"}} Cancel

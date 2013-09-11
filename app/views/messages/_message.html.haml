@@ -1,0 +1,10 @@
+%tr
+  %td{width: '25%'}
+    = message.created_at.strftime("%Y-%m-%d %H:%M:%S %Z")
+  %td{width: '20%'}
+    - if message.sender == current_user
+      = link_to message.recipient.username, message.recipient
+    - else
+      = link_to message.sender.username, message.sender
+  %td{width: '55%'}
+    = link_to message.subject, message

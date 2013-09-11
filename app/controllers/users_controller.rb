@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     @sidebar_links = {
       "My Profile" => @current_user,
       "Users" => users_path,
+      "Messages" => messages_path,
       "Logout" => logout_path
     }
   end
@@ -26,13 +27,14 @@ class UsersController < ApplicationController
   end
 
   def new
+    sign_out unless current_user && current_user.admin
     @user = User.new
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
-      sign_in @user
+      sign_in @user unless current_user && current_user.admin
       redirect_to @user, flash: { success: 'User created.' }
     else
       flash.now[:error] = 'Invalid user info.'

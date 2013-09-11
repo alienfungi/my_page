@@ -4,18 +4,20 @@
     %h1.col-sm-10
       = @user.username
       = content_tag :small, (h @user.headline)
-    - if @user == current_user || current_user.admin
-      .btn-group.pull-right.col-sm-2
-        %button{type: 'button', class: 'btn btn-primary dropdown-toggle', data: {toggle: 'dropdown'}}
-          Admin
-          %span.caret
-        %ul{class: 'dropdown-menu', role: 'menu'}
-          - if current_user == @user || current_user.admin
-            %li
-              = link_to "Edit", edit_user_path(@user)
-          - if current_user.admin
-            %li
-              = link_to "Delete", user_path(@user), method: :delete
+    .btn-group.col-sm-2
+      %button{type: 'button', class: 'btn btn-primary dropdown-toggle pull-right', data: {toggle: 'dropdown'}}
+        Options
+        %span.caret
+      %ul{class: 'dropdown-menu', role: 'menu'}
+        - if current_user != @user
+          %li
+            = link_to "Send Message", new_message_path(recipient: @user.id)
+        - if current_user == @user || current_user.admin
+          %li
+            = link_to "Edit", edit_user_path(@user)
+        - if current_user.admin
+          %li
+            %a{href: "#delete_modal_#{@user.id}", data: {toggle: "modal"}} Delete
 
 - content_for :sidebar do
   = render 'sidebar'
@@ -25,4 +27,6 @@
 .col-md-8
   %h2 About
   = h @user.about
+
+= render 'delete_confirm', user: @user
 

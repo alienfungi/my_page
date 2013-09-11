@@ -1,0 +1,8 @@
+- provide :title, "Message"
+
+- content_for :header do
+  %h1
+    Message
+    = h content_tag :small, @message.subject
+
+= content_tag :p, (simple_format @message.message, sanitize: true)

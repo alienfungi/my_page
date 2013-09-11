@@ -1,0 +1,20 @@
+= f.hidden_field :sender_id, value: current_user.id
+
+.form-group
+  - if @recipient
+    = f.label :recipient_id, "Recipient", class: "control-label"
+    %input{type: 'text', value: @recipient.username, readonly: true, class: "form-control"}
+    = f.hidden_field :recipient_id, value: @recipient.id, class: "form-control"
+  - else
+    = f.label :recipient_email, "Recipient", class: "control-label"
+    = f.text_field :recipient_email, class: "form-control", autofocus: true
+
+.form-group
+  = f.label :subject, "Subject", class: "control-label"
+  = f.text_field :subject, class: "form-control", autofocus: (@recipient ? true : false)
+
+.form-group
+  = f.label :message, "Message", class: "control-label"
+  = f.text_area :message, class: "form-control"
+
+= f.submit "Send Message", class: "btn btn-primary btn-block"

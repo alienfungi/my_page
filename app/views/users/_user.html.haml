@@ -1,6 +1,12 @@
-= link_to user do
-  .panel.panel-default
-    .panel-heading
+.panel.panel-default
+  .panel-heading
+    - if current_user.admin
+      %a{href: "#delete_modal_#{user.id}", type: 'button', class: 'close', data: {toggle: 'modal'}} &times;
+    = link_to user do
       = content_tag :h3, user.username, class: "panel-title"
-    .panel-body
+  .panel-body
+    = link_to user do
       = gravatar_for user, size: 100, class: "img-thumbnail"
+
+= render 'delete_confirm', user: user
+
