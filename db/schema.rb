@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130910193411) do
+ActiveRecord::Schema.define(version: 20130912213243) do
 
   create_table "messages", force: true do |t|
     t.string   "subject"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20130910193411) do
     t.integer  "recipient_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "removed_by_sender",    default: false
+    t.boolean  "removed_by_recipient", default: false
   end
 
   create_table "scores", force: true do |t|

@@ -26,15 +26,15 @@ Given /^I am logged in(?: as )?(\S*)$/ do |username|
 end
 
 Then /^I should be logged in$/ do
-  find('#flash').find('div').should have_content 'logged in'
+  find('#flash_messages').find('div').should have_content 'logged in'
 end
 
 Then /^I should be logged out$/ do
-  find('#flash').find('div').should have_content 'logged out'
+  find('#flash_messages').find('div').should have_content 'logged out'
   find_link('Login').visible?.should be_true
 end
 
 Then /^the (.*) should be (.*)$/ do |model, action|
-  find('#flash').find('div').should have_content "#{model} #{action}."
+  find('#flash_messages').find('div').should have_content "#{model} #{action}."
 end
 

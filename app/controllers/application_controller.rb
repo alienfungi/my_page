@@ -6,7 +6,9 @@ class ApplicationController < ActionController::Base
 
   before_action :set_header_links
 
-  #filter_parameter_logging :password
+  rescue_from 'ActiveRecord::RecordNotFound' do |exception|
+    render 'layouts/record_not_found'
+  end
 
 private
 

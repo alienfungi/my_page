@@ -10,7 +10,21 @@ class Message < ActiveRecord::Base
 
   before_save :set_recipient
 
-  default_scope order('created_at DESC')
+  default_scope { order('created_at DESC') }
+
+  def remove_user(user)
+    self.removed_by_sender = true if user == sender
+    self.removed_by_recipient = true if user == recipient
+    if removed_by_sender && removed_by_recipient
+      self.destroy
+    else
+      self.save
+    end
+  end
+
+  def valid_user(user)
+    (sender == user && !removed_by_sender) || (recipient == user && !removed_by_recipient)
+  end
 
 private
 
@@ -21,4 +35,5 @@ private
     end
     false unless self.recipient_id
   end
+
 end

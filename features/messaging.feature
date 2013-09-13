@@ -24,6 +24,6 @@ Feature: Messaging
     And I fill in "Subject" with "some subject"
     And I fill in "Message" with "some random message!"
     And I press "Send Message"
-    Then I should be on users page
+    Then I should be on new message page
     And I should see "Message sent."
 
