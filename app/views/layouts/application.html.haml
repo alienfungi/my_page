@@ -15,10 +15,11 @@
 
       / body [and sidebar]
       .container
-        - if content_for? :sidebar
+        - if (content_for? :sidebar) || (signed_in? && params[:controller] != 'static_pages')
           .row
             .col-sm-3
-              = yield :sidebar
+              = yield :sidebar if content_for? :sidebar
+              = render 'layouts/sidebar' if signed_in?
             .col-sm-9
               = render 'layouts/body'
         - else

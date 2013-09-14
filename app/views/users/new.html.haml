@@ -1,9 +1,5 @@
 - provide :title, 'New User'
 
-- if signed_in?
-  - content_for :sidebar do
-    = render 'sidebar'
-
 = form_for :user, as: :post, url: users_path, html: { role: "form" } do |f|
   = render 'fields', f: f
   .row

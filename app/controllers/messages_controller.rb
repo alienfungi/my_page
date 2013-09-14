@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+
   def index
     @received_messages = current_user.received_messages.where(removed_by_recipient: false).paginate(
       page: params[:received_messages_page], per_page: 10)
@@ -34,6 +35,7 @@ class MessagesController < ApplicationController
   def destroy
     begin
       @message = Message.find(params[:id])
+      raise unless @message.valid_user(current_user)
       session[:active_tab] = @message.recipient == current_user ? 'received' : 'sent'
       @message.remove_user(current_user)
       flash[:success] = "Message deleted."

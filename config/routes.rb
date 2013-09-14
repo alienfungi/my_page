@@ -3,6 +3,7 @@ MyPage::Application.routes.draw do
   resources :scores
   resources :users
   resources :messages
+  resources :friendships
 
   resource :sessions
   post 'login' => 'sessions#create'

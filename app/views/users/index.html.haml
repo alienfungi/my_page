@@ -13,9 +13,6 @@
               %span.glyphicon.glyphicon-search
             %input{class: 'hidden', type: 'submit', name: 'commit', id: 'search_submit'}
 
-- content_for :sidebar do
-  = render 'sidebar'
-
 = render @users
 .pull-right
   = will_paginate @users

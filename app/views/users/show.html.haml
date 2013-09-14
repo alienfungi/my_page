@@ -12,15 +12,18 @@
         - if current_user != @user
           %li
             = link_to "Send Message", new_message_path(recipient: @user.id)
-        - if current_user == @user || current_user.admin
+        - if current_user == @user
           %li
             = link_to "Edit", edit_user_path(@user)
+        - elsif @friendship
+          %li
+            = link_to "Remove Friend", @friendship, method: :delete
+        - else
+          %li
+            = link_to "Add Friend", friendships_path(friend_id: @user), method: :post
         - if current_user.admin
           %li
             %a{href: "#delete_modal_#{@user.id}", data: {toggle: "modal"}} Delete
-
-- content_for :sidebar do
-  = render 'sidebar'
 
 .col-md-4
   = gravatar_for @user, size: 250, class: "img-responsive"

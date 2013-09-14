@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :require_login
 
   before_action :set_header_links
+  before_action :set_sidebar_links
 
   rescue_from 'ActiveRecord::RecordNotFound' do |exception|
     render 'layouts/record_not_found'
@@ -18,6 +19,16 @@ private
       "Java" => java_path,
       "Resume" => resume_path,
       "Contact" => contact_path
+    }
+  end
+
+  def set_sidebar_links
+    @sidebar_links = {
+      "My Profile" => current_user,
+      "Users" => users_path,
+      "Friends" => friendships_path,
+      "Messages" => messages_path,
+      "Logout" => logout_path
     }
   end
 

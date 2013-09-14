@@ -1,0 +1,10 @@
+.panel.panel-default
+  .panel-heading
+    %a{href: "#delete_modal_#{friendship.friend_id}", type: 'button', class: 'close', data: {toggle: 'modal'}} &times;
+    = link_to friendship.friend do
+      = content_tag :h3, friendship.friend.username, class: "panel-title"
+  .panel-body
+    = link_to friendship.friend do
+      = gravatar_for friendship.friend, size: 100, class: "img-thumbnail"
+
+= render 'delete_confirm', friendship: friendship

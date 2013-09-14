@@ -1,0 +1,7 @@
+- provide :title, "Friends"
+
+- if @friendships.size > 0
+  %ul
+    = render @friendships
+- else
+  %h2 No friends :(

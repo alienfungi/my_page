@@ -1,8 +1,5 @@
 - provide :title, 'Edit User'
 
-- content_for :sidebar do
-  = render 'sidebar'
-
 = form_for @user, html: { role: "form" } do |f|
   = render 'fields', f: f
   .row
