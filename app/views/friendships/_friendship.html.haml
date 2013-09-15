@@ -1,10 +1,11 @@
+- target = friendship.user == current_user ? :friend : :user
 .panel.panel-default
   .panel-heading
-    %a{href: "#delete_modal_#{friendship.friend_id}", type: 'button', class: 'close', data: {toggle: 'modal'}} &times;
-    = link_to friendship.friend do
-      = content_tag :h3, friendship.friend.username, class: "panel-title"
+    %a{href: "#delete_modal_#{friendship.public_send(target).id}", type: 'button', class: 'close', data: {toggle: 'modal'}} &times;
+    = link_to friendship.public_send(target) do
+      = content_tag :h3, friendship.public_send(target).username, class: "panel-title"
   .panel-body
-    = link_to friendship.friend do
-      = gravatar_for friendship.friend, size: 100, class: "img-thumbnail"
+    = link_to friendship.public_send(target) do
+      = gravatar_for friendship.public_send(target), size: 100, class: "img-thumbnail"
 
 = render 'delete_confirm', friendship: friendship

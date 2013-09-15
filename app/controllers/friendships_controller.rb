@@ -11,14 +11,39 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
-    @friendship = current_user.friendships.find(params[:id])
-    @friendship.destroy
-    flash[:success] = "Removed friendship."
+    message = "Removed friendship."
+    begin
+      @friendship = current_user.friendships.find(params[:id])
+      @friendship.destroy
+    rescue
+      message = "Denied Friend request."
+    end
+    begin
+      @friendship = current_user.inverse_friendships.find(params[:id])
+      @friendship.destroy
+    rescue
+      message = "Cancelled friend request."
+    end
+    flash[:success] = message
     redirect_to users_path
   end
 
   def index
-    @friendships = current_user.friendships
-    @inverse_friendships = current_user.inverse_friendships
+    inbound_friends = current_user.inverse_friendships.map { |friendship| friendship.friend }
+    outbound_friends = current_user.friendships.map { |friendship| friendship.friend }
+
+    @mutual = current_user.friendships.keep_if do |friendship|
+      inbound_friends.include? friendship.friend
+    end
+
+    @requests = current_user.inverse_friendships.reject do |friendship|
+      outbound_friends.include? friendship.friend
+    end
+
+    @pending = current_user.friendships.reject do |friendship|
+      inbound_friends.include? friendship.friend
+    end
+
+    @active_tab = 'mutual'
   end
 end

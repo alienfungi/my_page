@@ -1,7 +1,33 @@
 - provide :title, "Friends"
 
-- if @friendships.size > 0
-  %ul
-    = render @friendships
-- else
-  %h2 No friends :(
+%ul#friendship_tabs.nav.nav-tabs
+  = content_tag :li, class: (@active_tab == "mutual" ? "active" : "") do
+    %a{href: "#mutual", data: {toggle: "tab"}} Mutual
+  = content_tag :li, class: (@active_tab == "requests" ? "active" : "") do
+    %a{href: "#requests", data: {toggle: "tab"}} Requests
+  = content_tag :li, class: (@active_tab == "pending" ? "active" : "") do
+    %a{href: "#pending", data: {toggle: "tab"}} Pending
+
+.tab-content
+  = content_tag :div, id: 'mutual', class: "tab-pane#{' active' if @active_tab == 'mutual'}" do
+    %br
+    %ul
+      - if @mutual.size > 0
+        = render @mutual
+      - else
+        %h2 No friends :(
+  = content_tag :div, id: 'requests', class: "tab-pane#{' active' if @active_tab == 'requests'}" do
+    %br
+    %ul
+      - if @requests.size > 0
+        = render @requests
+      - else
+        %h2 No one is awaiting approval from you
+  = content_tag :div, id: 'pending', class: "tab-pane#{' active' if @active_tab == 'pending'}" do
+    %br
+    %ul
+      - if @pending.size > 0
+        = render @pending
+      - else
+        %h2 You are not awaiting approval from anyone
+
