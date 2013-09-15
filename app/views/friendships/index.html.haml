@@ -13,21 +13,21 @@
     %br
     %ul
       - if @mutual.size > 0
-        = render @mutual
+        = render partial: 'friendship', collection: @mutual, as: :friendship
       - else
         %h2 No friends :(
   = content_tag :div, id: 'requests', class: "tab-pane#{' active' if @active_tab == 'requests'}" do
     %br
     %ul
       - if @requests.size > 0
-        = render @requests
+        = render partial: 'request', collection: @requests, as: :friendship
       - else
         %h2 No one is awaiting approval from you
   = content_tag :div, id: 'pending', class: "tab-pane#{' active' if @active_tab == 'pending'}" do
     %br
     %ul
       - if @pending.size > 0
-        = render @pending
+        = render partial: 'pending', collection: @pending, as: :friendship
       - else
         %h2 You are not awaiting approval from anyone
 
