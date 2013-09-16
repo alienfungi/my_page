@@ -1,10 +1,14 @@
 class MessagesController < ApplicationController
 
   def index
-    @received_messages = current_user.received_messages.where(removed_by_recipient: false).paginate(
-      page: params[:received_messages_page], per_page: 10)
-    @sent_messages = current_user.sent_messages.where(removed_by_sender: false).paginate(
-      page: params[:sent_messages_page], per_page: 10)
+    @received_messages = current_user.received_messages.where(
+      removed_by_recipient: false
+    ).paginate( page: params[:received_messages_page])
+
+    @sent_messages = current_user.sent_messages.where(
+      removed_by_sender: false
+    ).paginate(page: params[:sent_messages_page])
+
     @active_tab = session.delete(:active_tab) ||  params.delete(:active_tab) || "received"
   end
 

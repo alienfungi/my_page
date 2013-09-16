@@ -11,23 +11,31 @@
 .tab-content
   = content_tag :div, id: 'mutual', class: "tab-pane#{' active' if @active_tab == 'mutual'}" do
     %br
-    %ul
-      - if @mutual.size > 0
+    - if @mutual.blank?
+      %h2 No friends :(
+    - else
+      %ul
         = render partial: 'friendship', collection: @mutual, as: :friendship
-      - else
-        %h2 No friends :(
+      .pull-right
+        = will_paginate @mutual, param_name: :mutual_page, params: {active_tab: "mutual"}
+
   = content_tag :div, id: 'requests', class: "tab-pane#{' active' if @active_tab == 'requests'}" do
     %br
-    %ul
-      - if @requests.size > 0
+    - if @requests.blank?
+      %h2 No one is awaiting approval from you
+    - else
+      %ul
         = render partial: 'request', collection: @requests, as: :friendship
-      - else
-        %h2 No one is awaiting approval from you
+      .pull-right
+        = will_paginate @requests, param_name: :requests_page, params: {active_tab: "requests"}
+
   = content_tag :div, id: 'pending', class: "tab-pane#{' active' if @active_tab == 'pending'}" do
     %br
-    %ul
-      - if @pending.size > 0
+    - if @pending.blank?
+      %h2 You are not awaiting approval from anyone
+    - else
+      %ul
         = render partial: 'pending', collection: @pending, as: :friendship
-      - else
-        %h2 You are not awaiting approval from anyone
+      .pull-right
+        = will_paginate @pending, param_name: :pending_page, params: {active_tab: "pending"}
 

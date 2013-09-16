@@ -5,8 +5,6 @@
     = link_to user do
       = content_tag :h3, user.username, class: "panel-title"
   .panel-body
-    = link_to user do
-      = gravatar_for user, size: 100, class: "img-thumbnail"
-
+    = render 'layouts/user_sm', user: user
 = render 'delete_confirm', user: user
 

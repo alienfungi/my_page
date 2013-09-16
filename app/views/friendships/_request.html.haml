@@ -5,8 +5,7 @@
   .panel-body
     .container
       .row
-        = link_to friendship.user do
-          = gravatar_for friendship.user, size: 100, class: "img-thumbnail"
+        = render 'layouts/user_sm', user: friendship.user
       .row
         .btn-group.pull-right
           = link_to "Message", new_message_path(recipient: friendship.friend_id), class: "btn btn-primary"

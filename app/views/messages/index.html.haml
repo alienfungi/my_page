@@ -18,13 +18,14 @@
           %th{width: '20%'} Sender
           %th{width: '55%'} Subject
       %tbody
-        - if @received_messages.size > 0
-          = render @received_messages
-        - else
+        - if @received_messages.blank?
           %tr
             %td{colspan: 3} No messages found.
+        - else
+          = render @received_messages
     .pull-right
       = will_paginate @received_messages, param_name: :received_messages_page, params: {active_tab: "received"}
+
   = content_tag :div, id: "sent_messages", class: "tab-pane#{' active' if @active_tab == 'sent'}" do
     %br
     %table.table.table-hover
@@ -34,13 +35,14 @@
           %th{width: '20%'} Recipient
           %th{width: '55%'} Subject
       %tbody
-        - if @sent_messages.size > 0
-          = render @sent_messages
-        - else
+        - if @sent_messages.blank?
           %tr
             %td{colspan: 3} No messages found.
+        - else
+          = render @sent_messages
     .pull-right
       = will_paginate @sent_messages, param_name: :sent_messages_page, params: {active_tab: "sent"}
+
   = content_tag :div, id: "new_message", class: "tab-pane#{' active' if @active_tab == 'new'}" do
     %br
     .col-sm-8.col-sm-offset-2

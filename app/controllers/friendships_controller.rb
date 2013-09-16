@@ -36,18 +36,18 @@ class FriendshipsController < ApplicationController
     inbound_friends = current_user.inverse_friendships.map { |friendship| friendship.user }
     outbound_friends = current_user.friendships.map { |friendship| friendship.friend }
 
-    @mutual = current_user.friendships.keep_if do |friendship|
-      inbound_friends.include? friendship.friend
-    end
+    @mutual = current_user.friendships.where(
+      friend_id: inbound_friends
+    ).paginate(page: params[:mutual_page])
 
-    @requests = current_user.inverse_friendships.reject do |friendship|
-      outbound_friends.include? friendship.user
-    end
+    @requests = current_user.inverse_friendships.where.not(
+      user_id: outbound_friends
+    ).paginate(page: params[:requests_page])
 
-    @pending = current_user.friendships.reject do |friendship|
-      inbound_friends.include? friendship.friend
-    end
+    @pending = current_user.friendships.where.not(
+      friend_id: inbound_friends
+    ).paginate(page: params[:pending_page])
 
-    @active_tab = 'mutual'
+    @active_tab = params.delete(:active_tab) || 'mutual'
   end
 end

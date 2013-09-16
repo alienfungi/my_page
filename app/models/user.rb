@@ -17,7 +17,8 @@ class User < ActiveRecord::Base
   validates(:username,
             presence: true,
             format: { with: WORD_CHARS },
-            length: 3..20)
+            length: 3..20,
+            uniqueness: true)
   validates(:email,
             presence: true,
             format: { with: VALID_EMAIL_REGEX },
