@@ -3,6 +3,7 @@ require 'bcrypt'
 class User < ActiveRecord::Base
   attr_accessor :new_password, :new_password_confirmation, :password
 
+  has_many :microposts
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
   has_many :inverse_friendships, class_name: "Friendship", foreign_key: :friend_id, dependent: :destroy
