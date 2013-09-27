@@ -1,0 +1,15 @@
+- provide :title, "Recent Activity"
+
+%table.table
+  %thead
+    %tr
+      %th Activity
+      %th Date
+  %tbody
+    - @activities.each do |activity|
+      %tr
+        %td= ActivityPresenter.new(activity, self).render_activity
+        %td= activity.created_at
+.pull-right
+  = will_paginate @activities
+

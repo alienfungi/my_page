@@ -1,4 +1,5 @@
 class FriendshipsController < ApplicationController
+
   def create
     @friendship = if params.has_key? :friend_id
       current_user.friendships.build(friend_id: params.delete(:friend_id))
@@ -7,6 +8,7 @@ class FriendshipsController < ApplicationController
     end
     if @friendship.save
       flash[:success] = "Added friend."
+      track_activity @friendship
       redirect_to users_path
     else
       flash[:error] = "Unable to add friend."

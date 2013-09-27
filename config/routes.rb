@@ -1,9 +1,12 @@
 MyPage::Application.routes.draw do
+  resources :activities
+
   resources :contact_messages, only: [:new, :create]
   resources :scores
   resources :users
   resources :messages
   resources :friendships
+  resources :activities
 
   resource :sessions
   post 'login' => 'sessions#create'

@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
     render 'layouts/record_not_found'
   end
 
+  def track_activity(trackable, action = params[:action])
+    current_user.activities.create!(action: action, trackable: trackable)
+  end
+
 private
 
   def set_header_links

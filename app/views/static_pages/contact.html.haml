@@ -1,7 +1,7 @@
 - provide :title, 'Contact Me'
 
 .col-sm-8.col-sm-offset-2
-  = form_for @contact_message, html: { role: "form", onsubmit: "return validate_comment();" } do |f|
+  = form_for @contact_message, html: { role: "form", onsubmit: "return validate_contact_message();" } do |f|
     .form-group
       = f.label :name, "Name*", class: "control-label"
       = f.text_field :name, class: "input-medium form-control", autofocus: true
