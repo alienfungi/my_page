@@ -8,11 +8,7 @@ class ActivityPresenter < SimpleDelegator
 
   def render_activity
     div_for activity do
-      if activity.user == current_user
-        content_tag :span, "You "
-      else
-        link_to(activity.user.username, activity.user)
-      end + " " + render_partial
+      render_partial
     end
   end
 

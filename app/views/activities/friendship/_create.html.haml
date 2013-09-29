@@ -1,3 +1,13 @@
-added
-= link_to activity.trackable.friend.username, activity.trackable.friend
-to your friends list
+- if activity.trackable.nil?
+  Friendship cancelled.
+- else
+  - user = activity.trackable.user
+  - friend = activity.trackable.friend
+  - if user == current_user
+    You added
+    = link_to friend.username, friend
+    as a friend.
+  - else
+    = link_to user.username, user
+    added you as a friend.
+

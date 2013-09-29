@@ -30,7 +30,7 @@ class MessagesController < ApplicationController
     return_to = session.delete(:return_to)
     if @message.save
       flash[:success] = "Message sent."
-      track_activity @message
+      track_activity @message, [@message.recipient, @message.sender]
     else
       flash[:error] = "Message failed to send."
     end

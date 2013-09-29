@@ -11,8 +11,10 @@ class ApplicationController < ActionController::Base
     render 'layouts/record_not_found'
   end
 
-  def track_activity(trackable, action = params[:action])
-    current_user.activities.create!(action: action, trackable: trackable)
+  def track_activity(trackable, users = [current_user], action = params[:action])
+    users.each do |user|
+      user.activities.create!(action: action, trackable: trackable)
+    end
   end
 
 private
@@ -29,6 +31,7 @@ private
   def set_social_links
     @social_links = {
       "My Profile" => current_user,
+      "Activity" => activities_path,
       "Users" => users_path,
       "Friends" => friendships_path,
       "Messages" => messages_path,

@@ -8,7 +8,7 @@ class FriendshipsController < ApplicationController
     end
     if @friendship.save
       flash[:success] = "Added friend."
-      track_activity @friendship
+      track_activity @friendship, [@friendship.user, @friendship.friend]
       redirect_to users_path
     else
       flash[:error] = "Unable to add friend."
