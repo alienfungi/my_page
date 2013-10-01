@@ -5,7 +5,7 @@ describe ApplicationHelper do
 
   describe '#full_title' do
     before do
-      @base_title = "The Network"
+      @base_title = "Zane's Site"
     end
 
     context 'with provided page_title' do
@@ -25,7 +25,7 @@ describe ApplicationHelper do
 
   describe '#heading' do
     before do
-      @default_heading = "The Network"
+      @default_heading = "Zane's Site"
       @title = "Title"
       @heading = "Heading"
     end

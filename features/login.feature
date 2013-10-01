@@ -19,7 +19,6 @@ Feature: Login
 
   Scenario: Logging out
     Given I am logged in as SolidSnake
-    When I click "SolidSnake"
-    And I click "Logout"
+    When I click "Logout"
     Then I should be logged out
     And I should be on login page

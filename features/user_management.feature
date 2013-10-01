@@ -26,8 +26,7 @@ Feature: User Management
 
   Scenario: Visiting the user index page
     Given I am logged in as wombat_krusha
-    When I click "wombat_krusha"
-    And I click "Users"
+    When I click "Users"
     Then I should be on users page
     And I should see "Dick"
     And I should see "Jane"

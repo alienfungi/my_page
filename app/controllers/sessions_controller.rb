@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
 
   def new
+    redirect_to activities_path if signed_in?
   end
 
   def create

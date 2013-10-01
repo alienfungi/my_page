@@ -1,28 +1,25 @@
 %header.navbar.navbar-inverse.navbar-fixed-top
   .container
-    %button{class: "navbar-toggle", type: "button", data: {target: "#header_collapse", toggle: "collapse"}}
-      %span.icon-bar
-      %span.icon-bar
-      %span.icon-bar
+    - if signed_in?
+      %button{class: "navbar-toggle", type: "button", data: {target: "#header_collapse", toggle: "collapse"}}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
     .navbar-header
-      = link_to "Zane's Site", root_path, class: "navbar-brand"
-    #header_collapse.collapse.navbar-collapse
-      %ul.nav.navbar-nav
-        - @header_links.each do |text, path|
-          = content_tag :li, class: (current_page?(path) ? 'active' : '') do
-            = link_to text, path
-      %ul.nav.navbar-nav.navbar-right
-        %li.dropdown
-          - if signed_in?
-            %a{href: "#", class: "dropdown-toggle", data: {toggle: "dropdown"}}
-              = h current_user.username
-              %b.caret
-            %ul.dropdown-menu
-              - @social_links.each do |text, path|
-                %li
-                  = link_to text, path
-          - else
-            = link_to('Login', login_path)
+      = link_to "The Network", root_path, class: "navbar-brand"
+    - if signed_in?
+      #header_collapse.collapse.navbar-collapse
+        %ul.nav.navbar-nav
+          - @social_links.each do |text, path|
+            = content_tag :li, class: (current_page?(path) ? 'active' : '') do
+              = link_to text, path
+        %ul.nav.navbar-nav.navbar-right
+          %li= link_to 'Logout', logout_path
+    - else
+      .navbar-right
+        %ul.nav.navbar-nav
+          = content_tag :li, class: (current_page?(login_path) ? 'active' : '') do
+            = link_to 'Login', login_path
 
 - if content_for? :header
   .page-header

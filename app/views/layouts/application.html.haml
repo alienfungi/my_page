@@ -15,7 +15,7 @@
 
       / body [and sidebar]
       .container
-        - if (content_for? :sidebar) || (signed_in? && params[:controller] != 'static_pages')
+        - if (content_for? :sidebar)
           .row
             .col-sm-3
               = yield :sidebar if content_for? :sidebar
