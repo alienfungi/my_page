@@ -40,9 +40,11 @@ class UsersController < ApplicationController
   end
 
   def update
+    params[:user][:new_email] = nil if params[:user][:new_email] == @user.email
     if @user.update_attributes(user_params)
       flash[:success] = "User updated."
       sign_in @user
+      EmailConfirmationMailer.user_confirmation_email(@user).deliver if @user.new_email
       redirect_to @user
     else
       flash[:error] = "Invalid information."
@@ -64,22 +66,40 @@ class UsersController < ApplicationController
     confirmation_code = params[:confirmation_code]
     user_id = params[:user]
     @user = User.find(user_id)
-    if signed_in? || @user.confirmation_code.empty?
+    if @user.confirmation_code.empty?
+      redirect_to root_url
     elsif @user.confirmation_code == confirmation_code
-      @user.confirmed = true
       @user.confirmation_code = ""
-      @user.save
-      flash[:success] = "Account confirmed."
-    else
-      flash[:error] = "Account failed to confirm."
+      @user.new_email.blank? ? new_account : new_email 
     end
-    redirect_to root_url
   end
 
 private
 
+  def new_email
+    @user.email = @user.new_email
+    @user.new_email = nil
+    if @user.save
+      flash[:success] = "Email successfully updated."
+    else
+      flash[:error] = "Email failed to update."
+    end
+    sign_in @user
+    redirect_to @user
+  end
+
+  def new_account
+    @user.confirmed = true
+    if @user.save
+      flash[:success] = "You may now log in."
+    else
+      flash[:error] = "Email failed to confirm."
+    end
+    redirect_to root_url
+  end
+
   def user_params
-    params.require(:user).permit(:email, :username, :new_password, :new_password_confirmation, :headline, :about)
+    params.require(:user).permit(:email, :new_email, :username, :new_password, :new_password_confirmation, :headline, :about)
   end
 
   def correct_user
