@@ -44,6 +44,12 @@ class User < ActiveRecord::Base
     return nil
   end
 
+  def create_confirmation_code
+    token_chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
+    token_length = 20
+    self.confirmation_code = Array.new(token_length) { token_chars[rand(token_chars.length)] }.join
+  end
+
 private
 
   def hash_new_password
@@ -55,11 +61,5 @@ private
 
   def create_remember_token
     self.remember_token = SecureRandom.urlsafe_base64
-  end
-
-  def create_confirmation_code
-    token_chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
-    token_length = 20
-    self.confirmation_code = Array.new(token_length) { token_chars[rand(token_chars.length)] }.join
   end
 end
