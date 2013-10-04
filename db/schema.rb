@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130927154752) do
+ActiveRecord::Schema.define(version: 20131004021309) do
 
   create_table "activities", force: true do |t|
     t.integer  "user_id"
@@ -56,10 +56,12 @@ ActiveRecord::Schema.define(version: 20130927154752) do
     t.string   "remember_token"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "admin",           default: false
+    t.boolean  "admin",             default: false
     t.string   "username"
     t.string   "headline"
     t.text     "about"
+    t.string   "confirmation_code"
+    t.boolean  "confirmed",         default: false
   end
 
 end

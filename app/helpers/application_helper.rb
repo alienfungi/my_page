@@ -31,4 +31,11 @@ module ApplicationHelper
     end
   end
 
+  def host
+    if Rails.env.production?
+      "http://zanes-social-network.herokuapp.com/"
+    else
+      "http://localhost:3000/"
+    end
+  end
 end

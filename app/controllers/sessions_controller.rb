@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
   def create
     email = params[:session][:email].downcase
-    if User.authenticate(email, params[:session][:password])
+    if User.authenticate(email, params[:session][:password]).try(:confirmed)
       user = User.find_by_email(email)
       sign_in user
       redirect_to user, flash: { success: 'You are now logged in.' }

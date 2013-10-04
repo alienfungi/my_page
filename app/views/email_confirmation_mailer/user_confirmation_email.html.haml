@@ -1,0 +1,6 @@
+!!! 5
+%html{lang: "en"}
+  %head
+  %body
+    %p= link_to 'click to confirm account', "#{host}confirm?user=#{@user.id}&confirmation_code=#{@user.confirmation_code}"
+

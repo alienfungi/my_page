@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   before_save :hash_new_password
   before_save  { |user| user.email = email.downcase }
   before_save :create_remember_token
+  before_save :create_confirmation_code
 
   def password_changed?
     !@new_password.blank?
@@ -40,7 +41,6 @@ class User < ActiveRecord::Base
         return user
       end
     end
-
     return nil
   end
 
@@ -55,5 +55,11 @@ private
 
   def create_remember_token
     self.remember_token = SecureRandom.urlsafe_base64
+  end
+
+  def create_confirmation_code
+    token_chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
+    token_length = 20
+    self.confirmation_code = Array.new(token_length) { token_chars[rand(token_chars.length)] }.join
   end
 end
