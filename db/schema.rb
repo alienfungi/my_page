@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131004021309) do
+ActiveRecord::Schema.define(version: 20131004143205) do
 
   create_table "activities", force: true do |t|
     t.integer  "user_id"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20131004021309) do
     t.text     "about"
     t.string   "confirmation_code"
     t.boolean  "confirmed",         default: false
+    t.string   "new_email"
   end
 
 end

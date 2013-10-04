@@ -4,7 +4,7 @@ class EmailConfirmationMailer < ActionMailer::Base
 
   def user_confirmation_email(user)
     @user = user
-    mail to: @user.email,
+    mail to: (@user.new_email || @user.email),
          subject: "Please confirm your account with the social network."
   end
 end
