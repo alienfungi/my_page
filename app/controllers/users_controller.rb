@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: [:new, :create, :confirm]
+  skip_before_action :require_login, only: [:new, :create, :confirm, :recover]
 
   before_action :correct_user, only: [:edit, :update]
 
@@ -27,8 +27,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.confirmation_code = random_code(20)
     if @user.save
-      EmailConfirmationMailer.user_confirmation_email(@user).deliver
+      UserMailer.user_confirmation_email(@user).deliver
       redirect_to login_path, notice: 'Please confirm your account via the email sent to you.'
     else
       flash.now[:error] = 'Invalid user info.'
@@ -43,8 +44,12 @@ class UsersController < ApplicationController
     params[:user][:new_email] = nil if params[:user][:new_email] == @user.email
     if @user.update_attributes(user_params)
       flash[:success] = "User updated."
+      if @user.new_email
+        @user.confirmation_code = random_code(20)
+        @user.save
+        UserMailer.user_confirmation_email(@user).deliver
+      end
       sign_in @user
-      EmailConfirmationMailer.user_confirmation_email(@user).deliver if @user.new_email
       redirect_to @user
     else
       flash[:error] = "Invalid information."
@@ -72,6 +77,15 @@ class UsersController < ApplicationController
       @user.confirmation_code = ""
       @user.new_email.blank? ? new_account : new_email 
     end
+  end
+
+  def recover
+    @user = User.find_by_email(params[:recover][:email].downcase)
+    new_password = random_code(10)
+    @user.update_attributes(password: new_password)
+    UserMailer.password_recovery_email(@user, new_password).deliver
+    flash[:notice] = "An email has been sent to you with a new, temporary password."
+    redirect_to root_url
   end
 
 private
