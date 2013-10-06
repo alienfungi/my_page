@@ -10,6 +10,7 @@ class MessagesController < ApplicationController
     ).paginate(page: params[:sent_messages_page])
 
     @active_tab = session.delete(:active_tab) ||  params.delete(:active_tab) || "received"
+    prep_new_message
   end
 
   def show
@@ -21,20 +22,23 @@ class MessagesController < ApplicationController
   end
 
   def new
-    @recipient = params[:recipient] ? User.find(params[:recipient]) : nil
+    prep_new_message
   end
 
   def create
     @message = Message.new(message_params)
-    session[:active_tab] = 'new'
     return_to = session.delete(:return_to)
     if @message.save
+      session[:active_tab] = 'sent'
       flash[:success] = "Message sent."
       track_activity @message, [@message.recipient, @message.sender]
+      redirect_to messages_path
     else
+      session[:message] = message_params
+      session[:active_tab] = 'new'
       flash[:error] = "Message failed to send."
+      redirect_to :back
     end
-    redirect_to :back
   end
 
   def destroy
@@ -53,6 +57,17 @@ class MessagesController < ApplicationController
 private
 
   def message_params
-    params.require(:message).permit(:recipient_id, :recipient_email, :sender_id, :subject, :message)
+    params.require(:message).permit(:recipient_identifier, :sender_id, :subject, :message)
+  end
+
+  def prep_new_message
+    if session[:message]
+      @message = Message.new(session.delete(:message))
+    elsif params[:recipient]
+      recipient = User.find(params.delete(:recipient)).username
+      @message = Message.new(recipient_identifier: recipient)
+    else
+      @message = Message.new
+    end
   end
 end

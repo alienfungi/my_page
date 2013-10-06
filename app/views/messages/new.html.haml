@@ -1,6 +1,6 @@
 - provide :title, "New Message"
 
 .col-sm-8.col-sm-offset-2
-  = form_for :message, as: :post, url: messages_path, html: { role: "form" } do |f|
+  = form_for @message, html: { role: "form" } do |f|
     = render 'fields', f: f
 
