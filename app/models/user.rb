@@ -15,15 +15,20 @@ class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   WORD_CHARS = /\A\w+\z/
 
+  # username validations
   validates(:username,
             presence: true,
             format: { with: WORD_CHARS },
-            length: 3..20,
-            uniqueness: true)
+            length: 3..20)
+  validates_uniqueness_of :username, case_sensitive: false
+
+  # email validations
   validates(:email,
             presence: true,
             format: { with: VALID_EMAIL_REGEX },
             uniqueness: true)
+
+  # password validations
   validates_confirmation_of :new_password, :if => :password_changed?
 
   before_save :hash_new_password
@@ -43,6 +48,11 @@ class User < ActiveRecord::Base
     return nil
   end
 
+  def self.find_by_identifier(identifier)
+    User.where("lower(username) = ?", identifier.downcase).first ||
+      User.where("lower(email) = ?", identifier.downcase).first
+  end
+
 private
 
   def hash_new_password
@@ -55,4 +65,5 @@ private
   def create_remember_token
     self.remember_token = SecureRandom.urlsafe_base64
   end
+
 end

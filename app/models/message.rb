@@ -1,5 +1,5 @@
 class Message < ActiveRecord::Base
-  attr_accessor :recipient_email
+  attr_accessor :recipient_identifier
 
   belongs_to :sender, class_name: "User", foreign_key: :sender_id
   belongs_to :recipient, class_name: "User", foreign_key: :recipient_id
@@ -29,8 +29,8 @@ class Message < ActiveRecord::Base
 private
 
   def set_recipient
-    if recipient_email
-      recipient = User.find_by(email: recipient_email)
+    if recipient_identifier
+      recipient = User.find_by_identifier(recipient_identifier)
       self.recipient_id = recipient.try(:id)
     end
     false unless self.recipient_id

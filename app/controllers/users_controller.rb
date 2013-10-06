@@ -81,10 +81,14 @@ class UsersController < ApplicationController
 
   def recover
     @user = User.find_by_email(params[:recover][:email].downcase)
-    new_password = random_code(10)
-    @user.update_attributes(password: new_password)
-    UserMailer.password_recovery_email(@user, new_password).deliver
-    flash[:notice] = "An email has been sent to you with a new, temporary password."
+    if @user
+      new_password = random_code(10)
+      @user.update_attributes(password: new_password)
+      UserMailer.password_recovery_email(@user, new_password).deliver
+      flash[:notice] = "An email has been sent to you with a new, temporary password."
+    else
+      flash[:error] = "User not found."
+    end
     redirect_to root_url
   end
 
