@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.day do
-
+every 7.days do
+  runner "User.purge_unconfirmed(7)"
 end

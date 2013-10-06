@@ -68,9 +68,9 @@ class UsersController < ApplicationController
   end
 
   def confirm
-    confirmation_code = params[:confirmation_code]
-    user_id = params[:user]
-    @user = User.find(user_id)
+    confirmation_code = params.delete(:confirmation_code)
+    user_id = params.delete(:user)
+    @user = User.unscoped.find(user_id)
     if @user.confirmation_code.empty?
       redirect_to root_url
     elsif @user.confirmation_code == confirmation_code
