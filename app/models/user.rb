@@ -35,6 +35,8 @@ class User < ActiveRecord::Base
   before_save  { |user| user.email = email.downcase }
   before_save :create_remember_token
 
+  default_scope { where(confirmed: true).order('lower(username) ASC') }
+
   def password_changed?
     !@new_password.blank?
   end
@@ -51,6 +53,10 @@ class User < ActiveRecord::Base
   def self.find_by_identifier(identifier)
     User.where("lower(username) = ?", identifier.downcase).first ||
       User.where("lower(email) = ?", identifier.downcase).first
+  end
+
+  def self.purge_unconfirmed(num)
+    User.unscoped.where(confirmed: false).where("updated_at < ?", num.days.ago).destroy_all
   end
 
 private
