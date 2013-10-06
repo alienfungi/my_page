@@ -10,6 +10,7 @@ MyPage::Application.routes.draw do
     match '/logout', to: 'sessions#destroy', via: [:get, :post]
   resources :users
     match '/confirm', to: 'users#confirm', via: [:get, :post]
+    match '/recover', to: 'users#recover', via: [:get, :post]
 
   root to: 'sessions#new'
 end

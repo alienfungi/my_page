@@ -34,4 +34,10 @@ private
       redirect_to login_path
     end
   end
+
+  def random_code(size = 20)
+    token_chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
+    token_length = size
+    Array.new(token_length) { token_chars[rand(token_chars.length)] }.join
+  end
 end
