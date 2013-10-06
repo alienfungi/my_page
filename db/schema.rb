@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(version: 20131004143205) do
   create_table "scores", force: true do |t|
     t.string   "name"
     t.integer  "total"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

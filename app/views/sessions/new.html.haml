@@ -8,6 +8,23 @@
     = link_to "New User", new_user_path
     %br
     %br
+    %a{href: "#reset_password_modal", data: {toggle: "modal"}} Forgot Password
+    %br
+    %br
     = f.submit "Login", class: "btn btn-primary btn-block"
 
 %br
+
+#reset_password_modal.modal.fade{tabindex: "-1", role: "dialog", aria: {labelledby: "Password Reset", hidden: true}}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{type: "button", data: {dismiss: "modal"}, aria: {hidden: true}} &times;
+        %h4.modal-title Password Recovery
+      .modal-body
+        = form_for(:recover, url: recover_path, html: { class: 'form' }) do |f|
+          .form_group
+            = f.label :email, "Email", class: "control-label"
+            = f.text_field :email, class: "form-control"
+          %br
+          = f.submit "Reset Password", class: "btn btn-primary btn-block"
