@@ -15,11 +15,6 @@
               = link_to text, path
         %ul.nav.navbar-nav.navbar-right
           %li= link_to 'Logout', logout_path
-    - else
-      .navbar-right
-        %ul.nav.navbar-nav
-          = content_tag :li, class: (current_page?(login_path) ? 'active' : '') do
-            = link_to 'Login', login_path
 
 - if content_for? :header
   .page-header
