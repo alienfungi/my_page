@@ -1,10 +1,9 @@
 - provide :title, 'Login'
 
 .col-sm-6.col-sm-offset-3
-  = form_for(:session, url: sessions_path, html: { class: 'form-signin' }) do |f|
-    = f.text_field :email, class: 'form-control', placeholder: 'Email', autofocus: true
-    = f.password_field :password, class: 'form-control', placeholder: 'Password'
-    %br
+  = simple_form_for @session_form, url: sessions_path, html: { class: 'form-signin' } do |f|
+    = f.input :email, input_html: { autofocus: true }
+    = f.input :password, as: :password
     = link_to "New User", new_user_path
     %br
     %br

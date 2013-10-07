@@ -7,6 +7,7 @@ gem 'haml'
 gem 'haml-rails'
 gem 'whenever', require: false
 gem 'bcrypt-ruby', require: 'bcrypt'
+gem 'simple_form'
 
 group :development, :test do
   gem 'sqlite3'

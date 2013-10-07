@@ -1,6 +1,6 @@
 - provide :title, 'New User'
 
-= form_for @user, html: { role: "form" } do |f|
+= simple_form_for @user, html: { role: "form" } do |f|
   = render 'fields', f: f
   .row
     = f.submit "Create User", class: "btn btn-primary btn-block"
