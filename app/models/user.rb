@@ -29,6 +29,8 @@ class User < ActiveRecord::Base
             uniqueness: true)
 
   # password validations
+  validates_presence_of :new_password, :if => :password_changed?
+  validates_presence_of :new_password_confirmation, :if => :password_changed?
   validates_confirmation_of :new_password, :if => :password_changed?
 
   before_save :hash_new_password
@@ -38,7 +40,7 @@ class User < ActiveRecord::Base
   default_scope { where(confirmed: true).order('lower(username) ASC') }
 
   def password_changed?
-    !@new_password.blank?
+    !@new_password.blank? || hashed_password.blank?
   end
 
   def self.authenticate(email, password)

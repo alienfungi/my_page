@@ -1,15 +1,7 @@
 class MessagesController < ApplicationController
 
   def index
-    @received_messages = current_user.received_messages.where(
-      removed_by_recipient: false
-    ).paginate( page: params[:received_messages_page])
-
-    @sent_messages = current_user.sent_messages.where(
-      removed_by_sender: false
-    ).paginate(page: params[:sent_messages_page])
-
-    @active_tab = session.delete(:active_tab) ||  params.delete(:active_tab) || "received"
+    populate_messages
     prep_new_message
   end
 
@@ -37,7 +29,8 @@ class MessagesController < ApplicationController
       session[:message] = message_params
       session[:active_tab] = 'new'
       flash[:error] = "Message failed to send."
-      redirect_to :back
+      populate_messages if params[:page] == "index"
+      render params[:page]
     end
   end
 
@@ -70,4 +63,17 @@ private
       @message = Message.new
     end
   end
+
+  def populate_messages
+    @received_messages = current_user.received_messages.where(
+      removed_by_recipient: false
+    ).paginate( page: params[:received_messages_page])
+
+    @sent_messages = current_user.sent_messages.where(
+      removed_by_sender: false
+    ).paginate(page: params[:sent_messages_page])
+
+    @active_tab = session.delete(:active_tab) ||  params.delete(:active_tab) || "received"
+  end
+
 end
