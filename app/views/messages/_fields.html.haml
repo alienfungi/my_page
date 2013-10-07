@@ -1,15 +1,9 @@
 = f.hidden_field :sender_id, value: current_user.id
 
-.form-group
-  = f.label :recipient_identifier, "Recipient", class: "control-label"
-  = f.text_field :recipient_identifier, class: "form-control", autofocus: (@recipient ? false : true)
+= f.input :recipient_identifier, label: "Recipient", input_html: { value: (@recipient || "") }
 
-.form-group
-  = f.label :subject, "Subject", class: "control-label"
-  = f.text_field :subject, class: "form-control", autofocus: (@recipient ? true : false)
+= f.input :subject, input_html: { autofocus: !@recipient.blank? }
 
-.form-group
-  = f.label :message, "Message", class: "control-label"
-  = f.text_area :message, class: "form-control"
+= f.input :message, as: :text
 
 = f.submit "Send Message", class: "btn btn-primary btn-block"
