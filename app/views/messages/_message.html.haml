@@ -6,6 +6,9 @@
       = message.recipient.nil? ? "Deleted" : (link_to message.recipient.username, message.recipient)
     - else
       = message.sender.nil? ? "Deleted" : (link_to message.sender.username, message.sender)
-  %td{width: '55%'}
+  %td{width: '40%'}
     = link_to message.subject, message
+  %td{width: '10%'}
+    = message.read ? "Read" : "Unread"
+  %td{width: '5%'}
     = link_to '&times;'.html_safe, message_path(message.id), method: :delete, type: 'button', class: 'close'
