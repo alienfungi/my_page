@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131004143205) do
+ActiveRecord::Schema.define(version: 20131008184653) do
 
   create_table "activities", force: true do |t|
     t.integer  "user_id"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20131004143205) do
     t.datetime "updated_at"
     t.boolean  "removed_by_sender",    default: false
     t.boolean  "removed_by_recipient", default: false
+    t.boolean  "read",                 default: false
   end
 
   create_table "scores", force: true do |t|

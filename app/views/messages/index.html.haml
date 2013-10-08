@@ -16,7 +16,9 @@
         %tr
           %th{width: '25%'} Date
           %th{width: '20%'} Sender
-          %th{width: '55%'} Subject
+          %th{width: '40%'} Subject
+          %th{width: '10%'} Read
+          %th{width: '5%'}
       %tbody
         - if @received_messages.blank?
           %tr
@@ -33,7 +35,9 @@
         %tr
           %th{width: '25%'} Date
           %th{width: '20%'} Recipient
-          %th{width: '55%'} Subject
+          %th{width: '40%'} Subject
+          %th{width: '10%'} Read
+          %th{width: '5%'}
       %tbody
         - if @sent_messages.blank?
           %tr
