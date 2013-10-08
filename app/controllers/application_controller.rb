@@ -4,8 +4,6 @@ class ApplicationController < ActionController::Base
 
   before_action :require_login
 
-  before_action :set_social_links
-
   rescue_from 'ActiveRecord::RecordNotFound' do |exception|
     render 'layouts/record_not_found'
   end
@@ -17,16 +15,6 @@ class ApplicationController < ActionController::Base
   end
 
 private
-
-  def set_social_links
-    @social_links = {
-      "My Profile" => current_user,
-      "Activity" => activities_path,
-      "Users" => users_path,
-      "Friends" => friendships_path,
-      "Messages" => messages_path,
-    }
-  end
 
   def require_login
     unless signed_in?

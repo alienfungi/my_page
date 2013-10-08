@@ -11,6 +11,7 @@ class MessagesController < ApplicationController
       flash[:error] = "Invalid message."
       redirect_to users_path
     end
+    @message.update_attribute(:read, true) if @message.recipient == current_user
   end
 
   def new
