@@ -7,31 +7,44 @@ class FriendshipsController < ApplicationController
       current_user.friendships.build(friend_id: params.delete(:user_id))
     end
     if @friendship.save
-      flash[:success] = "Added friend."
+      flash[:success] = "Friended #{@friendship.friend.username}."
       track_activity @friendship, [@friendship.user, @friendship.friend]
-      redirect_to users_path
+      redirect_to :back
     else
       flash[:error] = "Unable to add friend."
-      redirect_to users_path
+      redirect_to :back
     end
   end
 
   def destroy
-    message = "Removed friendship."
+    # find friendships and set default variables
+    friendship = Friendship.find(params[:id])
+    user = friendship.user
+    friend = friendship.friend
+    inverse_friendship = Friendship.where(user: friend).first
+    friend_username = friend.username
+    message = "Unfriended #{ friend_username }."
+
+    # swap variables for message purposes if necessary
+    unless user == current_user
+      friend_username = user.username
+      friendship, inverse_friendship = inverse_friendship, friendship
+    end
+
+    # destroy friendships
     begin
-      @friendship = current_user.friendships.find(params[:id])
-      @friendship.destroy
+      friendship.destroy
     rescue
-      message = "Denied Friend request."
+      message = "Rejected #{ friend_username }'s friend request."
     end
     begin
-      @friendship = current_user.inverse_friendships.find(params[:id])
-      @friendship.destroy
+      inverse_friendship.destroy
     rescue
-      message = "Cancelled friend request."
+      message = "Cancelled your friend request to #{ friend_username }."
     end
+
     flash[:success] = message
-    redirect_to users_path
+    redirect_to friendships_path
   end
 
   def index
@@ -50,6 +63,21 @@ class FriendshipsController < ApplicationController
       friend_id: inbound_friends
     ).paginate(page: params[:pending_page])
 
-    @active_tab = params.delete(:active_tab) || 'mutual'
+    @active_tab = params.delete(:active_tab) || session.delete(:active_tab) || 'mutual'
+  end
+
+  def friends
+    session[:active_tab] = 'mutual'
+    redirect_to friendships_path
+  end
+
+  def requests
+    session[:active_tab] = 'requests'
+    redirect_to friendships_path
+  end
+
+  def pending
+    session[:active_tab] = 'pending'
+    redirect_to friendships_path
   end
 end

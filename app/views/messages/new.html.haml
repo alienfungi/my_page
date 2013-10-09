@@ -1,7 +1,0 @@
-- provide :title, "New Message"
-
-.col-sm-8.col-sm-offset-2
-  = simple_form_for @message, html: { role: "form" } do |f|
-    %input{name: "page", type: "hidden", value: "new"}
-    = render 'fields', f: f
-

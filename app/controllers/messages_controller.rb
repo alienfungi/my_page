@@ -5,6 +5,16 @@ class MessagesController < ApplicationController
     prep_new_message
   end
 
+  def received
+    session[:active_tab] = 'received'
+    redirect_to messages_path
+  end
+
+  def sent
+    session[:active_tab] = 'sent'
+    redirect_to messages_path
+  end
+
   def show
     @message = Message.find(params[:id])
     unless @message.valid_user(current_user)
@@ -15,7 +25,8 @@ class MessagesController < ApplicationController
   end
 
   def new
-    prep_new_message
+    session[:active_tab] = 'new'
+    redirect_to messages_path
   end
 
   def create
@@ -29,9 +40,13 @@ class MessagesController < ApplicationController
     else
       session[:message] = message_params
       session[:active_tab] = 'new'
-      flash[:error] = "Message failed to send."
+      flash.now[:error] = "Message failed to send." if @message.valid?
       populate_messages if params[:page] == "index"
-      render params[:page]
+      if params[:page]
+        render params.delete(:page)
+      else
+        redirect_to :back
+      end
     end
   end
 
@@ -39,7 +54,7 @@ class MessagesController < ApplicationController
     begin
       @message = Message.find(params[:id])
       raise unless @message.valid_user(current_user)
-      session[:active_tab] = @message.recipient == current_user ? 'received' : 'sent'
+      session[:active_tab] = @message.recipient == current_user ? :received : 'sent'
       @message.remove_user(current_user)
       flash[:success] = "Message deleted."
     rescue

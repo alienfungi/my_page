@@ -1,17 +1,30 @@
 MyPage::Application.routes.draw do
+  # activities
   resources :activities
-  resources :contact_messages, only: [:new, :create]
-  resources :friendships
-  resources :messages
-  resources :scores
-  resource :sessions
-    post 'login' => 'sessions#create'
-    get 'login'  => 'sessions#new'
-    match '/logout', to: 'sessions#destroy', via: [:get, :post]
-  resources :users
-    match '/confirm', to: 'users#confirm', via: [:get, :post]
-    match '/recover', to: 'users#recover', via: [:get, :post]
 
+  # friendships
+  get 'friends' => 'friendships#friends'
+  get 'friendships/requests' => 'friendships#requests'
+  get 'friendships/pending' => 'friendships#pending'
+  resources :friendships
+
+  # messages
+  get 'messages/received' => 'messages#received'
+  get 'messages/sent' => 'messages#sent'
+  resources :messages
+
+  # sesssions
+  post 'login' => 'sessions#create'
+  get 'login'  => 'sessions#new'
+  get 'logout' => 'sessions#destroy'
+  resource :sessions
+
+  # users
+  get 'confirm' => 'users#confirm'
+  get 'recover' => 'users#recover'
+  resources :users
+
+  # root
   root to: 'sessions#new'
 end
 
