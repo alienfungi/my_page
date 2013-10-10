@@ -24,12 +24,18 @@
         - if current_user.admin
           %li
             %a{href: "#delete_modal_#{@user.id}", data: {toggle: "modal"}} Delete
+.row
+  .col-md-4
+    = gravatar_for @user, size: 250, class: "img-responsive"
+  .col-md-8
+    %h2 About
+    = h @user.about
+.row
+  %h2 Posts
+  = render 'microposts/new'
+  = render 'microposts/index'
 
-.col-md-4
-  = gravatar_for @user, size: 250, class: "img-responsive"
-.col-md-8
-  %h2 About
-  = h @user.about
+.pull.right
+= will_paginate @microposts
 
 = render 'delete_confirm', user: @user
-

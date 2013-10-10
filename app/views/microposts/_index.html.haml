@@ -1,0 +1,10 @@
+.row
+  .col-sm-12
+    %table.table.table-hover
+      - @microposts.each do |micropost| 
+        %tr
+          %td= micropost.created_at.strftime("%Y-%m-%d %H:%M:%S %Z")
+          %td= micropost.content
+          - if @user == current_user
+            %td= link_to 'Edit', edit_micropost_path(micropost)
+            %td= link_to 'Destroy', micropost, :method => :delete, :data => { :confirm => 'Are you sure?' }

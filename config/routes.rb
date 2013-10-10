@@ -13,6 +13,9 @@ MyPage::Application.routes.draw do
   get 'messages/sent' => 'messages#sent'
   resources :messages
 
+  # microposts
+  resources :microposts
+
   # sesssions
   post 'login' => 'sessions#create'
   get 'login'  => 'sessions#new'
