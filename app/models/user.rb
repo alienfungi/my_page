@@ -25,8 +25,8 @@ class User < ActiveRecord::Base
   # email validations
   validates(:email,
             presence: true,
-            format: { with: VALID_EMAIL_REGEX },
-            uniqueness: true)
+            format: { with: VALID_EMAIL_REGEX })
+  validates_uniqueness_of :email, case_sensitive: false
 
   # password validations
   validates_presence_of :new_password, :if => :password_changed?
@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   default_scope { where(confirmed: true).order('lower(username) ASC') }
 
   def password_changed?
-    !@new_password.blank? || hashed_password.blank?
+    (!new_password.blank? || hashed_password.blank?) && password.blank?
   end
 
   def self.authenticate(email, password)
@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
 private
 
   def hash_new_password
-    unhashed_password = @new_password || @password
+    unhashed_password = new_password || password
      unless unhashed_password.blank?
        self.hashed_password = BCrypt::Password.create(unhashed_password)
      end
