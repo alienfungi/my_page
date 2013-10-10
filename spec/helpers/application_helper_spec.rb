@@ -49,4 +49,37 @@ describe ApplicationHelper do
       helper.flash_class(:error).should == "#{@base_alert}danger"
     end
   end
+
+  describe '#header_links' do
+    before do
+      @user = FactoryGirl.create(:user)
+      helper.stub(:current_user).and_return(@user)
+      @keys = ["My Profile", "Activity", "Users"]
+    end
+
+    context "with no new messages or friend requests" do
+      before do
+        @keys += ["Messages", "Friends"]
+      end
+
+      it "should return the correct links with no badges" do
+        helper.header_links.keys.should include(*@keys)
+      end
+    end
+
+    context "with a new message and 2 friend requests" do
+      before do
+        @user1 = FactoryGirl.create(:user)
+        @user2 = FactoryGirl.create(:user)
+        @friendship1 = FactoryGirl.create(:friendship, user_id: @user1.id, friend_id: @user.id)
+        @friendship2 = FactoryGirl.create(:friendship, user_id: @user2.id, friend_id: @user.id)
+        @message = FactoryGirl.create(:message, recipient_id: @user.id)
+        @keys += ["Messages <span class='badge'>1</span>", "Friends <span class='badge'>2</span>"]
+      end
+
+      it "should return links with a 1 badge next to messages and a 2 badge next to friends" do
+        helper.header_links.keys.should include(*@keys)
+      end
+    end
+  end
 end

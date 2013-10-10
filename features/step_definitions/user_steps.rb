@@ -5,7 +5,7 @@ Given /^the following (.+) records?$/ do |factory, table|
 end
 
 Given /^I have valid credentials$/ do
-  User.create(username: 'name', email: 'email@email.com', password: 'password')
+  User.create(username: 'name', email: 'email@email.com', password: 'password', confirmed: true)
 end
 
 Given /^I am logged in(?: as )?(\S*)$/ do |username|
@@ -17,11 +17,12 @@ Given /^I am logged in(?: as )?(\S*)$/ do |username|
     username: username,
     email: email,
     password: password,
-    admin: admin
+    admin: admin,
+    confirmed: true
   )
   visit login_path
-  fill_in 'session_email', with: email
-  fill_in 'session_password', with: password
+  fill_in 'session_form_email', with: email
+  fill_in 'session_form_password', with: password
   click_button 'Login'
 end
 
