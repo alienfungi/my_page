@@ -5,9 +5,9 @@ Feature: User Management
 
   Background:
     Given the following user records
-      | username | email           | password | admin |
-      | Dick     | email@email.com | password | false |
-      | Jane     | admin@email.com | password | true  |
+      | username | email           | password | admin | confirmed |
+      | Dick     | email@email.com | password | false | true      |
+      | Jane     | admin@email.com | password | true  | true      |
 
   Scenario: Visiting the new user page
     Given I am on the login page
@@ -21,8 +21,8 @@ Feature: User Management
     And I fill in "Password" with "password"
     And I fill in "Confirm Password" with "password"
     And I press "Create User"
-    Then I should be on an individual users page
-    And the User should be created
+    Then I should be on login page
+    And I should see "Please confirm your account via the email sent to you."
 
   Scenario: Visiting the user index page
     Given I am logged in as wombat_krusha
@@ -37,20 +37,6 @@ Feature: User Management
     When I click "Dick"
     Then I should be on an individual users page
     And I should see "Dick"
-
-  Scenario: When a new user is created with full data
-    Given I am on the new user page
-    When I fill in "Email" with "my@email.com"
-    And I fill in "Username" with "my_name"
-    And I fill in "Password" with "password"
-    And I fill in "Confirm Password" with "password"
-    And I fill in "About" with "Some stuff about me."
-    And I fill in "Headline" with "The headline I set."
-    And I press "Create User"
-    Then I should be on an individual users page
-    And I should see "my_name"
-    And I should see "Some stuff about me."
-    And I should see "The headline I set."
 
   Scenario: A user should be able to edit his info
     Given I am logged in

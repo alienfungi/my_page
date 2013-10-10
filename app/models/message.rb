@@ -4,7 +4,7 @@ class Message < ActiveRecord::Base
   belongs_to :sender, class_name: "User", foreign_key: :sender_id
   belongs_to :recipient, class_name: "User", foreign_key: :recipient_id
 
-  validates(:recipient_identifier, presence: true)
+  validates(:recipient_identifier, presence: true, :if => "recipient_id.nil?")
   validates(:subject, presence: true, length: 1..30)
   validates(:message, presence: true)
   validates(:sender_id, presence: true)

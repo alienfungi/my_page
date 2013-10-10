@@ -15,7 +15,9 @@ Feature: Messaging
     And I click "Jane"
     When I press "Options"
     And I click "Send Message"
-    Then I should be on new message page
+    Then I should be on messages page
+    And "Recipient" should be filled in with "Jane"
+    And The selected tab should be "new_tab"
 
   Scenario: Sending a message
     Given I am logged in
@@ -24,6 +26,7 @@ Feature: Messaging
     And I fill in "Subject" with "some subject"
     And I fill in "Message" with "some random message!"
     And I press "Send Message"
-    Then I should be on new message page
+    Then I should be on messages page
+    And The selected tab should be "sent_tab"
     And I should see "Message sent."
 
