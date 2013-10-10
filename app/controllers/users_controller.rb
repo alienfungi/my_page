@@ -5,10 +5,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @micropost = Micropost.new
     @friendship = nil
     current_user.friendships.each do |friendship|
       @friendship = friendship if friendship.friend == @user
     end
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
 
   def index
