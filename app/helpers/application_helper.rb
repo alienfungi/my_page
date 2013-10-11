@@ -58,6 +58,12 @@ module ApplicationHelper
     }
   end
 
+  def format_time(time)
+    time.in_time_zone(
+      cookies["browser.timezone"] || Time.zone
+    ).strftime("%b %d, %Y %I:%M %P").gsub(/0(\d:\d\d)/) { $1 }
+  end
+
 private
 
   def create_badge(num)

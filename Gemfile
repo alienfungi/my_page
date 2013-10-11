@@ -9,6 +9,7 @@ gem 'whenever', require: false
 gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'simple_form'
 gem 'pg'
+gem 'browser-timezone-rails'
 
 group :development, :test do
   #gem 'sqlite3'

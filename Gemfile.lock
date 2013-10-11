@@ -37,6 +37,9 @@ GEM
     bcrypt-ruby (3.1.2)
     bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
+    browser-timezone-rails (0.0.6)
+      jquery-rails
+      rails (>= 3.1)
     builder (3.1.4)
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -195,6 +198,7 @@ DEPENDENCIES
   bcrypt-ruby
   bootstrap-sass
   bootstrap-will_paginate!
+  browser-timezone-rails
   capybara
   coffee-rails
   cucumber
