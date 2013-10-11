@@ -1,10 +1,16 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: [:new, :create, :confirm, :recover]
 
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :correct_users?, only: [:edit, :update, :destroy]
+
+  def home
+    @microposts = Micropost.where(
+      user_id: current_user.mutual_friends.map { |friend| friend.id }
+    ).order("created_at DESC").paginate(page: params[:page])
+  end
 
   def show
-    @user = User.find(params[:id])
     @micropost = Micropost.new
     @friendship = nil
     current_user.friendships.each do |friendship|
@@ -123,8 +129,11 @@ private
     params.require(:user).permit(:email, :new_email, :username, :new_password, :new_password_confirmation, :headline, :about)
   end
 
-  def correct_user
+  def set_user
     @user = User.find(params[:id])
+  end
+
+  def correct_users?
     validate_users(@user)
   end
 end

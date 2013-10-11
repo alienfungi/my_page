@@ -1,0 +1,7 @@
+- provide :title, "The Network"
+
+%h2 Latest Posts
+= render @microposts
+
+.pull-right
+  = will_paginate @microposts

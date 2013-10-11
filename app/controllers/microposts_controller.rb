@@ -1,5 +1,6 @@
 class MicropostsController < ApplicationController
   before_action :set_micropost, only: [:edit, :update, :destroy]
+  before_action :correct_users?, only: [:edit, :update, :destroy]
 
   def edit
   end
@@ -31,6 +32,9 @@ private
 
   def set_micropost
     @micropost = Micropost.find(params[:id])
+  end
+
+  def correct_users?
     validate_users(@micropost.user)
   end
 
