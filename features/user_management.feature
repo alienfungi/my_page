@@ -40,7 +40,8 @@ Feature: User Management
 
   Scenario: A user should be able to edit his info
     Given I am logged in
-    When I press "Options"
+    When I click "My Profile"
+    And I press "Options"
     And I click "Edit"
     And I fill in "Username" with "aNew_username"
     And I fill in "Password" with "newPassword"

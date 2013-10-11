@@ -13,8 +13,7 @@ Feature: Login
     When I fill in "session_form_email" with "email@email.com"
     And I fill in "session_form_password" with "password"
     And I press "Login"
-    Then I should be logged in
-    And I should be on an individual users page
+    Then I should be on home page
 
   Scenario: Logging out
     Given I am logged in as SolidSnake

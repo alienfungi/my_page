@@ -1,7 +1,10 @@
 - provide :title, "The Network"
 
 %h2 Latest Posts
-= render @microposts
+- if @microposts.empty?
+  %p Apparently you either have no friends or they are too lazy to post anything.
+- else
+  = render @microposts
+  .pull-right
+    = will_paginate @microposts
 
-.pull-right
-  = will_paginate @microposts

@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 20131008184653) do
     t.datetime "updated_at"
   end
 
-  add_index "activities", ["trackable_id"], name: "index_activities_on_trackable_id"
-  add_index "activities", ["user_id"], name: "index_activities_on_user_id"
+  add_index "activities", ["trackable_id"], name: "index_activities_on_trackable_id", using: :btree
+  add_index "activities", ["user_id"], name: "index_activities_on_user_id", using: :btree
 
   create_table "friendships", force: true do |t|
     t.integer  "user_id"

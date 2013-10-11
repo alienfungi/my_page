@@ -1,13 +1,17 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: [:new, :create, :confirm, :recover]
+  skip_before_action :require_login, only: [:new, :create, :confirm, :recover, :home]
 
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :correct_users?, only: [:edit, :update, :destroy]
 
   def home
-    @microposts = Micropost.where(
-      user_id: current_user.mutual_friends.map { |friend| friend.id }
-    ).order("created_at DESC").paginate(page: params[:page])
+    if signed_in?
+      @microposts = Micropost.where(
+        user_id: current_user.mutual_friends.map { |friend| friend.id }
+      ).order("created_at DESC").paginate(page: params[:page])
+    else
+      redirect_to login_path
+    end
   end
 
   def show

@@ -8,9 +8,10 @@ gem 'haml-rails'
 gem 'whenever', require: false
 gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'simple_form'
+gem 'pg'
 
 group :development, :test do
-  gem 'sqlite3'
+  #gem 'sqlite3'
   gem 'debugger'
   gem 'pry-rails'
 end
@@ -32,13 +33,11 @@ gem 'uglifier', '>= 1.0.3'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate', :git => 'git://github.com/yrgoldteeth/bootstrap-will_paginate.git'
 gem 'bootstrap-sass'
 
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
 end
 
