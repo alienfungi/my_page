@@ -1,4 +1,7 @@
 MyPage::Application.routes.draw do
+  # root
+  root to: 'users#home'
+
   # activities
   resources :activities
 
@@ -27,7 +30,5 @@ MyPage::Application.routes.draw do
   get 'recover' => 'users#recover'
   resources :users
 
-  # root
-  root to: 'sessions#new'
 end
 

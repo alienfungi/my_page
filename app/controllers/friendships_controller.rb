@@ -1,5 +1,6 @@
 class FriendshipsController < ApplicationController
   before_action :set_friendship, only: [:destroy]
+  before_action :correct_users?, only: [:destroy]
 
   def create
     @friendship = if params.has_key? :friend_id
@@ -84,6 +85,9 @@ private
 
   def set_friendship
     @friendship = Friendship.find(params[:id])
+  end
+
+  def correct_users?
     validate_users(@friendship.user, @friendship.friend)
   end
 

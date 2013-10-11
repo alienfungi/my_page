@@ -1,0 +1,11 @@
+.panel.panel-default
+  .panel-heading
+    .row
+      .col-sm-6
+        = link_to micropost.user do
+          = content_tag :h3, micropost.user.username, class: "panel-title"
+      .col-sm-6
+        .pull-right
+          = micropost.created_at.strftime("%Y-%m-%d %H:%M:%S %Z")
+  .panel-body
+    %p= simple_format micropost.content, sanitize: true

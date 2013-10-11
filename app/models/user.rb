@@ -44,6 +44,12 @@ class User < ActiveRecord::Base
     (!new_password.blank? || hashed_password.blank?) && password.blank?
   end
 
+  def mutual_friends
+    friendships.where(
+      friend_id: inverse_friendships.map { |inverse_friend| inverse_friend.user }
+    ).map { |friendship| friendship.friend }
+  end
+
   def self.authenticate(email, password)
     if user = find_by_email(email)
       if BCrypt::Password.new(user.hashed_password).is_password? password

@@ -27,7 +27,7 @@ private
     valid = users.any? { |user| current_user? user }
     valid ||= current_user.admin
     unless valid
-      flash[:error] = "Unauthorized to access that page."
+      flash[:error] = "Unauthorized to access that content."
       redirect_to root_path
     end
   end
