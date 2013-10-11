@@ -6,6 +6,6 @@
           = content_tag :h3, micropost.user.username, class: "panel-title"
       .col-sm-6
         .pull-right
-          = micropost.created_at.strftime("%Y-%m-%d %H:%M:%S %Z")
+          = format_time micropost.created_at
   .panel-body
     %p= simple_format micropost.content, sanitize: true
