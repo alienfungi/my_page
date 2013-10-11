@@ -14,4 +14,5 @@
 //= require jquery.ui.all
 //= require jquery_ujs
 //= require bootstrap.min
+//= require browser_timezone_rails/application.js
 //= require_tree .
