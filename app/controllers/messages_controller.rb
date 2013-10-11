@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :destroy]
+  before_action :correct_users?, only: [:show, :destroy]
 
   def index
     populate_messages
@@ -61,6 +62,9 @@ private
 
   def set_message
     @message = Message.find(params[:id])
+  end
+
+  def correct_users?
     validate_users(@message.recipient, @message.sender)
   end
 

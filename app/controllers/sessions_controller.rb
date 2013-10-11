@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
 
   def new
-    redirect_to activities_path if signed_in?
+    redirect_to root_url if signed_in?
     @session_form = SessionForm.new
   end
 
@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     elsif User.authenticate(@session_form.email, @session_form.password).try(:confirmed)
       user = User.find_by_email(@session_form.email)
       sign_in user
-      redirect_to user, flash: { success: 'You are now logged in.' }
+      redirect_to root_url
     else
       flash.now[:error] = 'Invalid login credentials'
       render 'new'
