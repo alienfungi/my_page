@@ -23,6 +23,15 @@ private
     end
   end
 
+  def validate_users(*users)
+    valid = users.any? { |user| current_user? user }
+    valid ||= current_user.admin
+    unless valid
+      flash[:error] = "Unauthorized to access that page."
+      redirect_to root_path
+    end
+  end
+
   def random_code(size = 20)
     token_chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
     token_length = size

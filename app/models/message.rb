@@ -7,7 +7,6 @@ class Message < ActiveRecord::Base
   validates(:recipient_identifier, presence: true, :if => "recipient_id.nil?")
   validates(:subject, presence: true, length: 1..30)
   validates(:message, presence: true)
-  validates(:sender_id, presence: true)
 
   before_save :set_recipient
 
