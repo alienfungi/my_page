@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: [:new, :create, :confirm, :recover]
 
-  before_action :correct_user, only: [:edit, :update]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def show
     @user = User.find(params[:id])
@@ -40,6 +40,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    validate_users(@user)
   end
 
   def update
@@ -124,6 +125,6 @@ private
 
   def correct_user
     @user = User.find(params[:id])
-    redirect_to(root_path) unless current_user?(@user) || current_user.admin
+    validate_users(@user)
   end
 end

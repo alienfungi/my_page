@@ -1,7 +1,4 @@
 = f.hidden_field :user_id, value: current_user.id
 
-.row
-  .col-sm-12
-    .form-group
-      = f.label :content, "New Post", class: "control-label"
-      = f.text_area :content, class: "form-control", autofocus: true
+= f.input :content, as: :text, label: "New Post", input_html: { autofocus: true }
+

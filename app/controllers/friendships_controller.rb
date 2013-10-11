@@ -1,4 +1,5 @@
 class FriendshipsController < ApplicationController
+  before_action :set_friendship, only: [:destroy]
 
   def create
     @friendship = if params.has_key? :friend_id
@@ -17,28 +18,26 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
-    # find friendships and set default variables
-    friendship = Friendship.find(params[:id])
     user = friendship.user
     friend = friendship.friend
-    inverse_friendship = Friendship.where(user: friend).first
+    @inverse_friendship = Friendship.where(user: friend).first
     friend_username = friend.username
     message = "Unfriended #{ friend_username }."
 
     # swap variables for message purposes if necessary
     unless user == current_user
       friend_username = user.username
-      friendship, inverse_friendship = inverse_friendship, friendship
+      @friendship, @inverse_friendship = @inverse_friendship, @friendship
     end
 
     # destroy friendships
     begin
-      friendship.destroy
+      @friendship.destroy
     rescue
       message = "Rejected #{ friend_username }'s friend request."
     end
     begin
-      inverse_friendship.destroy
+      @inverse_friendship.destroy
     rescue
       message = "Cancelled your friend request to #{ friend_username }."
     end
@@ -80,4 +79,12 @@ class FriendshipsController < ApplicationController
     session[:active_tab] = 'pending'
     redirect_to friendships_path
   end
+
+private
+
+  def set_friendship
+    @friendship = Friendship.find(params[:id])
+    validate_users(@friendship.user, @friendship.friend)
+  end
+
 end
