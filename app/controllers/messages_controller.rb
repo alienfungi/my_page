@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  before_action :set_message, only: [:show, :destroy]
 
   def index
     populate_messages
@@ -16,11 +17,6 @@ class MessagesController < ApplicationController
   end
 
   def show
-    @message = Message.find(params[:id])
-    unless @message.valid_user(current_user)
-      flash[:error] = "Invalid message."
-      redirect_to users_path
-    end
     @message.update_attribute(:read, true) if @message.recipient == current_user
   end
 
@@ -51,15 +47,9 @@ class MessagesController < ApplicationController
   end
 
   def destroy
-    begin
-      @message = Message.find(params[:id])
-      raise unless @message.valid_user(current_user)
-      session[:active_tab] = @message.recipient == current_user ? :received : 'sent'
-      @message.remove_user(current_user)
-      flash[:success] = "Message deleted."
-    rescue
-      flash[:error] = "Record not found."
-    end
+    session[:active_tab] = @message.recipient == current_user ? :received : 'sent'
+    @message.remove_user(current_user)
+    flash[:success] = "Message deleted."
     redirect_to messages_path
   end
 
@@ -67,6 +57,11 @@ private
 
   def message_params
     params.require(:message).permit(:recipient_identifier, :sender_id, :subject, :message)
+  end
+
+  def set_message
+    @message = Message.find(params[:id])
+    validate_users(@message.recipient, @message.sender)
   end
 
   def prep_new_message

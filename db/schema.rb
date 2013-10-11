@@ -51,13 +51,6 @@ ActiveRecord::Schema.define(version: 20131008184653) do
     t.datetime "updated_at"
   end
 
-  create_table "microposts", force: true do |t|
-    t.text     "content"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "scores", force: true do |t|
     t.string   "name"
     t.integer  "total"

@@ -1,7 +1,8 @@
-- if @user == current_user
-  = form_for Micropost.new do |f|
+- if current_user?(@user)
+  = simple_form_for Micropost.new do |f|
+
     = render 'microposts/form', f: f
-    .row
-      = f.submit "Submit", class: "btn btn-primary"
+
+    = f.submit "Submit", class: "btn btn-primary"
 
   %br

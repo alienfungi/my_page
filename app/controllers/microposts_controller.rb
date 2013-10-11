@@ -7,10 +7,11 @@ class MicropostsController < ApplicationController
   def create
     @micropost = Micropost.new(micropost_params)
     if @micropost.save
-      redirect_to current_user
+      flash[:success] = "Post created."
     else
-      render action: 'new'
+      flash[:error] = "Post failed to create."
     end
+    redirect_to current_user
   end
 
   def update
@@ -26,9 +27,11 @@ class MicropostsController < ApplicationController
     redirect_to current_user
   end
 
-  private
+private
+
   def set_micropost
     @micropost = Micropost.find(params[:id])
+    validate_users(@micropost.user)
   end
 
   def micropost_params
