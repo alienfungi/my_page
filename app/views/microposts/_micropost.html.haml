@@ -12,11 +12,17 @@
       .row
         = content_tag :div, id: "micropost_#{micropost.id}" do
           = simple_format(micropost.content, sanitize: true)
-      - if current_user? micropost.user
+      -if current_user?(micropost.user) || micropost.user.mutual_friends.exists?(current_user.id)
         .row
           .pull-right
-            = link_to 'Edit', "#edit_micropost_modal_#{micropost.id}", data: {toggle: 'modal'}
-            = link_to 'Delete', micropost, method: :delete, data: { confirm: "Are you sure?" }
+            = link_to 'Comment', "#comment_modal_#{micropost.id}", data: {toggle: 'modal'}
+            - if current_user? micropost.user
+              = link_to 'Edit', "#edit_micropost_modal_#{micropost.id}", data: {toggle: 'modal'}
+              = link_to 'Delete', micropost, method: :delete, data: { confirm: "Are you sure?" }
+  - unless micropost.comments.empty?
+    %ul.list-group
+      - micropost.comments.each do |comment|
+        = render 'comments/comment', comment: comment
 
 - if current_user? micropost.user
   .modal.fade{id: "edit_micropost_modal_#{micropost.id}", role: 'dialog', aria: {hidden: true}}
@@ -29,4 +35,4 @@
           = simple_form_for micropost, action: :patch, remote: true do |f|
             = render 'microposts/fields', f: f
             = f.submit "Update Post", class: "btn btn-primary"
-
+= render 'comments/new', commentable: micropost

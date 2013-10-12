@@ -5,6 +5,9 @@ MyPage::Application.routes.draw do
   # activities
   resources :activities
 
+  # comments
+  resources :comments
+
   # friendships
   get 'friends' => 'friendships#friends'
   get 'friendships/requests' => 'friendships#requests'
@@ -17,7 +20,9 @@ MyPage::Application.routes.draw do
   resources :messages
 
   # microposts
-  resources :microposts
+  resources :microposts do
+    resources :comments
+  end
 
   # sesssions
   post 'login' => 'sessions#create'
