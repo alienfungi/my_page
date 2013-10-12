@@ -44,6 +44,10 @@ class User < ActiveRecord::Base
     (!new_password.blank? || hashed_password.blank?) && password.blank?
   end
 
+  def all_microposts
+    Micropost.where(user_id: mutual_friends << self)
+  end
+
   def mutual_friends
     friendships.where(
       friend_id: inverse_friendships.map { |inverse_friend| inverse_friend.user }

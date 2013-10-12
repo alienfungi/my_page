@@ -1,9 +1,6 @@
 class MicropostsController < ApplicationController
-  before_action :set_micropost, only: [:edit, :update, :destroy]
+  before_action :set_micropost, only: [:update, :destroy]
   before_action :correct_users?, only: [:edit, :update, :destroy]
-
-  def edit
-  end
 
   def create
     @micropost = Micropost.new(micropost_params)
@@ -12,20 +9,27 @@ class MicropostsController < ApplicationController
     else
       flash[:error] = "Post failed to create."
     end
-    redirect_to current_user
+    redirect_to :back
   end
 
   def update
-    if @micropost.update(micropost_params)
-      redirect_to current_user
-    else
-      render action: 'edit'
+    @updated_micropost = Micropost.find(params[:id])
+    respond_to do |format|
+      format.html do
+        @updated_micropost.update(micropost_params)
+        redirect_to :back
+      end
+      format.js do
+        @valid = @updated_micropost.update(micropost_params)
+        @updated_micropost = Micropost.find(params[:id]) unless @valid
+        render 'update'
+      end
     end
   end
 
   def destroy
     @micropost.destroy
-    redirect_to current_user
+    redirect_to :back
   end
 
 private

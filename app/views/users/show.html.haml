@@ -32,10 +32,10 @@
     = h @user.about
 .row
   %h2 Posts
-  = render 'microposts/new'
-  = render 'microposts/index'
-
-.pull.right
-  = will_paginate @microposts
+  - if current_user? @user
+    = render 'microposts/new'
+  = render @microposts
+  .pull.right
+    = will_paginate @microposts
 
 = render 'delete_confirm', user: @user
