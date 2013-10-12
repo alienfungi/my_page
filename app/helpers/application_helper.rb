@@ -40,28 +40,28 @@ module ApplicationHelper
   end
 
   def header_links
-    # check for new friend requests
-    inbound_friends = current_user.inverse_friendships.map { |friendship| friendship.user }
-    mutual_friends = current_user.friendships.where(friend_id: inbound_friends)
-    new_friend_count = inbound_friends.size - mutual_friends.size
-
-    # check for new messages
-    new_message_count = current_user.received_messages.where(read: false).count
-
-    # create links
     {
       "My Profile" => current_user,
       "Activity" => activities_path,
       "Users" => users_path,
-      "Friends#{create_badge(new_friend_count)}" => friendships_path,
-      "Messages#{create_badge(new_message_count)}" => messages_path
+      "Friends#{create_badge(current_user.friend_request_count)}" => friendships_path,
+      "Messages#{create_badge(current_user.unread_message_count)}" => messages_path
     }
   end
 
   def format_time(time)
-    time.in_time_zone(
-      cookies["browser.timezone"] || Time.zone
-    ).strftime("%b %d, %Y %I:%M %P").gsub(/0(\d:\d\d)/) { $1 }
+    formatted_time = if(cookies["browser.timezone"])
+      time.in_time_zone(cookies["browser.timezone"]).strftime("%b %d, %Y %I:%M %P")
+    else
+      time.strftime("%b %d, %Y %I:%M %P %Z")
+    end
+    formatted_time.gsub(/0(\d:\d\d)/) { $1 }
+  end
+
+  def random_code(size = 20)
+    token_chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
+    token_length = size
+    Array.new(token_length) { token_chars[rand(token_chars.length)] }.join
   end
 
 private

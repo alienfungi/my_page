@@ -54,6 +54,16 @@ class User < ActiveRecord::Base
     ).map { |friendship| friendship.friend }
   end
 
+  def friend_request_count
+    inverse = inverse_friendships.map { |friendship| friendship.user }
+    mutual = friendships.where(friend_id: inverse)
+    request_total = inverse.size - mutual.count
+  end
+
+  def unread_message_count
+    received_messages.where(read: false).count
+  end
+
   def self.authenticate(email, password)
     if user = find_by_email(email)
       if BCrypt::Password.new(user.hashed_password).is_password? password
