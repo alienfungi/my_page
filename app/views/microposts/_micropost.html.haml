@@ -8,4 +8,25 @@
         .pull-right
           = format_time micropost.created_at
   .panel-body
-    %p= simple_format micropost.content, sanitize: true
+    .container
+      .row
+        = content_tag :div, id: "micropost_#{micropost.id}" do
+          = simple_format(micropost.content, sanitize: true)
+      - if current_user? micropost.user
+        .row
+          .pull-right
+            = link_to 'Edit', "#edit_micropost_modal_#{micropost.id}", data: {toggle: 'modal'}
+            = link_to 'Delete', micropost, method: :delete, data: { confirm: "Are you sure?" }
+
+- if current_user? micropost.user
+  .modal.fade{id: "edit_micropost_modal_#{micropost.id}", role: 'dialog', aria: {hidden: true}}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{data: {dismiss: "modal"}, aria: {hidden: true}} &times;
+          = content_tag :h4, "Edit Post", class: 'modal-title'
+        .modal-body
+          = simple_form_for micropost, action: :patch, remote: true do |f|
+            = render 'microposts/fields', f: f
+            = f.submit "Update Post", class: "btn btn-primary"
+
