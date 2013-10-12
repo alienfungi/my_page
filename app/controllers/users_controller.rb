@@ -6,9 +6,8 @@ class UsersController < ApplicationController
 
   def home
     if signed_in?
-      @microposts = Micropost.where(
-        user_id: current_user.mutual_friends.map { |friend| friend.id }
-      ).order("created_at DESC").paginate(page: params[:page])
+      @micropost = Micropost.new
+      @microposts = current_user.all_microposts.paginate(page: params[:page])
     else
       redirect_to login_path
     end

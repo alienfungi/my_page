@@ -1,9 +1,6 @@
-- if current_user?(@user)
-  = simple_form_for Micropost.new do |f|
+= simple_form_for Micropost.new do |f|
+  = render 'microposts/fields', f: f
+  = f.submit "New Post", class: "btn btn-primary"
 
-    = render 'microposts/form', f: f
-
-    = f.submit "Submit", class: "btn btn-primary"
-
-  %br
+%br
 

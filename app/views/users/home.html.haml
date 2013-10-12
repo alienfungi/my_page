@@ -1,6 +1,7 @@
 - provide :title, "The Network"
 
 %h2 Latest Posts
+= render 'microposts/new'
 - if @microposts.empty?
   %p Apparently you either have no friends or they are too lazy to post anything.
 - else
