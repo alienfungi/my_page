@@ -11,7 +11,7 @@
       %ul{class: 'dropdown-menu', role: 'menu'}
         - if current_user != @user
           %li
-            = link_to "Send Message", messages_path(recipient: @user.id, active_tab: :new)
+            = link_to "Send Message", messages_path(recipient: @user.username, active_tab: :new)
         - if current_user == @user
           %li
             = link_to "Edit", edit_user_path(@user)
