@@ -4,6 +4,8 @@ class Message < ActiveRecord::Base
   belongs_to :sender, class_name: "User", foreign_key: :sender_id
   belongs_to :recipient, class_name: "User", foreign_key: :recipient_id
 
+  has_many :activities, as: :trackable
+
   validates(:recipient_identifier, presence: true, :if => "recipient_id.nil?")
   validates(:subject, presence: true, length: 1..30)
   validates(:message, presence: true)
@@ -22,7 +24,7 @@ class Message < ActiveRecord::Base
     end
   end
 
-  def valid_user(user)
+  def valid_user?(user)
     (sender == user && !removed_by_sender) || (recipient == user && !removed_by_recipient)
   end
 

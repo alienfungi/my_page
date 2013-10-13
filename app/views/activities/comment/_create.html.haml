@@ -1,0 +1,7 @@
+- if activity.trackable.nil?
+  Comment deleted by the commented material's owner
+- else
+  = raw "#{capital_username activity.trackable.user} commented on #{possessive_username activity.trackable.commentable.user}"
+  = link_to "post", activity.trackable.commentable
+\.
+

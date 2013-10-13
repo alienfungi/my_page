@@ -1,13 +1,7 @@
 - if activity.trackable.nil?
-  Friendship cancelled.
+  A friendship was squashed.
+- elsif friend_request? activity.trackable
+  = raw "#{capital_username activity.trackable.user} requested friendship with #{username activity.trackable.friend}"
 - else
-  - user = activity.trackable.user
-  - friend = activity.trackable.friend
-  - if user == current_user
-    You added
-    = link_to friend.username, friend
-    as a friend.
-  - else
-    = link_to user.username, user
-    added you as a friend.
+  = raw "#{capital_username activity.trackable.user} accepted #{possessive_username activity.trackable.friend} friend request."
 

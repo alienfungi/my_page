@@ -1,16 +1,7 @@
-- if activity.trackable.nil?
+- if activity.trackable.nil? || !activity.trackable.valid_user?(current_user)
   Message deleted.
 - else
-  - sender = activity.trackable.sender
-  - recipient = activity.trackable.recipient
-  - if sender == current_user && recipient == current_user
-    You sent yourself
-  - elsif sender == current_user
-    You sent
-    = recipient.blank? ? "Someone" : link_to(recipient.username, recipient)
-  - else
-    = sender.blank? ? "Someone" : link_to(sender.username, sender)
-    sent you
-  a
+  = raw "#{capital_username activity.trackable.sender} sent #{username activity.trackable.recipient} a"
   = link_to "message", activity.trackable
   \.
+ 
