@@ -19,8 +19,8 @@
             - if current_user? micropost.user
               = link_to 'Edit', "#edit_micropost_modal_#{micropost.id}", data: {toggle: 'modal'}
               = link_to 'Delete', micropost, method: :delete, data: { confirm: "Are you sure?" }
-  - unless micropost.comments.empty?
-    %ul.list-group
+  %ul.list-group
+    - unless micropost.comments.empty?
       - micropost.comments.each do |comment|
         = render 'comments/comment', comment: comment
 

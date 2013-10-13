@@ -1,2 +1,4 @@
 $('#comment_modal_<%= @comment.commentable.id %>').modal('hide');
-$('#micropost_<%= @comment.commentable.id %>').closest('.panel').find('.list-group').prepend('<%= j raw(render("comments/comment", comment: @comment)) %>');
+<% if @valid %>
+  $('#micropost_<%= @comment.commentable.id %>').closest('.panel').find('.list-group').prepend('<%= j render(partial: "comments/comment", locals: { comment: @comment }) %>');
+<% end %>

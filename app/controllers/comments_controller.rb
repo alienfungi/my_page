@@ -2,7 +2,6 @@ class CommentsController < ApplicationController
 
   def create
     @commentable = find_commentable
-    redirect_to root_url unless @commentable.user.mutual_friends.exists?(current_user.id)
     @comment = @commentable.comments.build(comment_params)
     respond_to do |format|
       format.html do
@@ -15,6 +14,7 @@ class CommentsController < ApplicationController
       end
       format.js do
         @valid = @comment.save
+        render 'create'
       end
     end
   end

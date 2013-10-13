@@ -4,5 +4,13 @@ class Comment < ActiveRecord::Base
 
   validates_presence_of :content
 
+  before_save :correct_user?
+
   default_scope { order('created_at DESC') }
+
+private
+
+  def correct_user?
+    (user == commentable.user) || commentable.user.mutual_friends.exists?(user.id)
+  end
 end
