@@ -1,0 +1,11 @@
+.modal.fade{id: "comment_modal_#{commentable.id}", role: 'dialog', aria: {hidden: true}}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{data: {dismiss: "modal"}, aria: {hidden: true}} &times;
+        = content_tag :h4, "Write Comment", class: 'modal-title'
+      .modal-body
+        = simple_form_for [commentable, Comment.new], remote: true do |f|
+          = f.hidden_field :user_id, value: current_user.id
+          = f.input :content, as: :text, label: "Comment"
+          = f.submit "Post Comment", class: "btn btn-primary"

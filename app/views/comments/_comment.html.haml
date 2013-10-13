@@ -1,0 +1,12 @@
+%li.list-group-item
+  .container
+    .row
+      = link_to comment.user.username, comment.user
+      .pull-right
+        = format_time comment.created_at
+    .row
+      = simple_format(comment.content, sanitize: true)
+    - if current_user?(comment.user) || current_user?(comment.commentable.user)
+      .row
+        .pull-right
+          = link_to "Delete", comment, method: :delete, data: { confirm: "Are you sure?" }

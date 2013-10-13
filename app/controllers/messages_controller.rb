@@ -23,7 +23,7 @@ class MessagesController < ApplicationController
 
   def new
     session[:active_tab] = 'new'
-    redirect_to messages_path
+    redirect_to messages_path(recipient: params[:recipient])
   end
 
   def create
@@ -72,7 +72,7 @@ private
     if session[:message]
       @message = Message.new(session.delete(:message))
     elsif params[:recipient]
-      recipient = User.find(params.delete(:recipient)).username
+      recipient = params[:recipient]
       @message = Message.new(recipient_identifier: recipient)
     else
       @message = Message.new

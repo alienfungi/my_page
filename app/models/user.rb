@@ -7,11 +7,12 @@ class User < ActiveRecord::Base
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
   has_many :inverse_friendships, class_name: "Friendship", foreign_key: :friend_id, dependent: :destroy
-  has_many :inverse_friends, through: :inverse_frienships, source: :user
+  has_many :inverse_friends, through: :inverse_friendships, source: :user
 
   has_many :sent_messages, class_name: "Message", foreign_key: :sender_id
   has_many :received_messages, class_name: "Message", foreign_key: :recipient_id
   has_many :activities
+  has_many :comments
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   WORD_CHARS = /\A\w+\z/
@@ -49,15 +50,19 @@ class User < ActiveRecord::Base
   end
 
   def mutual_friends
-    friendships.where(
-      friend_id: inverse_friendships.map { |inverse_friend| inverse_friend.user }
-    ).map { |friendship| friendship.friend }
+    friends.where(id: inverse_friends.map { |inverse| inverse.id })
+  end
+
+  def pending_friends
+    friends.where.not(id: inverse_friends.map { |inverse| inverse.id})
+  end
+
+  def friend_requests
+    inverse_friends.where.not(id: friends.map { |friend| friend.id})
   end
 
   def friend_request_count
-    inverse = inverse_friendships.map { |friendship| friendship.user }
-    mutual = friendships.where(friend_id: inverse)
-    request_total = inverse.size - mutual.count
+    request_total = inverse_friends.count - mutual_friends.count
   end
 
   def unread_message_count
