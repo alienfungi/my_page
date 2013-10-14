@@ -1,10 +1,11 @@
 class MicropostsController < ApplicationController
-  before_action :set_micropost, only: [:update, :destroy]
+  before_action :set_micropost, only: [:update, :destroy, :show]
   before_action :correct_users?, only: [:edit, :update, :destroy]
 
   def create
     @micropost = Micropost.new(micropost_params)
     if @micropost.save
+      track_activity(@micropost, @micropost.user.mutual_friends.all << current_user)
       flash[:success] = "Post created."
     else
       flash[:error] = "Post failed to create."
@@ -30,6 +31,9 @@ class MicropostsController < ApplicationController
   def destroy
     @micropost.destroy
     redirect_to :back
+  end
+
+  def show
   end
 
 private

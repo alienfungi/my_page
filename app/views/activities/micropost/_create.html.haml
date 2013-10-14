@@ -1,0 +1,6 @@
+- if activity.trackable.nil?
+  Post deleted
+- else
+  = raw "#{capital_username activity.trackable.user} made a new"
+  = link_to "post", activity.trackable
+\.

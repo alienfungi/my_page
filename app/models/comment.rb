@@ -2,6 +2,8 @@ class Comment < ActiveRecord::Base
   belongs_to :commentable, polymorphic: true
   belongs_to :user
 
+  has_many :activities, as: :trackable
+
   validates_presence_of :content
 
   before_save :correct_user?
