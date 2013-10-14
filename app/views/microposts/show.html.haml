@@ -1,0 +1,7 @@
+- provide :title, "Post by #{@micropost.user.username}"
+- provide :header do
+  %h1
+    = "Post by #{@micropost.user.username}"
+    %small= format_time @micropost.created_at
+
+= render 'micropost', micropost: @micropost

@@ -3,9 +3,11 @@ class CommentsController < ApplicationController
   def create
     @commentable = find_commentable
     @comment = @commentable.comments.build(comment_params)
+    @valid = @comment.save
+    track_activity(@comment, [@commentable.user, @comment.user])
     respond_to do |format|
       format.html do
-        if @comment.save
+        if @valid
           flash[:success] = "Successfully created comment."
           redirect_to id: nil
         else
@@ -13,7 +15,6 @@ class CommentsController < ApplicationController
         end
       end
       format.js do
-        @valid = @comment.save
         render 'create'
       end
     end
@@ -22,6 +23,9 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     validate_users(@comment.user, @comment.commentable.user)
+    unless current_user? @comment.commentable.user
+      @comment.activities.destroy_all
+    end
     @comment.destroy
     redirect_to :back
   end
