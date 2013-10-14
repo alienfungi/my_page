@@ -19,6 +19,10 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 7.days do
+every :day do
   runner "User.purge_unconfirmed(7)"
+end
+
+every :day do
+  runner "Activity.purge_old"
 end

@@ -35,7 +35,7 @@ class FriendshipsController < ApplicationController
     end
 
     flash[:success] = message
-    redirect_to friendships_path
+    redirect_to :back
   end
 
   def index

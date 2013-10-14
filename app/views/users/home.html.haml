@@ -1,11 +1,24 @@
 - provide :title, "The Network"
 
-%h2 Latest Posts
-= render 'microposts/new'
-- if @microposts.empty?
-  %p Apparently you either have no friends or they are too lazy to post anything.
-- else
-  = render @microposts
-  .pull-right
-    = will_paginate @microposts
+#home_wrap.container-fluid
+  .row
+    .col-md-8
+      %h2 Latest Posts
+      = render 'microposts/new'
+      - if @microposts.empty?
+        %p Apparently you either have no friends or they are too lazy to post anything.
+      - else
+        = render @microposts
+        .pull-right
+          = will_paginate @microposts
+
+    .col-md-4
+      .row
+        %h2 Recent Activity
+        #microposts
+          = render 'activities/list'
+      .row
+        %h2 Friends
+        #friends
+          = render 'friendships/list'
 

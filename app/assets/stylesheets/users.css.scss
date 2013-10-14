@@ -1,3 +1,13 @@
+#home_wrap {
+  margin: auto;
+  max-width: 1920px;
+  padding: 0 5% 0 5%;
+
+  #microposts, #friends {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+}
 .page-header {
   .btn-group {
     margin-top: 20px;
