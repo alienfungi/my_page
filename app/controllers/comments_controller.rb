@@ -26,8 +26,15 @@ class CommentsController < ApplicationController
     unless current_user? @comment.commentable.user
       @comment.activities.destroy_all
     end
+    @comment_id = @comment.id
     @comment.destroy
-    redirect_to :back
+    respond_to do |format|
+      format.html do
+        redirect_to :back
+      end
+      format.js do
+      end
+    end
   end
 
 private

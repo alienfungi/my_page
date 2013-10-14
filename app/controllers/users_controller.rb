@@ -72,13 +72,16 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    begin
-      User.destroy(params[:id])
-      flash[:success] = "User deleted."
-    rescue
-      flash[:error] = "Record not found."
+    @user_id = @user.id
+    @user.destroy
+    respond_to do |format|
+      format.html do
+        flash[:success] = "User deleted."
+        redirect_to users_path
+      end
+      format.js do
+      end
     end
-    redirect_to users_path
   end
 
   def confirm

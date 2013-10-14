@@ -41,6 +41,7 @@ module ApplicationHelper
 
   def header_links
     {
+      "Home" => root_path,
       "My Profile" => current_user,
       "Activity" => activities_path,
       "Users" => users_path,

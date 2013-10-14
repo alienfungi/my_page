@@ -29,8 +29,15 @@ class MicropostsController < ApplicationController
   end
 
   def destroy
+    @micropost_id = @micropost.id
     @micropost.destroy
-    redirect_to :back
+    respond_to do |format|
+      format.html do
+        redirect_to :back
+      end
+      format.js do
+      end
+    end
   end
 
   def show

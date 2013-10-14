@@ -48,10 +48,17 @@ class MessagesController < ApplicationController
   end
 
   def destroy
-    session[:active_tab] = @message.recipient == current_user ? :received : 'sent'
+    session[:active_tab] = @message.recipient == current_user ? 'received' : 'sent'
+    @message_id = @message.id
     @message.remove_user(current_user)
-    flash[:success] = "Message deleted."
-    redirect_to messages_path
+    respond_to do |format|
+      format.html do
+        flash[:success] = "Message deleted."
+        redirect_to messages_path
+      end
+      format.js do
+      end
+    end
   end
 
 private

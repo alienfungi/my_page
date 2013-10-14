@@ -1,4 +1,4 @@
-.panel.panel-default
+= content_tag :div, class: "panel panel-default", id: "user_#{user.id}" do
   .panel-heading
     - if current_user.admin
       %a{href: "#delete_modal_#{user.id}", type: 'button', class: 'close', data: {toggle: 'modal'}} &times;
