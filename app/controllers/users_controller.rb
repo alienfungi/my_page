@@ -8,6 +8,8 @@ class UsersController < ApplicationController
     if signed_in?
       @micropost = Micropost.new
       @microposts = current_user.all_microposts.paginate(page: params[:page])
+      @activities = current_user.activities
+      @friends = current_user.mutual_friends
     else
       redirect_to login_path
     end

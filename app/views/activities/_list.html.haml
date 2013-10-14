@@ -1,0 +1,8 @@
+- if @activities.empty?
+  No recent activity
+- else
+  %table.table
+    %tbody
+      - @activities.each do |activity|
+        %tr
+          %td= ActivityPresenter.new(activity, self).render_activity

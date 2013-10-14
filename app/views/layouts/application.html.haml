@@ -15,7 +15,7 @@
       = render 'layouts/header'
 
       / body [and sidebar]
-      .container
+      = content_tag :div, class: (current_page?(root_path) ? "" : "container") do
         - if (content_for? :sidebar)
           .row
             .col-sm-3

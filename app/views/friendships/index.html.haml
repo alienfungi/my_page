@@ -25,7 +25,7 @@
       %h2 No one is awaiting approval from you
     - else
       %ul
-        = render partial: 'request', collection: @requests, as: :friend
+        = render partial: 'request', collection: @requests, as: :user
       .pull-right
         = will_paginate @requests, param_name: :requests_page, params: {active_tab: "requests"}
 
@@ -35,7 +35,7 @@
       %h2 You are not awaiting approval from anyone
     - else
       %ul
-        = render partial: 'pending', collection: @pending, as: :user
+        = render partial: 'pending', collection: @pending, as: :friend
       .pull-right
         = will_paginate @pending, param_name: :pending_page, params: {active_tab: "pending"}
 
