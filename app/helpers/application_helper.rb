@@ -58,12 +58,6 @@ module ApplicationHelper
     formatted_time.gsub(/0(\d:\d\d)/) { $1 }
   end
 
-  def random_code(size = 20)
-    token_chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
-    token_length = size
-    Array.new(token_length) { token_chars[rand(token_chars.length)] }.join
-  end
-
 private
 
   def create_badge(num)
