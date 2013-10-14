@@ -68,5 +68,7 @@ module MyPage
     config.serve_static_assets = true
 
     WillPaginate.per_page = 10
+
+    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
   end
 end

@@ -27,7 +27,7 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = Message.new(message_params)
+    @message = current_user.sent_messages.build(message_params)
     return_to = session.delete(:return_to)
     if @message.save
       session[:active_tab] = 'sent'
@@ -57,7 +57,7 @@ class MessagesController < ApplicationController
 private
 
   def message_params
-    params.require(:message).permit(:recipient_identifier, :sender_id, :subject, :message)
+    params.require(:message).permit(:recipient_identifier, :subject, :message)
   end
 
   def set_message

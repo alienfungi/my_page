@@ -3,7 +3,7 @@ class MicropostsController < ApplicationController
   before_action :correct_users?, only: [:edit, :update, :destroy]
 
   def create
-    @micropost = Micropost.new(micropost_params)
+    @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
       track_activity(@micropost, @micropost.user.mutual_friends.all << current_user)
       flash[:success] = "Post created."
@@ -47,6 +47,6 @@ private
   end
 
   def micropost_params
-    params.require(:micropost).permit(:content, :user_id)
+    params.require(:micropost).permit(:content)
   end
 end

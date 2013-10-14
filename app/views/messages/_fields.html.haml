@@ -1,5 +1,3 @@
-= f.hidden_field :sender_id, value: current_user.id
-
 = f.input :recipient_identifier, label: "Recipient", input_html: { autofocus: @message.recipient_identifier.blank? }
 
 = f.input :subject, input_html: { autofocus: !@message.recipient_identifier.blank? }
