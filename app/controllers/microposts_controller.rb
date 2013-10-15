@@ -4,13 +4,16 @@ class MicropostsController < ApplicationController
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
-    if @micropost.save
-      track_activity(@micropost, @micropost.user.mutual_friends.all << current_user)
-      flash[:success] = "Post created."
-    else
-      flash[:error] = "Post failed to create."
+    @valid = @micropost.save
+    track_activity(@micropost, @micropost.user.mutual_friends.all << current_user) if @valid
+    respond_to do |format|
+      format.html do
+        flash[:error] = "Post failed to create." unless @valid
+        redirect_to :back
+      end
+      format.js do
+      end
     end
-    redirect_to :back
   end
 
   def update

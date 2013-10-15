@@ -12,7 +12,6 @@ gem 'pg'
 gem 'browser-timezone-rails'
 
 group :development, :test do
-  #gem 'sqlite3'
   gem 'debugger'
   gem 'pry-rails'
 end

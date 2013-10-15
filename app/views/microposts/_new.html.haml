@@ -1,4 +1,4 @@
-= simple_form_for Micropost.new do |f|
+= simple_form_for Micropost.new, remote: true do |f|
   = render 'microposts/fields', f: f
   = f.submit "New Post", class: "btn btn-primary"
 

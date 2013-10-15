@@ -1,4 +1,4 @@
-= content_tag :div, class: "panel panel-default", id: "micropost_#{micropost.id}" do
+= content_tag :div, class: "micropost panel panel-default", id: "micropost_#{micropost.id}" do
   .panel-heading
     .row
       .col-sm-6
@@ -10,7 +10,7 @@
   .panel-body
     .container
       .row
-        = content_tag :div, id: "micropost_#{micropost.id}" do
+        = content_tag :div, id: "micropost_content_#{micropost.id}" do
           = simple_format(micropost.content, sanitize: true)
       -if current_user?(micropost.user) || micropost.user.mutual_friends.exists?(current_user.id)
         .row

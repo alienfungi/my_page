@@ -1,6 +1,6 @@
 $('#edit_micropost_modal_<%= @updated_micropost.id %>').modal('hide');
 <% if @valid %>
-  $('#micropost_<%= @updated_micropost.id %>').html('<%= j simple_format(@updated_micropost.content, sanitize: true) %>');
+  $('#micropost_content_<%= @updated_micropost.id %>').html('<%= j simple_format(@updated_micropost.content, sanitize: true) %>');
 <% else %>
   $('#edit_micropost_<%= @updated_micropost.id %>').find('#micropost_content').val('<%= j raw(@updated_micropost.content) %>')
 <% end %>

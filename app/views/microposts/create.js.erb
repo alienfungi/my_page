@@ -1,0 +1,9 @@
+var form = $('form#new_micropost');
+var group = form.find('.form-group');
+<% if @valid %>
+  $('<%= j render(partial: 'micropost', locals: {micropost: @micropost}) %>').insertBefore('.micropost');
+  form.find('#micropost_content').val('');
+  group.removeClass('has-error');
+<% else %>
+  group.addClass('has-error');
+<% end %>
