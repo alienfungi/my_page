@@ -15,6 +15,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def poll
+    respond_to do |format|
+      format.js do
+      end
+    end
+  end
+
   def show
     @micropost = Micropost.new
     @friendship = nil

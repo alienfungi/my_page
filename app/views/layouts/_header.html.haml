@@ -10,9 +10,9 @@
     - if signed_in?
       #header_collapse.collapse.navbar-collapse
         %ul.nav.navbar-nav
-          - header_links.each do |text, path|
-            = content_tag :li, class: (current_page?(path) ? 'active' : '') do
-              = link_to raw(text), path
+          - header_links.each do |key, link|
+            = content_tag :li, class: (current_page?(link[:path]) ? 'active' : '') do
+              = link_to raw(link[:text]), link[:path], id: link[:id]
         %ul.nav.navbar-nav.navbar-right
           %li= link_to 'Logout', logout_path
 
