@@ -12,7 +12,11 @@ private
 
   def track_activity(trackable, users = [current_user], action = params[:action])
     users.each do |user|
-      user.activities.create!(action: action, trackable: trackable)
+      user.activities.create!(
+        action: action,
+        trackable: trackable,
+        old: current_user?(user)
+      )
     end
   end
 

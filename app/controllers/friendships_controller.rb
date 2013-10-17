@@ -6,45 +6,63 @@ class FriendshipsController < ApplicationController
     else
       current_user.friendships.build(friend_id: params.delete(:user_id))
     end
-    if @friendship.save
-      flash[:success] = "Friended #{@friendship.friend.username}."
-      track_activity @friendship, [@friendship.user, @friendship.friend]
-      redirect_to :back
-    else
-      flash[:error] = "Unable to add friend."
-      redirect_to :back
+    @valid = @friendship.save
+    track_activity @friendship, [@friendship.user, @friendship.friend] if @valid
+    respond_to do |format|
+      format.html do
+        if @valid
+          flash[:success] = "Friended #{@friendship.friend.username}."
+        else
+          flash[:error] = "Unable to add friend."
+        end
+        redirect_to :back
+      end
+      format.js do
+        if current_user.mutual_friends.include? @friendship.friend
+          @new_friend = @friendship.friend
+          inverse_friendship = current_user.inverse_friendships.where(user: @friendship.friend).first
+          @new_activity = current_user.activities.where(trackable_id: @friendship).first
+          @activity = current_user.activities.where(trackable_id: inverse_friendship).first
+        end
+      end
     end
   end
 
   def destroy
-    @friendship = current_user.friendships.where(friend_id: params[:id])
-    @inverse_friendship = current_user.inverse_friendships.where(user_id: params[:id])
+    @friendship = current_user.friendships.find_by_friend_id(params[:id])
+    @inverse_friendship = current_user.inverse_friendships.find_by_user_id(params[:id])
+    activity = current_user.activities.where(trackable: @inverse_friendship).first unless @inverse_friendship.nil?
+    @activity_id = activity.id if activity
+    activity.try(:destroy)
     friend = User.find(params[:id])
     message = "Unfriended #{ friend.username }."
 
     # destroy friendships
     begin
-      @friendship.first.destroy
+      @friendship.destroy
     rescue
       message = "Rejected #{ friend.username }'s friend request."
     end
     begin
-      @inverse_friendship.first.destroy
+      @inverse_friendship.destroy
     rescue
       message = "Cancelled your friend request to #{ friend.username }."
     end
 
-    flash[:success] = message
-    redirect_to :back
+    respond_to do |format|
+      format.html do
+        flash[:success] = message
+        redirect_to :back
+      end
+      format.js do
+      end
+    end
   end
 
   def index
     @mutual = current_user.mutual_friends.paginate(page: params[:mutual_page])
-
     @requests = current_user.friend_requests.paginate(page: params[:requests_page])
-
     @pending = current_user.pending_friends.paginate(page: params[:pending_page])
-
     @active_tab = params.delete(:active_tab) || session.delete(:active_tab) || 'mutual'
   end
 

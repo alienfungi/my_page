@@ -5,8 +5,8 @@
   - if current_user?(activity.trackable.friend) && !current_user.friends.exists?(activity.trackable.user)
     .pull-right
       .btn-group
-        = link_to "Approve", friendships_path(user_id: activity.trackable.user), method: :post, type: 'button', class: 'btn btn-success btn-sm'
-        = link_to "Reject", friendship_path(activity.trackable.user), method: :delete, type: 'button', class: 'btn btn-danger btn-sm'
+        = link_to "Approve", friendships_path(user_id: activity.trackable.user), method: :post, type: 'button', class: 'btn btn-success btn-sm', remote: true
+        = link_to "Reject", friendship_path(activity.trackable.user), method: :delete, type: 'button', class: 'btn btn-danger btn-sm', remote: true
 - else
   = raw "#{capital_username activity.trackable.user} accepted #{possessive_username activity.trackable.friend} friend request."
 

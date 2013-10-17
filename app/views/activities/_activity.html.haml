@@ -1,0 +1,4 @@
+%tr
+  %td= ActivityPresenter.new(activity, self).render_activity
+  - if defined? time
+    %td= format_time activity.created_at

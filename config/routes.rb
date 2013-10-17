@@ -2,6 +2,9 @@ MyPage::Application.routes.draw do
   # root
   root to: 'users#home'
 
+  # polling
+  get 'users/poll' => 'users#poll'
+
   # activities
   resources :activities
 

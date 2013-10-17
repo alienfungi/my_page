@@ -1,0 +1,11 @@
+$('#activity_<%= @activity.id %>').html('<%= j raw(ActivityPresenter.new(@activity, self).render_activity)%>');
+$('#activity_<%= @activity.id %>').closest('tr').before('<%= j render(partial: 'activities/activity', locals: {activity: @new_activity}) %>');
+
+<% if @new_friend %>
+  var home_friends = $('#home_friends');
+  if(home_friends.length > 0) {
+    home_friends.prepend('<%= j render(partial: 'friendships/friend', locals: {friend: @new_friend}) %>');
+  } else {
+    $('#friends').html('<%= j render(partial: 'friendships/list', locals: {friends: [@new_friend]}) %>');
+  }
+<% end %>

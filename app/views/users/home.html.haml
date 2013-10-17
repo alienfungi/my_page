@@ -15,10 +15,10 @@
     .col-md-4
       .row
         %h2 Recent Activity
-        #microposts
-          = render 'activities/list'
+        #activities
+          = render 'activities/list', activities: @activities
       .row
         %h2 Friends
         #friends
-          = render 'friendships/list'
+          = render 'friendships/list', friends: @friends
 
