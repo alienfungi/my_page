@@ -19,9 +19,10 @@ class FriendshipsController < ApplicationController
       end
       format.js do
         if current_user.mutual_friends.include? @friendship.friend
+          @new_friend = @friendship.friend
           inverse_friendship = current_user.inverse_friendships.where(user: @friendship.friend).first
-          @new_activity = current_user.activities.where(trackable: @friendship).first
-          @activity = current_user.activities.where(trackable: inverse_friendship).first
+          @new_activity = current_user.activities.where(trackable_id: @friendship).first
+          @activity = current_user.activities.where(trackable_id: inverse_friendship).first
         end
       end
     end

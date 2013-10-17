@@ -53,6 +53,10 @@ class User < ActiveRecord::Base
     friends.where(id: inverse_friends.map { |inverse| inverse.id })
   end
 
+  def mutual_friendships
+    friendships.where(friend_id: inverse_friendships.map { |inverse| inverse.user_id })
+  end
+
   def pending_friends
     friends.where.not(id: inverse_friends.map { |inverse| inverse.id})
   end

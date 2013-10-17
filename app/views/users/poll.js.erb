@@ -1,11 +1,28 @@
+// update badges in header
 <% links = header_links %>
 $('#<%=j links[:friends][:id]%>').html('<%=j raw(links[:friends][:text])%>');
 $('#<%=j links[:messages][:id]%>').html('<%=j raw(links[:messages][:text])%>');
-home_activity = $('#home_activities');
-if(home_activity.length > 0) {
-  <% @new_activities.each do |activity| %>
-    home_activity.prepend('<%= j render(partial: 'activities/activity', locals: {activity: activity})%>');
-  <% end unless @new_activities.blank? %>
-} else {
-  $('#activities').html('<%= j render(partial: 'activities/list', locals: {activities: @new_activities})%>');
-}
+
+// update activities
+<% if @new_activities %>
+  var home_activities = $('#home_activities');
+  if(home_activities.length > 0) {
+    <% @new_activities.each do |activity| %>
+      home_activities.prepend('<%= j render(partial: 'activities/activity', locals: {activity: activity}) %>');
+    <% end %>
+  } else {
+    $('#activities').html('<%= j render(partial: 'activities/list', locals: {activities: @new_activities})%>');
+  }
+<% end %>
+
+// update friends
+<% if @new_friends %>
+  var home_friends = $('#home_friends');
+  if(home_friends.length > 0) {
+    <% @new_friends.each do |friend| %>
+      home_friends.prepend('<%= j render(partial: 'friendships/friend', locals: {friend: friend}) %>');
+    <% end %>
+  } else {
+    $('#friends').html('<%= j render(partial: 'friendships/list', locals: {friends: @new_friends}) %>');
+  }
+<% end %>

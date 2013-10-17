@@ -18,9 +18,23 @@ class UsersController < ApplicationController
   def poll
     respond_to do |format|
       format.js do
-        @new_activities = current_user.activities.where(old: false).all
-        current_user.activities.update_all(old: true)
-        @friends = current_user.mutual_friends
+        @new_activities = current_user.activities.where(old: false)
+        if @new_activities.count > 0
+          @new_activities.load
+          new_friend_activity = @new_activities.where(trackable_type: 'Friendship').map do |activity|
+            friendship = activity.trackable
+            current_user?(friendship.user) ? friendship.friend.id : friendship.user.id
+          end
+          @new_friends = current_user.mutual_friends.where(id: new_friend_activity)
+          current_user.activities.update_all(old: true)
+          if @new_friends.count > 0
+            @new_friends.load
+          else
+            @new_friends = false
+          end
+        else
+          @new_activities = false
+        end
       end
     end
   end

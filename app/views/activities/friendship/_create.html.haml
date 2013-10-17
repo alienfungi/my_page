@@ -1,5 +1,5 @@
 - if activity.trackable.nil?
-  Friend request was rejected.
+  A friendship was squashed.
 - elsif friend_request? activity.trackable
   = raw "#{capital_username activity.trackable.user} requested friendship with #{username activity.trackable.friend}"
   - if current_user?(activity.trackable.friend) && !current_user.friends.exists?(activity.trackable.user)
