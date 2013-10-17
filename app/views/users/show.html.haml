@@ -17,7 +17,7 @@
             = link_to "Edit", edit_user_path(@user)
         - elsif @friendship
           %li
-            = link_to "Remove Friend", @friendship, method: :delete
+            = link_to "Remove Friend", friendship_path(@user), method: :delete
         - else
           %li
             = link_to "Add Friend", friendships_path(friend_id: @user), method: :post

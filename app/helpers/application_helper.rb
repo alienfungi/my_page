@@ -41,12 +41,12 @@ module ApplicationHelper
 
   def header_links
     {
-      "Home" => root_path,
-      "My Profile" => current_user,
-      "Activity" => activities_path,
-      "Users" => users_path,
-      "Friends#{create_badge(current_user.friend_request_count)}" => friendships_path,
-      "Messages#{create_badge(current_user.unread_message_count)}" => messages_path
+      home: header_hash("Home", root_path, 'home'),
+      profile: header_hash("My Profile", current_user, 'profile'),
+      activities: header_hash("Activity", activities_path, 'activities'),
+      users: header_hash("Users", users_path, 'users'),
+      friends: header_hash("Friends#{create_badge(current_user.friend_request_count)}", friendships_path, 'friends'),
+      messages: header_hash("Messages#{create_badge(current_user.unread_message_count)}", messages_path, 'messages')
     }
   end
 
@@ -60,6 +60,14 @@ module ApplicationHelper
   end
 
 private
+
+  def header_hash(text, path, id)
+    {
+      text: text,
+      path: path,
+      id: "header_#{id}"
+    }
+  end
 
   def create_badge(num)
     if num > 0

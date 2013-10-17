@@ -1,8 +1,6 @@
-- if @activities.empty?
+- if activities.blank?
   No recent activity
 - else
-  %table.table
-    %tbody
-      - @activities.each do |activity|
-        %tr
-          %td= ActivityPresenter.new(activity, self).render_activity
+  %table#home_activities.table
+    - activities.each do |activity|
+      = render 'activities/activity', activity: activity

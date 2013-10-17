@@ -6,10 +6,7 @@
       %th Activity
       %th Date
   %tbody
-    - @activities.each do |activity|
-      %tr
-        %td= ActivityPresenter.new(activity, self).render_activity
-        %td= format_time activity.created_at
+    = render @activities, time: true
 .pull-right
   = will_paginate @activities
 
