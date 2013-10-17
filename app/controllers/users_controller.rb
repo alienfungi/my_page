@@ -18,6 +18,9 @@ class UsersController < ApplicationController
   def poll
     respond_to do |format|
       format.js do
+        @new_activities = current_user.activities.where(old: false).all
+        current_user.activities.update_all(old: true)
+        @friends = current_user.mutual_friends
       end
     end
   end

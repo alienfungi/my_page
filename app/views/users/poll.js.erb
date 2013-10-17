@@ -1,3 +1,11 @@
 <% links = header_links %>
-$('#<%=j links[:friends][:id]%>').html('<%=j raw(links[:friends][:text])%>')
-$('#<%=j links[:messages][:id]%>').html('<%=j raw(links[:messages][:text])%>')
+$('#<%=j links[:friends][:id]%>').html('<%=j raw(links[:friends][:text])%>');
+$('#<%=j links[:messages][:id]%>').html('<%=j raw(links[:messages][:text])%>');
+home_activity = $('#home_activities');
+if(home_activity.length > 0) {
+  <% @new_activities.each do |activity| %>
+    home_activity.prepend('<%= j render(partial: 'activities/activity', locals: {activity: activity})%>');
+  <% end unless @new_activities.blank? %>
+} else {
+  $('#activities').html('<%= j render(partial: 'activities/list', locals: {activities: @new_activities})%>');
+}

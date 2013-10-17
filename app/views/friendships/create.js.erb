@@ -1,0 +1,2 @@
+$('#activity_<%= @activity.id %>').html('<%= j raw(ActivityPresenter.new(@activity, self).render_activity)%>');
+$('#activity_<%= @activity.id %>').closest('tr').before('<%= j render(partial: 'activities/activity', locals: {activity: @new_activity}) %>');
