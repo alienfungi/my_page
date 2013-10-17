@@ -1,7 +1,8 @@
 jQuery ->
   # polling
+  location = '<%= (Rails.env.production? ? 'http://zanes-social-network.herokuapp.com/users/poll' : '/users/poll') %>'
   updatePage = ->
-    $.ajax '/users/poll',
+    $.ajax location,
       type: 'GET'
       dataType: 'script'
       setTimeout(updatePage, 5000)
