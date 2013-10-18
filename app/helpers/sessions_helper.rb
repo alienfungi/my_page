@@ -44,10 +44,12 @@ module SessionsHelper
     session[:return_to] = request.url
   end
 
+  def valid_users?(*users)
+    current_user.admin || users.any? { |user| current_user? user }
+  end
+
   def validate_users(*users)
-    valid = users.any? { |user| current_user? user }
-    valid ||= current_user.admin
-    unless valid
+    unless valid_users?([users])
       flash[:error] = "Unauthorized to access that content."
       redirect_to root_path
     end

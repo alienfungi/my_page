@@ -44,6 +44,8 @@ class MicropostsController < ApplicationController
   end
 
   def show
+    user = @micropost.user
+    validate_users(user, *user.mutual_friends)
   end
 
 private

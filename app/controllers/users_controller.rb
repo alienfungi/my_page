@@ -78,7 +78,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    validate_users(@user)
   end
 
   def update
@@ -157,12 +156,9 @@ private
     else
       flash[:error] = "Email failed to confirm."
     end
+    sign_out
     redirect_to root_url
   end
-
-  def new_friends(new_activities)
-  end
-
 
   def user_params
     params.require(:user).permit(:email, :new_email, :username, :new_password, :new_password_confirmation, :headline, :about)

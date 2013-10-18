@@ -3,7 +3,7 @@ require 'bcrypt'
 class User < ActiveRecord::Base
   attr_accessor :new_password, :new_password_confirmation, :password
 
-  has_many :microposts
+  has_many :microposts, dependent: :destroy
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
   has_many :inverse_friendships, class_name: "Friendship", foreign_key: :friend_id, dependent: :destroy
@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   has_many :sent_messages, class_name: "Message", foreign_key: :sender_id
   has_many :received_messages, class_name: "Message", foreign_key: :recipient_id
-  has_many :activities
+  has_many :activities, dependent: :destroy
   has_many :comments
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

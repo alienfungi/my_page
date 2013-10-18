@@ -30,12 +30,13 @@
   .col-md-8
     %h2 About
     = h @user.about
-.row
-  %h2 Posts
-  - if current_user? @user
-    = render 'microposts/new'
-  = render @microposts
-  .pull.right
-    = will_paginate @microposts
+- if valid_users?(@user, *@user.mutual_friends)
+  .row
+    %h2 Posts
+    - if current_user? @user
+      = render 'microposts/new'
+    = render @microposts
+    .pull.right
+      = will_paginate @microposts
 
-= render 'delete_confirm', user: @user
+  = render 'delete_confirm', user: @user

@@ -2,14 +2,15 @@ class CommentsController < ApplicationController
 
   def create
     @commentable = find_commentable
+    validate_users(@commentable.user, *@commentable.user.mutual_friends)
     @comment = @commentable.comments.build(comment_params)
-    @valid = @comment.save
-    track_activity(@comment, [@commentable.user, @comment.user])
+    @valid = (current_user.id == params[:comment][:user_id].to_i) && @comment.save
+    track_activity(@comment, [@commentable.user, @comment.user]) if @valid
     respond_to do |format|
       format.html do
         if @valid
           flash[:success] = "Successfully created comment."
-          redirect_to id: nil
+          redirect_to :back
         else
           render action: 'new'
         end
