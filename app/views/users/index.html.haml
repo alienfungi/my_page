@@ -3,17 +3,12 @@
 - content_for :header do
   .row
     %h1.col-sm-8.col-md-9 Users
-    = form_tag({}, method: "get", class: "form-inline col-sm-4 col-md-3", role: "form") do
-      %table
-        %tr
-          %td
-            = text_field_tag :search_for, "", class: "form-control", autofocus: true
-          %td
-            %label{for: 'search_submit', class: 'btn btn-primary'}
-              %span.glyphicon.glyphicon-search
-            %input{class: 'hidden', type: 'submit', name: 'commit', id: 'search_submit'}
+    .container
+      = form_for @search_form, url: users_path, method: :get, class: "form col-sm-4 col-md-3", role: "form", remote: true do |f|
+        .input-group
+          = f.text_field :search_for, class: "form-control", autofocus: true
+          %span.input-group-addon.glyphicon.glyphicon-search
 
-= render @users
-.pull-right
-  = will_paginate @users
+.searchable
+  = render 'users', users: @users
 

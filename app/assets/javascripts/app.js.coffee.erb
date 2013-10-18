@@ -18,3 +18,7 @@ jQuery ->
     $('html, body').stop().animate(
       scrollTop: 0
     , 'fast')
+
+  # submit search on change
+  $('input#search_form_search_for').on 'input', ->
+    $('form#new_search_form').submit()

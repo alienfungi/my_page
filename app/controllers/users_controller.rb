@@ -52,12 +52,24 @@ class UsersController < ApplicationController
   end
 
   def index
-    users = if params.has_key? :search_for
-      User.where("username LIKE ?", "#{Regexp.escape(params[:search_for])}%")
-    else
+    @search_form = params.has_key?(:search_form) ? SearchForm.new(search_params) : SearchForm.new
+    users = if @search_form.search_for.blank?
       User
+    else
+      User.where(
+        "lower(username) LIKE lower(?)",
+        "#{Regexp.escape(@search_form.search_for)}%"
+      )
     end
-    @users = users.paginate(page: params[:page])
+    respond_to do |format|
+      format.html do
+        @users = users.paginate(page: params[:page])
+      end
+      format.js do
+        @users = users.paginate(page: nil)
+        render 'users'
+      end
+    end
   end
 
   def new
@@ -162,6 +174,10 @@ private
 
   def user_params
     params.require(:user).permit(:email, :new_email, :username, :new_password, :new_password_confirmation, :headline, :about)
+  end
+
+  def search_params
+    params.require(:search_form).permit(:search_for)
   end
 
   def set_user

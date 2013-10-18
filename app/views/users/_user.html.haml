@@ -5,6 +5,12 @@
     = link_to user do
       = content_tag :h3, user.username, class: "panel-title"
   .panel-body
-    = render 'layouts/user_sm', user: user
+    .container
+      .row
+        = render 'layouts/user_sm', user: user
+      - unless current_user?(user) || current_user.friends.include?(user)
+        .row
+          .btn-group.pull-right
+            = link_to "Add Friend", friendships_path(friend_id: user), method: :post, class: "btn btn-success"
 = render 'delete_confirm', user: user
 
