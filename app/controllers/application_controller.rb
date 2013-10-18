@@ -40,4 +40,8 @@ private
     Array.new(token_length) { token_chars[rand(token_chars.length)] }.join
   end
 
+  def search_params
+    params.require(:search_form).permit(:search_for)
+  end
+
 end

@@ -1,0 +1,3 @@
+$('div.mutual.searchable').html('<%= j render(partial: 'friendships', locals: {mutual: @mutual}) %>');
+$('div.requests.searchable').html('<%= j render(partial: 'requests', locals: {requests: @requests}) %>');
+$('div.pending.searchable').html('<%= j render(partial: 'pendings', locals: {pending: @pending}) %>');

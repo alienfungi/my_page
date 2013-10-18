@@ -176,10 +176,6 @@ private
     params.require(:user).permit(:email, :new_email, :username, :new_password, :new_password_confirmation, :headline, :about)
   end
 
-  def search_params
-    params.require(:search_form).permit(:search_for)
-  end
-
   def set_user
     @user = User.find(params[:id])
   end

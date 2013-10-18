@@ -1,5 +1,10 @@
 - provide :title, "Friends"
 
+- content_for :header do
+  .row
+    %h1.col-sm-8.col-md-9 Friends
+    = render 'layouts/search', url: friendships_path
+
 %ul#friendship_tabs.nav.nav-tabs
   = content_tag :li, class: (@active_tab == "mutual" ? "active" : "") do
     %a{href: "#mutual", data: {toggle: "tab"}} Mutual
@@ -14,28 +19,22 @@
     - if @mutual.blank?
       %h2 No friends :(
     - else
-      %ul
-        = render partial: 'friendship', collection: @mutual, as: :friend
-      .pull-right
-        = will_paginate @mutual, param_name: :mutual_page, params: {active_tab: "mutual"}
+      .mutual.searchable
+        = render 'friendships', mutual: @mutual
 
   = content_tag :div, id: 'requests', class: "tab-pane#{' active' if @active_tab == 'requests'}" do
     %br
     - if @requests.blank?
       %h2 No one is awaiting approval from you
     - else
-      %ul
-        = render partial: 'request', collection: @requests, as: :user
-      .pull-right
-        = will_paginate @requests, param_name: :requests_page, params: {active_tab: "requests"}
+      .requests.searchable
+        = render 'requests', requests: @requests
 
   = content_tag :div, id: 'pending', class: "tab-pane#{' active' if @active_tab == 'pending'}" do
     %br
     - if @pending.blank?
       %h2 You are not awaiting approval from anyone
     - else
-      %ul
-        = render partial: 'pending', collection: @pending, as: :friend
-      .pull-right
-        = will_paginate @pending, param_name: :pending_page, params: {active_tab: "pending"}
+      .pending.searchable
+        = render 'pendings', pending: @pending
 

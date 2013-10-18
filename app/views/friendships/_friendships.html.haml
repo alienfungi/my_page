@@ -1,0 +1,4 @@
+= render partial: 'friendship', collection: mutual, as: :friend
+.pull-right
+  = will_paginate mutual, param_name: :mutual_page, params: {active_tab: "mutual"}
+

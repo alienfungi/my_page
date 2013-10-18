@@ -3,11 +3,7 @@
 - content_for :header do
   .row
     %h1.col-sm-8.col-md-9 Users
-    .container
-      = form_for @search_form, url: users_path, method: :get, class: "form col-sm-4 col-md-3", role: "form", remote: true do |f|
-        .input-group
-          = f.text_field :search_for, class: "form-control", autofocus: true
-          %span.input-group-addon.glyphicon.glyphicon-search
+    = render 'layouts/search', url: users_path
 
 .searchable
   = render 'users', users: @users

@@ -60,10 +60,38 @@ class FriendshipsController < ApplicationController
   end
 
   def index
-    @mutual = current_user.mutual_friends.paginate(page: params[:mutual_page])
-    @requests = current_user.friend_requests.paginate(page: params[:requests_page])
-    @pending = current_user.pending_friends.paginate(page: params[:pending_page])
+    @search_form = params.has_key?(:search_form) ? SearchForm.new(search_params) : SearchForm.new
     @active_tab = params.delete(:active_tab) || session.delete(:active_tab) || 'mutual'
+    @mutual = current_user.mutual_friends
+    @requests = current_user.friend_requests
+    @pending = current_user.pending_friends
+    unless @search_form.search_for.blank?
+      @mutual = @mutual.where(
+        "lower(username) LIKE lower(?)",
+        "#{Regexp.escape(@search_form.search_for)}%"
+      )
+      @requests = @requests.where(
+        "lower(username) LIKE lower(?)",
+        "#{Regexp.escape(@search_form.search_for)}%"
+      )
+      @pending = @pending.where(
+        "lower(username) LIKE lower(?)",
+        "#{Regexp.escape(@search_form.search_for)}%"
+      )
+    end
+    respond_to do |format|
+      format.html do
+        @mutual = @mutual.paginate(page: params[:mutual_page])
+        @requests = @requests.paginate(page: params[:requests_page])
+        @pending = @pending.paginate(page: params[:pending_page])
+      end
+      format.js do
+        @mutual = @mutual.paginate(page: nil)
+        @requests = @requests.paginate(page: nil)
+        @pending = @pending.paginate(page: nil)
+        render 'friends'
+      end
+    end
   end
 
   def friends
