@@ -5,8 +5,9 @@ jQuery ->
     $.ajax location,
       type: 'GET'
       dataType: 'script'
-      setTimeout(updatePage, 5000)
-  setTimeout updatePage, 5000
+      success: ->
+        setTimeout updatePage, 10000
+  setTimeout updatePage, 10000
 
   # remove flash messages on tab clicks
   $('ul.nav-tabs').children('li').children('a').click ->
@@ -17,4 +18,3 @@ jQuery ->
     $('html, body').stop().animate(
       scrollTop: 0
     , 'fast')
-

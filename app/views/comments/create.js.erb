@@ -1,6 +1,11 @@
-var modal = $('#comment_modal_<%= @comment.commentable.id %>')
+var modal = $('#comment_modal_<%= @comment.commentable.id %>');
+var comments = $('#micropost_<%= @comment.commentable.id %>').closest('.panel').find('.list-group');
+
+// hide and clear comment create modal
 modal.modal('hide');
 modal.find('#comment_content').val('');
+
+// add comment if it successfully saved to db
 <% if @valid %>
-  $('#micropost_<%= @comment.commentable.id %>').closest('.panel').find('.list-group').prepend('<%= j render(partial: "comments/comment", locals: { comment: @comment }) %>');
+  comments.append('<%= j render(partial: "comments/comment", locals: { comment: @comment }) %>');
 <% end %>

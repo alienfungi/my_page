@@ -17,21 +17,24 @@ class UsersController < ApplicationController
 
   def poll
     respond_to do |format|
+      format.html do
+        redirect_to root_path
+      end
       format.js do
+
+        # load new activities or false
         @new_activities = current_user.activities.where(old: false)
         if @new_activities.count > 0
           @new_activities.load
-          new_friend_activity = @new_activities.where(trackable_type: 'Friendship').map do |activity|
+          current_user.activities.update_all(old: true)
+
+          # load new friends or false
+          new_friend_activity = new_activities.where(trackable_type: 'Friendship').map do |activity|
             friendship = activity.trackable
             current_user?(friendship.user) ? friendship.friend.id : friendship.user.id
           end
-          @new_friends = current_user.mutual_friends.where(id: new_friend_activity)
-          current_user.activities.update_all(old: true)
-          if @new_friends.count > 0
-            @new_friends.load
-          else
-            @new_friends = false
-          end
+          friends_new = current_user.mutual_friends.where(id: new_friend_activity)
+          @new_friends = friends_new.count > 0 ? friends_new.load : false
         else
           @new_activities = false
         end
@@ -156,6 +159,10 @@ private
     end
     redirect_to root_url
   end
+
+  def new_friends(new_activities)
+  end
+
 
   def user_params
     params.require(:user).permit(:email, :new_email, :username, :new_password, :new_password_confirmation, :headline, :about)

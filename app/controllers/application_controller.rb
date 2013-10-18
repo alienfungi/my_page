@@ -22,8 +22,15 @@ private
 
   def require_login
     unless signed_in?
-      flash[:error] = "You must be logged in to access this content."
-      redirect_to login_path
+      respond_to do |format|
+        format.html do
+          flash[:error] = "You must be logged in to access this content."
+          redirect_to login_path
+        end
+        format.js do
+          render 'sessions/fail'
+        end
+      end
     end
   end
 
