@@ -2,7 +2,7 @@
 
 #home_wrap.container-fluid
   .row
-    .col-md-8
+    .col-sm-8
       %h2 Latest Posts
       = render 'microposts/new'
       - if @microposts.empty?
@@ -12,7 +12,7 @@
         .pull-right
           = will_paginate @microposts
 
-    .col-md-4
+    .col-sm-4
       .row
         %h2 Recent Activity
         #activities

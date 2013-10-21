@@ -29,7 +29,7 @@ class UsersController < ApplicationController
           current_user.activities.update_all(old: true)
 
           # load new friends or false
-          new_friend_activity = new_activities.where(trackable_type: 'Friendship').map do |activity|
+          new_friend_activity = @new_activities.where(trackable_type: 'Friendship').map do |activity|
             friendship = activity.trackable
             current_user?(friendship.user) ? friendship.friend.id : friendship.user.id
           end

@@ -5,4 +5,6 @@
     Message
     = h content_tag :small, @message.subject
 
-= content_tag :p, (simple_format @message.message, sanitize: true)
+.panel.panel-default
+  .panel-body
+    %p= simple_format @message.message, sanitize: true

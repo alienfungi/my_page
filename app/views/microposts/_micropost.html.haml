@@ -20,9 +20,7 @@
               = link_to 'Edit', "#edit_micropost_modal_#{micropost.id}", data: {toggle: 'modal'}
               = link_to 'Delete', micropost, method: :delete, data: { confirm: "Are you sure?" }, remote: true
   %ul.list-group
-    - unless micropost.comments.empty?
-      - micropost.comments.each do |comment|
-        = render 'comments/comment', comment: comment
+    = render micropost.comments
 
 - if current_user? micropost.user
   .modal.fade{id: "edit_micropost_modal_#{micropost.id}", role: 'dialog', aria: {hidden: true}}

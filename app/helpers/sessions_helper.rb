@@ -49,7 +49,7 @@ module SessionsHelper
   end
 
   def validate_users(*users)
-    unless valid_users?([users])
+    unless valid_users?(*users)
       flash[:error] = "Unauthorized to access that content."
       redirect_to root_path
     end
