@@ -10,6 +10,7 @@ gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'simple_form'
 gem 'pg'
 gem 'browser-timezone-rails'
+gem 'annotate'
 
 group :development, :test do
   gem 'debugger'

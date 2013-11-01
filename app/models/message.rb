@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: messages
+#
+#  id                   :integer          not null, primary key
+#  subject              :string(255)
+#  message              :text
+#  sender_id            :integer
+#  recipient_id         :integer
+#  created_at           :datetime
+#  updated_at           :datetime
+#  removed_by_sender    :boolean          default(FALSE)
+#  removed_by_recipient :boolean          default(FALSE)
+#  read                 :boolean          default(FALSE)
+#
+
 class Message < ActiveRecord::Base
   attr_accessor :recipient_identifier
 

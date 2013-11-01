@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                :integer          not null, primary key
+#  email             :string(255)
+#  hashed_password   :string(255)
+#  remember_token    :string(255)
+#  created_at        :datetime
+#  updated_at        :datetime
+#  admin             :boolean          default(FALSE)
+#  username          :string(255)
+#  headline          :string(255)
+#  about             :text
+#  confirmation_code :string(255)
+#  confirmed         :boolean          default(FALSE)
+#  new_email         :string(255)
+#
+
 require 'bcrypt'
 
 class User < ActiveRecord::Base
