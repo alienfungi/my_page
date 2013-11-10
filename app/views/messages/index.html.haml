@@ -27,6 +27,7 @@
           = render @received_messages
     .pull-right
       = will_paginate @received_messages, param_name: :received_messages_page, params: {active_tab: 'received'}
+    .clearfix
 
   = content_tag :div, id: "sent_tab", class: "tab-pane#{' active' if @active_tab == 'sent'}" do
     %br
@@ -46,6 +47,7 @@
           = render @sent_messages
     .pull-right
       = will_paginate @sent_messages, param_name: :sent_messages_page, params: {active_tab: 'sent'}
+    .clearfix
 
   = content_tag :div, id: "new_tab", class: "tab-pane#{' active' if @active_tab == 'new'}" do
     %br
@@ -53,4 +55,5 @@
       = simple_form_for @message, html: { role: "form" } do |f|
         %input{name: "page", type: "hidden", value: "index"}
         = render 'fields', f: f
+    .clearfix
 
