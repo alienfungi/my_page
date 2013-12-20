@@ -6,7 +6,6 @@
     %link{href: 'http://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic,700italic', rel: 'stylesheet', type: 'text/css'}
     %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
     = stylesheet_link_tag    "application", media: "all"
-    = javascript_include_tag "application"
     = csrf_meta_tags
   %body
     #wrap
@@ -29,3 +28,5 @@
     / footer
     = render 'layouts/footer'
 
+    / include javascript
+    = javascript_include_tag "application"

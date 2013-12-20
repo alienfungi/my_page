@@ -20,3 +20,6 @@
 
 # Ignore backup files
 *~
+
+# Ignore uploads
+/public/uploads

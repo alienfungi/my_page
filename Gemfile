@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 ruby "2.0.0"
 
-gem 'rails'
+gem 'rb-readline', require: false
+gem 'rails', '4.0.0'
 gem 'mail'
 gem 'haml'
 gem 'haml-rails'
@@ -10,11 +11,13 @@ gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'simple_form'
 gem 'pg'
 gem 'browser-timezone-rails'
-gem 'annotate'
+gem 'turbolinks'
+gem 'pry-rails'
 
 group :development, :test do
   gem 'debugger'
-  gem 'pry-rails'
+  gem 'bullet'
+  gem 'annotate'
 end
 
 group :test do
