@@ -1,9 +1,11 @@
+- user ||= micropost.user
+
 = content_tag :div, class: "micropost panel panel-default", id: "micropost_#{micropost.id}" do
   .panel-heading
     .row
       .col-sm-6
-        = link_to micropost.user do
-          = content_tag :h3, micropost.user.username, class: "panel-title"
+        = link_to user do
+          = content_tag :h3, user.username, class: "panel-title"
       .col-sm-6
         .pull-right
           = format_time micropost.created_at
@@ -12,17 +14,17 @@
       .row
         = content_tag :div, id: "micropost_content_#{micropost.id}" do
           = simple_format(micropost.content, sanitize: true)
-      -if current_user?(micropost.user) || micropost.user.mutual_friends.exists?(current_user.id)
+      -if current_user?(user) || user.mutual_friends.exists?(current_user.id)
         .row
           .pull-right
             = link_to 'Comment', "#comment_modal_#{micropost.id}", data: {toggle: 'modal'}
-            - if current_user? micropost.user
+            - if current_user? user
               = link_to 'Edit', "#edit_micropost_modal_#{micropost.id}", data: {toggle: 'modal'}
               = link_to 'Delete', micropost, method: :delete, data: { confirm: "Are you sure?" }, remote: true
   %ul.list-group
-    = render micropost.comments
+    = render micropost.comments, commentable_user: user
 
-- if current_user? micropost.user
+- if current_user? user
   .modal.fade{id: "edit_micropost_modal_#{micropost.id}", role: 'dialog', aria: {hidden: true}}
     .modal-dialog
       .modal-content

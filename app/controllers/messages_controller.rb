@@ -87,11 +87,11 @@ private
   end
 
   def populate_messages
-    @received_messages = current_user.received_messages.where(
+    @received_messages = current_user.received_messages.includes(:sender).where(
       removed_by_recipient: false
     ).paginate( page: params[:received_messages_page])
 
-    @sent_messages = current_user.sent_messages.where(
+    @sent_messages = current_user.sent_messages.includes(:recipient).where(
       removed_by_sender: false
     ).paginate(page: params[:sent_messages_page])
 

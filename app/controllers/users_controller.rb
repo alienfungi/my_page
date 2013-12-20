@@ -7,8 +7,8 @@ class UsersController < ApplicationController
   def home
     if signed_in?
       @micropost = Micropost.new
-      @microposts = current_user.all_microposts.paginate(page: params[:page])
-      @activities = current_user.activities
+      @microposts = current_user.all_microposts.includes(comments: [:user, :commentable]).paginate(page: params[:page])
+      @activities = current_user.activities.includes(:trackable)
       @friends = current_user.mutual_friends
     else
       redirect_to login_path
@@ -46,9 +46,9 @@ class UsersController < ApplicationController
     @micropost = Micropost.new
     @friendship = nil
     current_user.friendships.each do |friendship|
-      @friendship = friendship if friendship.friend == @user
+      @friendship = friendship if friendship.friend_id == @user
     end
-    @microposts = @user.microposts.paginate(page: params[:page])
+    @microposts = @user.microposts.includes(comments: [:user]).paginate(page: params[:page])
   end
 
   def index

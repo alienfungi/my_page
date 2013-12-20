@@ -2,7 +2,7 @@
 
 #home_wrap.container-fluid
   .row
-    .col-sm-8
+    .col-sm-8.col-xs-12
       %h2 Latest Posts
       = render 'microposts/new'
       - if @microposts.empty?
@@ -11,14 +11,14 @@
         = render @microposts
         .pull-right
           = will_paginate @microposts
-
     .col-sm-4
-      .row
-        %h2 Recent Activity
-        #activities
-          = render 'activities/list', activities: @activities
-      .row
-        %h2 Friends
-        #friends
-          = render 'friendships/list', friends: @friends
+      .hidden-xs
+        .row
+          %h2 Recent Activity
+          #activities
+            = render 'activities/list', activities: @activities
+        .row
+          %h2 Friends
+          #friends
+            = render 'friendships/list', friends: @friends
 

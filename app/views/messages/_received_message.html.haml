@@ -1,0 +1,11 @@
+= content_tag :tr, id: "message_#{message.id}" do
+  %td{width: '25%'}
+    = format_time message.created_at
+  %td{width: '20%'}
+    = message.sender.nil? ? "Deleted" : (link_to message.sender.username, message.sender)
+  %td{width: '40%'}
+    = link_to message.subject, message
+  %td{width: '10%'}
+    = link_to (message.read ? "Read" : "Unread"), message
+  %td{width: '5%'}
+    = link_to '&times;'.html_safe, message_path(message.id), method: :delete, type: 'button', class: 'close', remote: true

@@ -24,7 +24,7 @@
           %tr
             %td{colspan: 3} No messages found.
         - else
-          = render @received_messages
+          = render partial: 'received_message', collection: @received_messages, as: :message
     .pull-right
       = will_paginate @received_messages, param_name: :received_messages_page, params: {active_tab: 'received'}
     .clearfix
@@ -44,7 +44,7 @@
           %tr
             %td{colspan: 3} No messages found.
         - else
-          = render @sent_messages
+          = render partial: 'sent_message', collection: @sent_messages, as: :message
     .pull-right
       = will_paginate @sent_messages, param_name: :sent_messages_page, params: {active_tab: 'sent'}
     .clearfix

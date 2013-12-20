@@ -30,7 +30,7 @@ module ActivitiesHelper
   end
 
   def friend_request?(friendship)
-    inverse = Friendship.where(friend: friendship.user).where(user: friendship.friend)
+    inverse = Friendship.where(friend: friendship.user, user: friendship.friend)
     if inverse.count == 0 || inverse.first.created_at > friendship.created_at
       true
     else

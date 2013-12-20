@@ -35,7 +35,7 @@
     %h2 Posts
     - if current_user? @user
       = render 'microposts/new'
-    = render @microposts
+    = render @microposts, user: @user
     .pull.right
       = will_paginate @microposts
 

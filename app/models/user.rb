@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
   end
 
   def all_microposts
-    Micropost.where(user_id: mutual_friends << self)
+    Micropost.includes(:user).where(user_id: mutual_friends << self)
   end
 
   def mutual_friends
